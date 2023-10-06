@@ -2,6 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <link href="./assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet" >
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,8 +26,7 @@
     <link href="./assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="./assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
     <link href="./assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-
-
+    <link href="./assets/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
 
 
     <!-- Theme CSS -->
@@ -166,7 +167,7 @@
                     <p class="pe-lg-10 mb-5">El punto de encuentro de los emprendedores más existosos del mundo.</p>
                     <!-- btn -->
                     <a href="{{ route('register') }}" class="btn btn-primary">Registrarme ahora</a>
-                    <a href="https://www.youtube.com/watch?v=JRzWRZahOVU" class="popup-youtube fs-4 text-inherit ms-3">
+                    <a href="https://www.youtube.com/watch?v=Ikxo8jQ7GZA" class="popup-youtube fs-4 text-inherit ms-3">
                       <img src="./assets/images/svg/play-btn.svg" alt="play" class="me-2">Video introducción</a>
       
       
@@ -612,11 +613,12 @@
     <script src="./assets/js/theme.min.js"></script>
 
 
-
+    <script src="./assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
     <script src="./assets/libs/@popperjs/core/dist/umd/popper.min.js"></script>
     <script src="./assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
-
+    <script src="./assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
     <script src="./assets/js/vendors/tooltip.js"></script>
+    <script src="../assets/js/vendors/popup.js"></script>
 
 
 </body>
