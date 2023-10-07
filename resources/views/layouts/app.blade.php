@@ -22,17 +22,17 @@
 
     <!-- Libs CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="../assets/fonts/feather/feather.css" rel="stylesheet">
-    <link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-    <link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-
+    <link href="{{ asset('assets/libs/magnific-popup/dist/magnific-popup.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/fonts/feather/feather.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet" >
 
 
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="../assets/css/theme.min.css">
-    <title>{{ config('app.name', 'App') }} | Panel de Administración</title>
+    <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
+    <title>{{ config('app.name', 'App') }} :. Panel de Administración</title>
 </head>
 
 <body>
@@ -41,17 +41,19 @@
 
     <!-- Scripts -->
     <!-- Libs JS -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js')}}"></script>
+
 
 
     <!-- Theme JS -->
-    <script src="../assets/js/theme.min.js"></script>
-    <script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="../assets/js/vendors/flatpickr.js"></script>
-    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="../assets/js/vendors/chart.js"></script>
+    <script src="{{ asset('assets/js/theme.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/flatpickr.js')}}"></script>
+    <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/chart.js')}}"></script>
+
 
 </body>
 

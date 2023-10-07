@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <link href="./assets/libs/magnific-popup/dist/magnific-popup.css" rel="stylesheet" >
+
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -20,17 +20,15 @@
     <!-- Favicon icon-->
     <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon/favicon.ico">
 
-
     <!-- Libs CSS -->
-    <link href="./assets/fonts/feather/feather.css" rel="stylesheet">
-    <link href="./assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="./assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
-    <link href="./assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
-    <link href="./assets/libs/tiny-slider/dist/tiny-slider.css" rel="stylesheet">
-
+    <link href="{{ asset('assets/libs/magnific-popup/dist/magnific-popup.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/fonts/feather/feather.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet" >
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="./assets/css/theme.min.css">
+    <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
 
     <title>{{ config('app.name', 'App') }} :. Marketing & Inversiones</title>
 </head>
@@ -66,7 +64,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Inicio</a>
                     </li>
-                   
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false">
@@ -93,7 +91,7 @@
                               Contáctenos
                             </a>
                           </li>
-              
+
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -135,7 +133,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                
+
                             </div>
                         </div>
                     </li>
@@ -169,8 +167,8 @@
                     <a href="{{ route('register') }}" class="btn btn-primary">Registrarme ahora</a>
                     <a href="https://www.youtube.com/watch?v=Ikxo8jQ7GZA" class="popup-youtube fs-4 text-inherit ms-3">
                       <img src="./assets/images/svg/play-btn.svg" alt="play" class="me-2">Video introducción</a>
-      
-      
+
+
                   </div>
                 </div>
                 <!-- col -->
@@ -188,7 +186,7 @@
                       class=" position-absolute top-0  start-0 mt-18 ms-lg-n19 ms-n8">
                     <img src="../../assets/images/background/acedamy-img/trophy.svg" alt="trophy"
                       class=" position-absolute top-0  start-0 ms-lg-n14 ms-n5">
-      
+
                   </div>
                 </div>
               </div>
@@ -243,7 +241,7 @@
                       <span>Qualified Instructor</span>
                     </div>
                   </div>
-      
+
                 </div>
                 <div class="col-md-6 col-lg-3 border-top-md border-bottom border-end-lg ">
                   <!-- icon -->
@@ -257,7 +255,7 @@
                       <span>Course enrolments</span>
                     </div>
                   </div>
-      
+
                 </div>
                 <div class="col-md-6 col-lg-3 border-top-lg border-bottom border-end-md ">
                   <!-- icon -->
@@ -271,7 +269,7 @@
                       <span>Courses in 42 languages</span>
                     </div>
                   </div>
-      
+
                 </div>
                 <div class="col-md-6 col-lg-3 border-top-lg border-bottom ">
                   <!-- icon -->
@@ -285,14 +283,14 @@
                       <span>Online Videos</span>
                     </div>
                   </div>
-      
+
                 </div>
-      
+
               </div>
             </div>
         </section>
-        
-       
+
+
 
         <section class="bg-light py-lg-14 py-7 bg-cover">
             <div class="container">
@@ -351,7 +349,7 @@
                     <div class="position-absolute top-100 start-100 translate-middle  d-none d-md-block">
                       <img src="../../assets/images/svg/graphics-1.svg" alt="graphics-1">
                     </div>
-      
+
                   </div>
                 </div>
               </div>
@@ -473,10 +471,10 @@
         </section>
 
          <!-- section -->
-        
+
          <section class="bg-light py-7 bg-cover">
             <div class="container text-center">
-      
+
               <div class="row">
                 <div class="col-xl-12 col-md-12 col-12">
                   <div class="text-center mb-6">
@@ -517,7 +515,7 @@
               </div>
             </div>
         </section>
-        
+
     </main>
     <!-- footer -->
     <!-- footer -->
@@ -604,22 +602,20 @@
 
     <!-- Scripts -->
     <!-- Libs JS -->
-    <script src="./assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="./assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/libs/simplebar/dist/simplebar.min.js"></script>
 
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/simplebar/dist/simplebar.min.js')}}"></script>
 
     <!-- Theme JS -->
-    <script src="./assets/js/theme.min.js"></script>
+    <script src="{{ asset('assets/js/theme.min.js')}}"></script>
 
-
-    <script src="./assets/libs/tiny-slider/dist/min/tiny-slider.js"></script>
-    <script src="./assets/libs/@popperjs/core/dist/umd/popper.min.js"></script>
-    <script src="./assets/libs/tippy.js/dist/tippy-bundle.umd.min.js"></script>
-    <script src="./assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-    <script src="./assets/js/vendors/tooltip.js"></script>
-    <script src="../assets/js/vendors/popup.js"></script>
-
+    <script src="{{ asset('assets/libs/tiny-slider/dist/min/tiny-slider.js')}}"></script>
+    <script src="{{ asset('assets/libs/@popperjs/core/dist/umd/popper.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/tippy.js/dist/tippy-bundle.umd.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/tooltip.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/popup.js')}}"></script>
 
 </body>
 
