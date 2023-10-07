@@ -1,10 +1,10 @@
 <x-guest-layout>
-  
+
     <!-- Page content -->
     <main>
         <section class="container d-flex flex-column">
         <div class="row align-items-center justify-content-center g-0 min-vh-100">
-    
+
             <div class="col-lg-5 col-md-8 py-8 py-xl-0">
             <!-- Card -->
             <div class="card shadow ">

@@ -52,20 +52,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $custom_messages = [
+            'nickname_promoter.exists' => 'El nick o código del promotor no existe, indique un código correcto.'
+        ];
 
         $request->validate([
-            'name' => ['required', 'string', 'max:191'],
-            'dni' => ['required', 'string', 'max:191', 'unique:users'],
+            'nickname' => ['required', 'string', 'max:191', 'unique:users'],
+            'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
+            /* 'package' => ['required', 'string', 'max:15', 'exists:packages,id'], */
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        ], $custom_messages);
 
         $user = User::create([
-            'name' => $request->name,
-            'dni' => $request->dni,
+            'nickname' => $request->nickname,
+            'nickname_promoter' => $request->nickname_promoter,
             'email' => $request->email,
             'phone' => $request->phone,
+            /* 'package_id' => $request->package, */
             'password' => Hash::make($request->password),
         ]);
 
@@ -73,7 +78,6 @@ class RegisteredUserController extends Controller
         Auth::login($user);
         return redirect(RouteServiceProvider::HOME);
     }
-
     /**
      * Update the specified resource in storage.
      *

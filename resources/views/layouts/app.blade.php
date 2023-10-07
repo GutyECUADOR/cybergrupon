@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Dashboard') }}</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Codescandy">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Favicons -->
-        <link href="assets/img/favicon.ico" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <script>
+        // Render blocking JS:
+        if (localStorage.theme) document.documentElement.setAttribute("data-theme", localStorage.theme);
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </script>
 
-
-        <!-- Styles -->
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-        <link rel="stylesheet" href="{{ asset('assets_admin/css/app.css') }}">
-	    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
 
 
-        <!-- Scripts -->
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="../assets/fonts/feather/feather.css" rel="stylesheet">
+    <link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="../assets/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+    <link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
 
-    </head>
-        {{ $slot }}
 
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
-        <script src="{{ asset('assets_admin/js/app.js') }}"></script>
-        <script src="{{ asset('assets/js/dashboard.js')}}?<?php echo date('Ymdhiiss')?>" defer></script>
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../assets/css/theme.min.css">
+    <title>{{ config('app.name', 'App') }} | Panel de Administración</title>
+</head>
+
+<body>
+
+    {{ $slot }}
+
+    <!-- Scripts -->
+    <!-- Libs JS -->
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+
+    <!-- Theme JS -->
+    <script src="../assets/js/theme.min.js"></script>
+    <script src="../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="../assets/js/vendors/flatpickr.js"></script>
+    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="../assets/js/vendors/chart.js"></script>
+
+</body>
+
 </html>
+

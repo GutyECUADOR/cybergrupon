@@ -23,15 +23,29 @@
 
 								<!-- Username -->
 								<div class="mb-3">
-									<label for="codigo_patrocinador" class="form-label">Código de patrocinador </label>
-									<input type="text" id="codigo_patrocinador" class="form-control" name="codigo_patrocinador" placeholder="XXXXX" required>
+									<label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+									<input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" placeholder="XXXXX" required>
 								</div>
-									<!-- Email -->
+
+                                <!-- Nickname -->
+                                <div class="mb-3">
+                                    <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                    <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                </div>
+
+								<!-- Email -->
 								<div class="mb-3">
 									<label for="email" class="form-label">Correo electrónico</label>
 									<input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
 								</div>
-									<!-- Password -->
+
+                            <!-- Phone -->
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Teléfono</label>
+                                    <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                </div>
+
+								<!-- Password -->
 								<div class="mb-3">
 									<label for="password" class="form-label">Contraseña</label>
 									<input type="password" id="password" class="form-control" name="password" placeholder="**************" required>
@@ -57,7 +71,7 @@
 									</button>
 									</div>
 								</div>
-								
+
 							</form>
 						</div>
 					</div>

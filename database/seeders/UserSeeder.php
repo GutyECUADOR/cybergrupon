@@ -26,15 +26,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('admin123'),
             'role' => 'ADMIN_ROLE',
             'phone' => '+593',
-            'wallet_usdt_tr20' => '',
-            'wallet_alarab' => '',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'is_payed' => 1,
             ],
         ));
 
-        foreach (range(1,31) as $index) {
+       /*  foreach (range(1,31) as $index) {
             User::create([
                 'location' => $index+1,
                 'nickname' => 'partner'.$index,
@@ -46,10 +44,10 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('admin2023'),
                 'imagen_recibo' => null
             ]);
-        }
-        
-        
-      
+        } */
+
+
+
        /*  foreach (range(1,10) as $index) {
             User::create([
                 'nickname' => 'test'.$index,
@@ -63,7 +61,7 @@ class UserSeeder extends Seeder
             ]);
         } */
 
-       
-    
+
+
     }
 }
