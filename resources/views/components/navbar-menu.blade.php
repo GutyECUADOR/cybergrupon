@@ -18,15 +18,15 @@
                 <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <div class="avatar avatar-md avatar-indicators avatar-online">
-                        <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle">
+                        <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-1.jpg')}}" class="rounded-circle">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                     <div class="dropdown-item">
                         <div class="d-flex">
                             <div class="avatar avatar-md avatar-indicators avatar-online">
-                                <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg"
-                                    class="rounded-circle">
+                                <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-1.jpg')}}" class="rounded-circle">
+
                             </div>
                             <div class="ms-3 lh-1">
                                 <h5 class="mb-1">Usuario Test</h5>
@@ -37,12 +37,12 @@
                     <div class="dropdown-divider"></div>
                     <ul class="list-unstyled">
                         <li>
-                            <a class="dropdown-item" href="../../../pages/profile-edit.html">
+                            <a class="dropdown-item" href="#">
                                 <i class="fe fe-user me-2"></i> Perfil
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="../../../pages/student-subscriptions.html">
+                            <a class="dropdown-item" href="">
                                 <i class="fe fe-star me-2"></i> Pagos & Subscripciones
                             </a>
                         </li>

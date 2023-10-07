@@ -72,22 +72,22 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-arrow dropdown-menu-end" aria-labelledby="navbarPages">
                           <li>
-                            <a class="dropdown-item" href="../../pages/jobs/company-list.html">
+                            <a class="dropdown-item" href="#">
                               Sobre nosotros
                             </a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="../../pages/jobs/post-job.html">
+                            <a class="dropdown-item" href="#">
                               ¿Cómo funiona?
                             </a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="../../pages/jobs/upload-resume.html">
+                            <a class="dropdown-item" href="#">
                               Preguntas Frecuentes
                             </a>
                           </li>
                           <li>
-                            <a class="dropdown-item" href="../../pages/jobs/upload-resume.html">
+                            <a class="dropdown-item" href="#">
                               Contáctenos
                             </a>
                           </li>
@@ -100,7 +100,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-md dropdown-menu-end " aria-labelledby="navbarDropdown">
                             <div class="list-group">
-                                <a class="list-group-item list-group-item-action border-0" href="../../docs/index.html">
+                                <a class="list-group-item list-group-item-action border-0" href="#">
                                     <div class="d-flex align-items-center">
                                         <i class="fe fe-search fs-3 text-primary"></i>
                                         <div class="ms-3">
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="list-group-item list-group-item-action border-0" href="../../docs/bootstrap-5-snippets.html">
+                                <a class="list-group-item list-group-item-action border-0" href="#">
                                     <div class="d-flex align-items-center">
                                         <i class="bi bi-cash-coin fs-3 text-primary"></i>
                                         <div class="ms-3">
@@ -122,7 +122,7 @@
                                         </div>
                                     </div>
                                 </a>
-                                <a class="list-group-item list-group-item-action border-0" href="../../docs/changelog.html">
+                                <a class="list-group-item list-group-item-action border-0" href="#">
                                     <div class="d-flex align-items-center">
                                         <i class="fe fe-users fs-3 text-primary"></i>
                                         <div class="ms-3">
@@ -175,18 +175,19 @@
                 <div class="col-lg-6 d-flex justify-content-center">
                   <!-- images -->
                   <div class="position-relative">
-                    <img src="../../assets/images/background/acedamy-img/investment01.svg" alt="img" style="width: 100%" class=" ">
-                    <img src="../../assets/images/background/acedamy-img/frame-1.svg" alt="frame"
-                      class=" position-absolute top-0 ms-lg-n10 ms-n19">
-                    <img src="../../assets/images/background/acedamy-img/frame-2.svg" alt="frame"
-                      class=" position-absolute bottom-0 start-0 ms-lg-n14 ms-n6 mb-n7">
-                    <img src="../../assets/images/background/acedamy-img/target.svg" alt="target"
-                      class=" position-absolute bottom-0 mb-10 ms-n10 ms-lg-n1 ">
-                    <img src="../../assets/images/background/acedamy-img/sound.svg" alt="sound"
-                      class=" position-absolute top-0  start-0 mt-18 ms-lg-n19 ms-n8">
-                    <img src="../../assets/images/background/acedamy-img/trophy.svg" alt="trophy"
-                      class=" position-absolute top-0  start-0 ms-lg-n14 ms-n5">
 
+                    <img src="{{ asset('assets/images/background/acedamy-img/investment01.svg')}}" alt="img" style="width: 100%" class=" ">
+
+                    <img src="{{ asset('assets/images/background/acedamy-img/frame-1.svg')}}" alt="frame"
+                      class=" position-absolute top-0 ms-lg-n10 ms-n19">
+                    <img src="{{ asset('assets/images/background/acedamy-img/frame-2.svg')}}" alt="frame"
+                      class=" position-absolute bottom-0 start-0 ms-lg-n14 ms-n6 mb-n7">
+                    <img src="{{ asset('assets/images/background/acedamy-img/target.svg')}}" alt="target"
+                      class=" position-absolute bottom-0 mb-10 ms-n10 ms-lg-n1 ">
+                    <img src="{{ asset('assets/images/background/acedamy-img/sound.svg')}}" alt="sound"
+                      class=" position-absolute top-0  start-0 mt-18 ms-lg-n19 ms-n8">
+                    <img src="{{ asset('assets/images/background/acedamy-img/trophy.svg')}}" alt="trophy"
+                      class=" position-absolute top-0  start-0 ms-lg-n14 ms-n5">
                   </div>
                 </div>
               </div>
@@ -203,13 +204,13 @@
                   <div class="d-flex justify-content-center ">
                     <!-- img -->
                     <div class="position-relative">
-                      <img src="../../assets/images/png/cta-instructor-1.png" alt="image" class="img-fluid mt-n13">
+                      <img src="{{ asset('assets/images/png/cta-instructor-1.png')}}" alt="image" class="img-fluid mt-n13">
                       <div class="ms-n12 position-absolute bottom-0 start-0 mb-6">
-                        <img src="../../assets/images/svg/dollor.svg" alt="dollor">
+                        <img src="{{ asset('assets/images/svg/dollor.svg')}}" alt="dollor">
                       </div>
                       <!-- img -->
                       <div class="me-n4 position-absolute top-0 end-0">
-                        <img src="../../assets/images/svg/graph.svg" alt="graph">
+                        <img src="{{ asset('assets/images/png/graph.svg')}}" alt="graph">
                       </div>
                     </div>
                   </div>
@@ -342,12 +343,12 @@
                 <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6 col-12 d-lg-flex justify-content-end">
                   <div class="mt-12 mt-lg-0 position-relative">
                     <div class="position-absolute top-0 start-0 translate-middle  d-none d-md-block">
-                      <img src="../../assets/images/svg/graphics-2.svg" alt="graphics-2">
+                      <img src="{{ asset('assets/images/svg/graphics-2.svg')}}" alt="graphics-2">
                     </div>
-                    <img src="../../assets/images/education/skils.jpg" alt="online course"
+                    <img src="{{ asset('assets/images/education/skils.jpg')}}" alt="online course"
                       class="img-fluid rounded-4 w-100 z-1 position-relative">
                     <div class="position-absolute top-100 start-100 translate-middle  d-none d-md-block">
-                      <img src="../../assets/images/svg/graphics-1.svg" alt="graphics-1">
+                      <img src="{{ asset('assets/images/svg/graphics-1.svg')}}" alt="graphics-1">
                     </div>
 
                   </div>
@@ -486,27 +487,32 @@
                     <div class=" row row-cols-lg-5 row-cols-md-3 row-cols-2 g-4 flex-nowrap">
                       <div class="col">
                         <div class="text-center mb-3">
-                          <img src="../../assets/images/brand/gray-logo-airbnb.svg" alt="airbnb" class="img-fluid">
+                          <img src="{{ asset('assets/images/brand/gray-logo-airbnb.svg')}}" alt="airbnb" class="img-fluid">
+
                         </div>
                       </div>
                       <div class="col">
                         <div class="text-center mb-3">
-                          <img src="../../assets/images/brand/gray-logo-digitalocean.svg" alt="digitalocean" class="img-fluid">
+                          <img src="{{ asset('assets/images/brand/gray-logo-digitalocean.svg')}}" alt="digitalocean" class="img-fluid">
+
                         </div>
                       </div>
                       <div class="col">
                         <div class="text-center mb-3">
-                          <img src="../../assets/images/brand/gray-logo-discord.svg" alt="discord" class="img-fluid">
+                          <img src="{{ asset('assets/images/brand/gray-logo-discord.svg')}}" alt="discord" class="img-fluid">
+
                         </div>
                       </div>
                       <div class="col">
                         <div class="text-center mb-3">
-                          <img src="../../assets/images/brand/gray-logo-intercom.svg" alt="intercom" class="img-fluid">
+                          <img src="{{ asset('assets/images/brand/gray-logo-intercom.svg')}}" alt="intercom" class="img-fluid">
+
                         </div>
                       </div>
                       <div class="col">
                         <div class="text-center mb-3">
-                          <img src="../../assets/images/brand/gray-logo-netflix.svg" alt="netflix" class="img-fluid">
+                          <img src="{{ asset('assets/images/brand/gray-logo-netflix.svg')}}" alt="netflix" class="img-fluid">
+
                         </div>
                       </div>
                     </div>
@@ -525,7 +531,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- about company -->
                     <div class="mb-4">
-                        <img src="./assets/images/brand/google-drive.svg" alt="LOGO" class="logo-inverse ">
+                        <img src="{{ asset('assets/images/brand/google-drive.svg')}}" alt="LOGO" class="logo-inverse ">
                         <div class="mt-4">
                             <p>Geek is feature-rich components and beautifully Bootstrap UIKit for developers, built with bootstrap responsive framework.</p>
                             <!-- social media -->

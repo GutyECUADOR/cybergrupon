@@ -8,7 +8,7 @@
 						<!-- Card body -->
 						<div class="card-body p-6">
 							<div class="mb-4">
-								<a href="/"><img src="../assets/images/brand/google-drive.svg" class="mb-4" alt="logo-icon" /></a>
+								<a href="/"><img src="{{ asset('assets/images/brand/google-drive.svg')}}" class="mb-4" alt="logo-icon"></a>
 								<h1 class="mb-1 fw-bold">Restaurar contraseña</h1>
 								<p> {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}</p>
 							</div>
@@ -22,7 +22,7 @@
 							<!-- Form -->
 							<form method="POST" action="{{ route('password.email') }}">
                             @csrf
-								
+
 								<!-- Email -->
 								<div class="mb-3">
 									<label for="email" class="form-label">Email</label>
