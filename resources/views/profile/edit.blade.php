@@ -112,13 +112,21 @@
                                     <p class="mb-4">
                                         Edite su información personal y dirección.
                                     </p>
+
                                     <!-- Form -->
-                                    <form class="row gx-3">
+                                    <form method="POST" action="{{ route('profile.update', $usuario) }}" class="row gx-3">
+                                        @csrf
+                                        @method('PUT')
+
+                                        <!-- Flash messages -->
+                                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                                        <!-- Validation Errors -->
+                                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                                         <!-- First name -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="fname">Nombre</label>
-                                            <input type="text" id="fname" class="form-control"
-                                                placeholder="" required>
+                                            <input type="text" id="fname" class="form-control" value="{{ $usuario->name }}" required>
                                         </div>
                                         <!-- Last name -->
                                         <div class="mb-3 col-12 col-md-6">
@@ -129,8 +137,7 @@
                                         <!-- Phone -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="phone">Teléfono</label>
-                                            <input type="text" id="phone" class="form-control"
-                                                placeholder="" required>
+                                            <input type="text" id="phone" name="phone" class="form-control" value="{{ $usuario->phone }}" required>
                                         </div>
                                         <!-- Birthday -->
                                         <div class="mb-3 col-12 col-md-6">
@@ -147,13 +154,12 @@
                                         <!-- Address -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="address2">Dirección</label>
-                                            <input type="text" id="address2" class="form-control"
-                                                placeholder="" required>
+                                            <input type="text" id="address2" class="form-control" value="{{ $usuario->address }}" required>
                                         </div>
                                         <!-- State -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label">País</label>
-                                            <select class="form-select">
+                                            <select class="form-select" name="country">
                                                 <option value="">Select State</option>
                                                 <option value="1">Colombia</option>
                                                 <option value="2">Ecuador</option>

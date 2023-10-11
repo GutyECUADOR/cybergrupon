@@ -65,25 +65,20 @@ class ProfileController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Credito  $credito
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Credito $credito)
+    public function update(Request $request, $id_usuario)
     {
+        $usuario = User::find($id_usuario);
+
         $request->validate([
-            'nombre' => 'required|max:190',
-            'cantidad' => 'required|numeric|digits_between:1,19',
-            'cuotas' => 'required|numeric|digits_between:1,4',
-            'interes' => 'required|numeric|between:0,999.99',
+            'phone' => 'required|numeric|digits_between:10,13'
         ]);
 
-        $credito->nombre = $request->nombre;
-        $credito->cantidad = $request->cantidad;
-        $credito->cuotas = $request->cuotas;
-        $credito->interes = $request->interes;
+        $usuario->phone = $request->phone;
 
-        $credito->save();
-        return redirect()->route('dashboard')->with('status', 'crédito: '.$request->nombre.' actualizado con éxito!');
+        $usuario->save();
+        return redirect()->route('profile.index')->with('status', 'Perfil de: '.$request->nickname.' actualizado con éxito!');
     }
 
     /**
