@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DiasInversionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
 use App\Http\Controllers\PagoController;
@@ -37,12 +38,9 @@ Route::middleware(['auth','role'])->group(function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
-    Route::resource('creditos', CreditoController::class);
+    Route::resource('/profile', ProfileController::class);
 
-    Route::post('/analisis/{credito}', [AnalisisController::class, 'index'])->name('analisis.index');
 
-    Route::resource('tipos-inversion', TipoInversionController::class);
-    Route::resource('dias-inversion', DiasInversionController::class);
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });
 

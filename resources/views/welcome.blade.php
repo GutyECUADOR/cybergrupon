@@ -157,8 +157,8 @@
                   <div class="">
                     <!-- heading -->
                     <h5 class="text-dark mb-4"><i
-                        class="fe fe-check icon-xxs icon-shape bg-light-success text-success rounded-circle me-2"></i>Most
-                      trusted marketing platform</h5>
+                        class="fe fe-check icon-xxs icon-shape bg-light-success text-success rounded-circle me-2"></i>La mas
+                      efectiva plataforma de marketing</h5>
                     <!-- heading -->
                     <h1 class="display-3 fw-bold mb-3">Bienvenido a Cybergrupon.com</h1>
                     <!-- para -->
@@ -210,7 +210,7 @@
                       </div>
                       <!-- img -->
                       <div class="me-n4 position-absolute top-0 end-0">
-                        <img src="{{ asset('assets/images/png/graph.svg')}}" alt="graph">
+                        <img src="{{ asset('assets/images/svg/graph.svg')}}" alt="graph">
                       </div>
                     </div>
                   </div>
@@ -219,10 +219,8 @@
                   <div class="text-white p-5 p-lg-0">
                     <!-- text -->
                     <h2 class="h1 text-white">Conviertete en inversor</h2>
-                    <p class="mb-0">Instructors from around the world teach millions of students on Geeks. We provide the
-                      tools
-                      and skills to teach what you love.</p>
-                    <a href="#" class="btn btn-white mt-4">Start Teaching Today</a>
+                    <p class="mb-0">Invierte en publicidad en tu negocio y obten grandes beneficios. Notros te ayudamos paso a paso en todo el proceso.</p>
+                    <a href="#" class="btn btn-white mt-4">Comience a invertir hoy</a>
                   </div>
                 </div>
               </div>
@@ -239,7 +237,7 @@
                     </div>
                     <div class="lh-1">
                       <h2 class="mb-1">316,000+</h2>
-                      <span>Qualified Instructor</span>
+                      <span>Inversores</span>
                     </div>
                   </div>
 
@@ -253,7 +251,7 @@
                     <!-- text -->
                     <div class="lh-1">
                       <h2 class="mb-1">1.8 Billion+</h2>
-                      <span>Course enrolments</span>
+                      <span>Ganancias Globales</span>
                     </div>
                   </div>
 
@@ -267,7 +265,7 @@
                     <!-- text -->
                     <div class="lh-1">
                       <h2 class="mb-1">41,000+</h2>
-                      <span>Courses in 42 languages</span>
+                      <span>Paginas de contacto</span>
                     </div>
                   </div>
 
@@ -281,7 +279,7 @@
                     <!-- text -->
                     <div class="lh-1">
                       <h2 class="mb-1">179,000+</h2>
-                      <span>Online Videos</span>
+                      <span>Videos de publicidad</span>
                     </div>
                   </div>
 
@@ -298,11 +296,10 @@
               <div class="row d-flex align-items-center">
                 <div class=" col-xxl-5  col-xl-6 col-lg-6 col-12">
                   <div>
-                    <h1 class="display-2 fw-bold mb-3">Learn today’s most in-<u class="text-warning"><span
-                          class="text-primary">demand-skills</span></u></h1>
-                    <p class="lead mb-4">Classes & Courses website template to start creating your stunning website. All
-                      templates
-                      are fully customizable.</p>
+                    <h1 class="display-2 fw-bold mb-3">Comienza hoy mismo y <u class="text-warning"><span
+                          class="text-primary">Gana mucho dinero</span></u></h1>
+                    <p class="lead mb-4">Genera publicidad para tu negocio tradicional
+                    invita a personas a que hagan lo mismo nosotros te apoyamos</p>
                     <ul class="list-unstyled mb-5">
                       <li class="mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--geeks-success)"
@@ -310,7 +307,7 @@
                           <path
                             d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
-                        <span class="ms-2">No credit card required</span>
+                        <span class="ms-2">Publicidad facil y rapida a tu negocio</span>
                       </li>
                       <li class="mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--geeks-success)"
@@ -318,7 +315,7 @@
                           <path
                             d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
-                        <span class="ms-2">Customer service 24/7</span>
+                        <span class="ms-2">Servicio 24/7</span>
                       </li>
                       <li class="mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--geeks-success)"
@@ -326,7 +323,7 @@
                           <path
                             d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
-                        <span class="ms-2">No setup fee</span>
+                        <span class="ms-2">Facil manejo</span>
                       </li>
                       <li class="mb-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="var(--geeks-success)"
@@ -334,10 +331,10 @@
                           <path
                             d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
-                        <span class="ms-2">Cancel any time</span>
+                        <span class="ms-2">Invita y gana</span>
                       </li>
                     </ul>
-                    <a href="#!" class="btn btn-dark btn-lg">Explore Online Courses</a>
+                    <a href="#!" class="btn btn-dark btn-lg">Toma esta gran oportunidad</a>
                   </div>
                 </div>
                 <div class="col-xxl-5 offset-xxl-1 col-xl-6 col-lg-6 col-12 d-lg-flex justify-content-end">
@@ -364,8 +361,8 @@
                   <!-- caption -->
                   <span class="text-primary mb-3 d-block text-uppercase fw-semibold ls-xl">Necesito saber</span>
                   <h2 class="mb-2 display-4 fw-bold ">Preguntas frecuentes.</h2>
-                  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In mattis non accumsan in, tempor
-                    dictum neque.</p>
+                  <p class="lead">Te ayudamos a contruir una imagen fuerte para tu empresa y
+                    ganas dinero por invitar a mas empresarios.</p>
                 </div>
               </div>
               <!-- row -->
@@ -378,7 +375,7 @@
                           data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
                           aria-controls="collapseOne">
                           <span class="me-auto">
-                            What is the cost of an online course
+                            Cual es el costo de la publicidad?
                           </span>
                           <span class="collapse-toggle ms-4">
                             <i class="fe fe-plus text-primary"></i>
@@ -389,7 +386,7 @@
                     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample">
                       <div class="py-3 fs-4">
-                        Create beautiful website with this Geeks UI template. Get started building a site today.
+                        El costo es mas bajo de toda la publicidad del mercado, lo puedes hacer sencillo y rapido.
                       </div>
                     </div>
                     <!-- Card  -->
@@ -400,7 +397,7 @@
                           data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
                           aria-controls="collapseTwo">
                           <span class="me-auto">
-                            What do I need to take a course?
+                            En verdad necesito publicidad para mi negocio?
                           </span>
                           <span class="collapse-toggle ms-4">
                             <i class="fe fe-plus text-primary"></i>
@@ -410,8 +407,8 @@
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                       <div class="py-3 fs-4">
-                        Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                        nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        El mundo esta lleno de sitios nuevos y grandes marcas, la unica forma de resaltar
+                        es aprovechando las nuevas tecnologias para llegar a todos los clientes posibles.
                       </div>
                     </div>
                     <!-- Card  -->
@@ -422,7 +419,7 @@
                           data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
                           aria-controls="collapseThree">
                           <span class="me-auto">
-                            What do I receive for taking this course?
+                            Como puedo ganar dinero con el sistema?
                           </span>
                           <span class="collapse-toggle ms-4">
                             <i class="fe fe-plus text-primary"></i>
@@ -433,9 +430,8 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample">
                       <div class="py-3 fs-4">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                        quinoa nesciunt laborum eiusmod.
+                        Asi como alguien compartio contigo esta oportunidad de crecer, puedes hacer lo mismo
+                        por o tros empresarios que estan buscando el exito financiero y ganas grandes conisiones hasta el 100%.
                       </div>
                     </div>
                     <!-- Card  -->
@@ -446,7 +442,7 @@
                           data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false"
                           aria-controls="collapseFour">
                           <span class="me-auto">
-                            What willI get if I subscribe to this Certificate?
+                            Como puedo cobrar mis comisiones?
                           </span>
                           <span class="collapse-toggle ms-4">
                             <i class="fe fe-plus text-primary"></i>
@@ -456,15 +452,14 @@
                     </div>
                     <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                       <div class="py-3 fs-4">
-                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                        quinoa nesciunt laborum eiusmod.
+                        Las comisiones puedes cobrarlas en criptomonedas en cuestion de momentos, en banco aunque sea un poquito mas lento
+                        y por otros medios de pago sencillos y accequibles sin importar tu pais.
                       </div>
                     </div>
                   </div>
                   <div class="mt-10 text-center">
-                    <a href="#" class="btn btn-outline-primary">More questions? Visit the Learner Help
-                      Center.</a>
+                    <a href="#" class="btn btn-outline-primary">Mas preguntas? Visita nuestro centro
+                      de ayuda.</a>
                   </div>
                 </div>
               </div>

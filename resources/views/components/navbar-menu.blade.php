@@ -18,26 +18,26 @@
                 <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <div class="avatar avatar-md avatar-indicators avatar-online">
-                        <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-1.jpg')}}" class="rounded-circle">
+                        <img alt="avatar" src="{{ asset('assets/images/avatar/'.auth()->user()->avatar)}}" class="rounded-circle">
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                     <div class="dropdown-item">
                         <div class="d-flex">
                             <div class="avatar avatar-md avatar-indicators avatar-online">
-                                <img alt="avatar" src="{{ asset('assets/images/avatar/avatar-1.jpg')}}" class="rounded-circle">
+                                <img alt="avatar" src="{{ asset('assets/images/avatar/'.auth()->user()->avatar)}}" class="rounded-circle">
 
                             </div>
                             <div class="ms-3 lh-1">
-                                <h5 class="mb-1">Usuario Test</h5>
-                                <p class="mb-0 text-muted">admin@admin.test</p>
+                                <h5 class="mb-1">{{ auth()->user()->nickname }}</h5>
+                                <p class="mb-0 text-muted">{{ auth()->user()->email }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="dropdown-divider"></div>
                     <ul class="list-unstyled">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="{{ route('profile.index')}}">
                                 <i class="fe fe-user me-2"></i> Perfil
                             </a>
                         </li>
@@ -46,11 +46,7 @@
                                 <i class="fe fe-star me-2"></i> Pagos & Subscripciones
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="#">
-                                <i class="fe fe-settings me-2"></i> Configuración
-                            </a>
-                        </li>
+
                     </ul>
                     <div class="dropdown-divider"></div>
                     <ul class="list-unstyled">
