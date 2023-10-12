@@ -47,7 +47,7 @@
 
             <!-- Nav item -->
             <li class="nav-item ">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('tienda.index') }}">
                     <i class="nav-icon fe fe-book-open me-2"></i> Tienda
                 </a>
             </li>

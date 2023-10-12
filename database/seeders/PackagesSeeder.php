@@ -17,47 +17,50 @@ class PackagesSeeder extends Seeder
     {
         DB::table('packages')->insert(array(
         [
-            'name' => 'Plan 150/50',
-            'usdt' => 150,
-            'alarab' => 50,
+            'name' => 'Plan 20 USD',
+            'price' => 20,
+            'nivel' => 1,
+            'imagen' => 'banner.jpg',
+            'descripcion' => 'Mi descripcion',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ],
         [
-            'name' => 'Plan 500/200',
-            'usdt' => 500,
-            'alarab' => 200,
+            'name' => 'Plan 40 USD',
+            'price' => 40,
+            'nivel' => 2,
+            'imagen' => 'banner.jpg',
+            'descripcion' => 'Mi descripcion',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ],
         [
-            'name' => 'Plan 1000/450',
-            'usdt' => 1000,
-            'alarab' => 450,
+            'name' => 'Plan 160 USD ',
+            'price' => 160,
+            'nivel' => 3,
+            'imagen' => 'banner.jpg',
+            'descripcion' => 'Mi descripcion',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ],
         [
-            'name' => 'Plan 5000/2250',
-            'usdt' => 5000,
-            'alarab' => 2250,
+            'name' => 'Plan 320 USD',
+            'price' => 320,
+            'nivel' => 4,
+            'imagen' => 'banner.jpg',
+            'descripcion' => 'Mi descripcion',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ],
         [
-            'name' => 'Plan 10000/4500',
-            'usdt' => 10000,
-            'alarab' => 4500,
+            'name' => 'Plan 640 USD',
+            'price' => 640,
+            'nivel' => 5,
+            'imagen' => 'banner.jpg',
+            'descripcion' => 'Mi descripcion',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ],
-        [
-            'name' => 'Plan 30000/13500',
-            'usdt' => 30000,
-            'alarab' => 13500,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ],
+        ]
         ));
     }
 }

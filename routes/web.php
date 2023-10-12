@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DiasInversionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\CompraController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
 use App\Http\Controllers\PagoController;
@@ -39,6 +41,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class);
+    Route::resource('/tienda', TiendaController::class);
+    Route::resource('/compra', CompraController::class);
+
 
 
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
