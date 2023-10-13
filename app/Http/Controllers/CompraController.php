@@ -53,8 +53,17 @@ class CompraController extends Controller
         ->groupBy('user_id')
         ->get();
 
+        $movimientos = $saldo_recargas->merge($saldo_compras);
 
-        dd($saldo_compras);
+        $saldo_actual = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_actual += $movimiento->valor;
+        }
+
+        if ($saldo_actual <= $request->valor) {
+            return redirect()->route('tienda.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'.$saldo_actual]);
+        }
+
 
         $request->request->add(['user_id' => Auth::user()->id]);
         $data = $request->all();

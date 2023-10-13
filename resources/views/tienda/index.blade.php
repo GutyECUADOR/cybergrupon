@@ -59,6 +59,7 @@
                                                 @csrf
                                                 <input type="hidden" name="package_id" value="{{ $package->id }}">
                                                 <input type="hidden" name="package_name" value="{{ $package->name }}">
+                                                <input type="hidden" name="valor" value="{{ $package->PrecioAcumulado }}">
                                                 <a href="#" class="text-inherit btn btn-success"
                                                         onclick="event.preventDefault();
                                                                 if (window.confirm('Confirma la compra del {{$package->name}}?')) {
