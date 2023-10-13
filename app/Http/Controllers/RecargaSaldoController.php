@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RecargaSaldo;
 use Illuminate\Http\Request;
-use App\Models\Compra;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Packages;
 
-class TiendaController extends Controller
+class RecargaSaldoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +14,7 @@ class TiendaController extends Controller
      */
     public function index()
     {
-        //Obtener el listado de planes mayores al que ya tiene.
-        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
-        if (!$package_mayor) {
-            $package_mayor = 0;
-        }
-        $packages = Packages::where('nivel', '>', $package_mayor)->get();
-        return view('tienda.index', compact('packages'));
+        //
     }
 
     /**
@@ -49,10 +41,10 @@ class TiendaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\RecargaSaldo  $recargaSaldo
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(RecargaSaldo $recargaSaldo)
     {
         //
     }
@@ -60,10 +52,10 @@ class TiendaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\RecargaSaldo  $recargaSaldo
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(RecargaSaldo $recargaSaldo)
     {
         //
     }
@@ -72,10 +64,10 @@ class TiendaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\RecargaSaldo  $recargaSaldo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, RecargaSaldo $recargaSaldo)
     {
         //
     }
@@ -83,10 +75,10 @@ class TiendaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\RecargaSaldo  $recargaSaldo
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(RecargaSaldo $recargaSaldo)
     {
         //
     }

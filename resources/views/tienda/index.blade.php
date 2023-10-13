@@ -50,7 +50,7 @@
                                 <div class="card-footer">
                                     <div class="row align-items-center g-0">
                                         <div class="col">
-                                            <h5 class="mb-0">${{$package->price}} USD</h5>
+                                            <h5 class="mb-0">${{$package->PrecioAcumulado}} USD</h5>
                                         </div>
 
                                         <div class="col-auto">
