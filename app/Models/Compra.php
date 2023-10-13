@@ -11,7 +11,7 @@ class Compra extends Model
 
     protected $fillable = [
         'user_id',
-        'package_id'
-
+        'package_id',
+        'valor'
     ];
 }

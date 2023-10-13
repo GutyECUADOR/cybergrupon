@@ -19,12 +19,6 @@ class Packages extends Model
     ];
 
     public function getPrecioAcumuladoAttribute () {
-        /* $data = DB::table('users')->where([
-                'nickname_promoter' => $this->nickname,
-                'is_payed' => 1
-        ])->get(); */
-
-        /* $precioAcumulado = Packages::where('nivel', '>', Auth::user()->nivel)->sum('price'); */
 
         $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id');
         if (!$package_mayor) {

@@ -17,6 +17,7 @@ class CreateComprasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('package_id');
+            $table->decimal('valor');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('package_id')->references('id')->on('packages');
             $table->timestamps();

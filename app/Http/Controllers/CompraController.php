@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Compra;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -37,13 +38,30 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
+        // Validar que usuario tenga saldo
 
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+
+        $saldo_compras = DB::table('compras')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+
+        dd($saldo_compras);
 
         $request->request->add(['user_id' => Auth::user()->id]);
         $data = $request->all();
         $request->validate([
             'user_id' => 'required|int',
-            'package_id' => 'required|int'
+            'package_id' => 'required|int',
+            'valor' => 'required|int'
         ]);
 
         Compra::create($data);
