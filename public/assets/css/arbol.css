@@ -120,3 +120,15 @@ right connector from last child*/
 .avatar-xl{
     height: 100px !important;
 }
+
+#container-arbol{
+    min-width: 200% !important;
+}
+
+@media (max-width: 768px) {
+    #container-arbol{
+        min-width: 50000px !important;
+
+    }
+
+  }

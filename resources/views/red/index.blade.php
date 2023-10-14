@@ -31,7 +31,7 @@
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
 
-                <div class="row" style="width: 2000px;" >
+                <div class="row" id="container-arbol">
 
                     <div class="table-responsive">
                         <table class="table" style="width:125%;">
@@ -41,7 +41,9 @@
                                         <a href="#" style="margin-left: 60px;">
                                             <img src="{{ asset('assets/images/avatar/default.png') }}" alt=""
                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                            <h4 class="mb-0">Gutyecuador</h4>
+                                            <div class="text-wrap text-break fw-bold text-dark" style="width: 6rem;">
+                                                Usuario
+                                            </div>
                                         </a>
                                         <ul id="primerenlace">
                                             <li>
@@ -49,7 +51,10 @@
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                         alt=""
                                                         class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                    <h4 class="mb-0">Gutyecuador</h4>
+                                                    <div class="text-wrap text-break fw-bold text-dark"
+                                                        style="width: 6rem;">
+                                                        Usuario
+                                                    </div>
                                                 </a>
                                                 <ul>
                                                     <li>
@@ -57,7 +62,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
 
                                                     </li>
@@ -66,7 +74,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -74,7 +85,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -84,7 +98,10 @@
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                         alt=""
                                                         class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                    <h4 class="mb-0">Gutyecuador</h4>
+                                                    <div class="text-wrap text-break fw-bold text-dark"
+                                                        style="width: 6rem;">
+                                                        Usuario
+                                                    </div>
                                                 </a>
                                                 <ul>
                                                     <li>
@@ -92,7 +109,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
 
                                                     </li>
@@ -101,7 +121,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -109,7 +132,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -119,7 +145,10 @@
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                         alt=""
                                                         class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                    <h4 class="mb-0">Gutyecuador</h4>
+                                                    <div class="text-wrap text-break fw-bold text-dark"
+                                                        style="width: 6rem;">
+                                                        Usuario
+                                                    </div>
                                                 </a>
                                                 <ul>
                                                     <li>
@@ -127,7 +156,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
 
                                                     </li>
@@ -136,7 +168,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                     <li>
@@ -144,7 +179,10 @@
                                                             <img src="{{ asset('assets/images/avatar/default.png') }}"
                                                                 alt=""
                                                                 class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
-                                                            <h4 class="mb-0">Gutyecuador</h4>
+                                                            <div class="text-wrap text-break fw-bold text-dark"
+                                                                style="width: 6rem;">
+                                                                Usuario
+                                                            </div>
                                                         </a>
                                                     </li>
                                                 </ul>
