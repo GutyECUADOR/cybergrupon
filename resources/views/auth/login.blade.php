@@ -12,7 +12,7 @@
                 <div class="card-body p-6">
                 <div class="mb-4">
                     <a href="/">
-                        <img src="{{ asset('assets/images/brand/google-drive.svg')}}" class="mb-4" alt="logo-icon">
+                        <img style="max-width: 50px;" src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" class="mb-4" alt="logo-icon">
                     </a>
                     <h1 class="mb-1 fw-bold">Iniciar Sesión</h1>
                     <span>Aun no tienes una cuenta? <a href="{{ route('register')}}" class="ms-1">Registrarse</a></span>

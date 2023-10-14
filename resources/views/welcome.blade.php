@@ -37,7 +37,7 @@
     <!-- navbar login -->
     <nav class="navbar navbar-expand-lg">
         <div class="container px-0">
-            <a class="navbar-brand" href="/"><img src="./assets/images/brand/google-drive.svg" alt="Logo Empresa"> <span class="text-dark">EMPRESA</span></a>
+            <a class="navbar-brand" href="/"><img style="max-width: 50px;" src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" alt="Logo Empresa"> <span class="text-dark">Cybergrupon</span></a>
             <div class="d-flex align-items-center order-lg-3 ms-lg-3">
                 <div class="d-flex align-items-center">
                     <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle me-2">
@@ -526,7 +526,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                     <!-- about company -->
                     <div class="mb-4">
-                        <img src="{{ asset('assets/images/brand/google-drive.svg')}}" alt="LOGO" class="logo-inverse ">
+                        <img src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" style="max-width: 50px;" alt="LOGO" class="logo-inverse ">
                         <div class="mt-4">
                             <p>Geek is feature-rich components and beautifully Bootstrap UIKit for developers, built with bootstrap responsive framework.</p>
                             <!-- social media -->
@@ -584,7 +584,7 @@
                                 document.getElementById('copyright2').appendChild(document.createTextNode(new Date().getFullYear()))
 
                             </script>
-                        </span> Geeks-UI, Inc. All Rights Reserved</span>
+                        </span> Cybergrupon, Inc. All Rights Reserved</span>
                 </div>
 
                 <!-- Links -->

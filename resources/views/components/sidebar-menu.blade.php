@@ -4,7 +4,8 @@
     <div class="vh-100" data-simplebar>
         <!-- Brand logo -->
         <a class="navbar-brand" href="/dashboard">
-            <img src="./assets/images/brand/google-drive.svg" alt="">
+            <img src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" alt="">
+            <span class="text-white">Cybergrupon</span>
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
