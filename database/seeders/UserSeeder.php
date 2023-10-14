@@ -19,7 +19,6 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert(array([
-            'location' => 1,
             'nickname' => 'administrador',
             'nickname_promoter' => '',
             'email' => 'admin@admin.com',
@@ -32,19 +31,18 @@ class UserSeeder extends Seeder
             ],
         ));
 
-       /*  foreach (range(1,31) as $index) {
+         foreach (range(1,31) as $index) {
             User::create([
-                'location' => $index+1,
                 'nickname' => 'partner'.$index,
                 'is_payed' => true,
                 'package_id' => 1,
                 'nickname_promoter' => 'administrador',
-                'email' => 'partner'.$index.'@clubalarab.com',
+                'email' => 'partner'.$index.'@cybergrupon.com',
                 'phone' => '+593',
                 'password' => Hash::make('admin2023'),
                 'imagen_recibo' => null
             ]);
-        } */
+        }
 
 
 
