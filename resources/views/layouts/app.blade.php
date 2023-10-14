@@ -32,6 +32,7 @@
 
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
+     <link href="{{ asset('assets/css/arbol.css')}}" rel="stylesheet" >
     <title>{{ config('app.name', 'App') }} :. Panel de Administración</title>
 </head>
 

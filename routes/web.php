@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DiasInversionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\RedController;
 use App\Http\Controllers\CompraController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
@@ -43,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/profile', ProfileController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/compra', CompraController::class);
+    Route::resource('/red', RedController::class);
 
 
 
