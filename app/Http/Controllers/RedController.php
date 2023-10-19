@@ -17,6 +17,21 @@ class RedController extends Controller
      */
     public function index()
     {
+        $NoPosition = new \stdclass();
+        $NoPosition->nickname = '';
+        $posicion2_1 = $NoPosition;
+        $posicion2_2 = $NoPosition;
+        $posicion2_3 = $NoPosition;
+        $posicion3_1 = $NoPosition;
+        $posicion3_2 = $NoPosition;
+        $posicion3_3 = $NoPosition;
+        $posicion3_4 = $NoPosition;
+        $posicion3_5 = $NoPosition;
+        $posicion3_6 = $NoPosition;
+        $posicion3_7 = $NoPosition;
+        $posicion3_8 = $NoPosition;
+        $posicion3_9 = $NoPosition;
+
         $posicion2_1 =  DB::table('users')
             ->where('id_usuario_location', Auth::user()->id)
             ->where('location', 1)
@@ -32,53 +47,56 @@ class RedController extends Controller
             ->where('location', 3)
             ->first();
 
-
-        // Tercer nivel
-        $posicion3_1 =  DB::table('users')
+        if ($posicion2_2 && $posicion2_3) {
+            // Tercer nivel
+            $posicion3_1 =  DB::table('users')
             ->where('id_usuario_location',  $posicion2_1->id)
             ->where('location', 1)
             ->first();
 
-        $posicion3_2 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_1->id)
-            ->where('location', 2)
-            ->first();
+            $posicion3_2 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_1->id)
+                ->where('location', 2)
+                ->first();
 
-        $posicion3_3 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_1->id)
-            ->where('location', 3)
-            ->first();
+            $posicion3_3 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_1->id)
+                ->where('location', 3)
+                ->first();
 
 
-        $posicion3_4 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_2->id)
-            ->where('location', 1)
-            ->first();
+            $posicion3_4 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_2->id)
+                ->where('location', 1)
+                ->first();
 
-        $posicion3_5 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_2->id)
-            ->where('location', 2)
-            ->first();
+            $posicion3_5 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_2->id)
+                ->where('location', 2)
+                ->first();
 
-        $posicion3_6 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_2->id)
-            ->where('location', 3)
-            ->first();
+            $posicion3_6 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_2->id)
+                ->where('location', 3)
+                ->first();
 
-        $posicion3_7 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_3->id)
-            ->where('location', 1)
-            ->first();
+            $posicion3_7 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_3->id)
+                ->where('location', 1)
+                ->first();
 
-        $posicion3_8 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_3->id)
-            ->where('location', 2)
-            ->first();
+            $posicion3_8 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_3->id)
+                ->where('location', 2)
+                ->first();
 
-        $posicion3_9 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_3->id)
-            ->where('location', 3)
-            ->first();
+            $posicion3_9 =  DB::table('users')
+                ->where('id_usuario_location',  $posicion2_3->id)
+                ->where('location', 3)
+                ->first();
+        }
+
+
 
 
 
