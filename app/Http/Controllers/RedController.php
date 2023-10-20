@@ -38,29 +38,31 @@ class RedController extends Controller
         $posicion3_8 = $NoPosition;
         $posicion3_9 = $NoPosition;
 
+        // NIVEL 1
         $posicion1_1 =  Auth::user();
 
+        //NIVEL 2
         $posicion2_1 =  DB::table('users')
-            ->where('id_usuario_location', Auth::user()->id)
+            ->where('id_usuario_location', $posicion1_1->id)
             ->where('location', 1)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
-
-
         $posicion2_2 =  DB::table('users')
-            ->where('id_usuario_location', Auth::user()->id)
+            ->where('id_usuario_location', $posicion1_1->id)
             ->where('location', 2)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
         $posicion2_3 =  DB::table('users')
-            ->where('id_usuario_location', Auth::user()->id)
+            ->where('id_usuario_location', $posicion1_1->id)
             ->where('location', 3)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
-        if ($posicion2_2 && $posicion2_3) {
+        // NIVEL 3
+
+        if ($posicion2_1) {
             // Tercer nivel
             $posicion3_1 =  DB::table('users')
             ->where('id_usuario_location',  $posicion2_1->id)
@@ -79,8 +81,9 @@ class RedController extends Controller
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
+        }
 
-
+        if ($posicion2_2) {
             $posicion3_4 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 1)
@@ -98,6 +101,9 @@ class RedController extends Controller
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
+        }
+
+        if ($posicion2_1) {
 
             $posicion3_7 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_3->id)
@@ -143,24 +149,30 @@ class RedController extends Controller
      */
     public function store(Request $request) {
         $custom_messages = [
-            'nickname_promoter.exists' => 'El nick o código del promotor no existe, indique un código correcto.'
+            'nickname_promoter.exists' => 'El nick o código del promotor no existe, indique un código correcto.',
+            'id_usuario_location.required' => 'Esta ubicación no esta habilitada, selecciona una ubicación directa a otro usuario.'
         ];
+
+        //dd($request->all());
 
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
+            'location' => ['required'],
+            'id_usuario_location' => ['required'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
-            /* 'package' => ['required', 'string', 'max:15', 'exists:packages,id'], */
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);
 
         $user = User::create([
             'nickname' => $request->nickname,
+            'nicklocationname' => $request->location,
+            'location' => $request->location,
+            'id_usuario_location' => $request->id_usuario_location,
             'nickname_promoter' => $request->nickname_promoter,
             'email' => $request->email,
             'phone' => $request->phone,
-            /* 'package_id' => $request->package, */
             'password' => Hash::make($request->password),
         ]);
 

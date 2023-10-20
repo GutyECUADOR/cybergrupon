@@ -47,6 +47,7 @@
                                         </a>
                                         <!-- segundo nivel -->
                                         <ul id="primerenlace">
+                                            <!-- Posicion 2-1 -->
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_1" style="margin-left: 30px;">
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
@@ -73,6 +74,8 @@
 
                                                             <form method="POST" action="{{ route('red.store') }}">
                                                                 @csrf
+                                                                <input type="hidden" class="form-control" name="id_usuario_location" value="{{ $posicion1_1->id }}" required>
+                                                                <input type="hidden" class="form-control" name="location" value="1" required>
 
                                                                 <!-- Username -->
                                                                 <div class="mb-3">
@@ -141,6 +144,77 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_1" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-1</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_1)){{$posicion2_1->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="1" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_2" style="margin-left: 30px;">
@@ -154,6 +228,95 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+                                                        @if(!is_null($posicion2_1))
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_2" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-2</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_1)){{$posicion2_1->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="2" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
+                                                        @else
+                                                            <div class="modal" id="modal_position3_2" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal-dialog modal-sm">
+                                                                    <div class="modal-content ">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Posición no Válida</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Seleccione una posición con usuario directo.</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+
+                                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_3" style="margin-left: 30px;">
@@ -167,9 +330,79 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_3" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-3</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_1)){{$posicion2_1->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="3" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </li>
+                                            <!-- Posicion 2-2 -->
                                             <li id="tercerenlace">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_2" style="margin-left: 30px;">
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
@@ -182,6 +415,76 @@
                                                         @endif
                                                     </div>
                                                 </a>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modal_position2_2" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title">Registrar en posición 2-2</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form method="POST" action="{{ route('red.store') }}">
+                                                                @csrf
+                                                                <input type="hidden" class="form-control" name="id_usuario_location" value="{{ $posicion1_1->id }}" required>
+                                                                <input type="hidden" class="form-control" name="location" value="2" required>
+
+                                                                <!-- Username -->
+                                                                <div class="mb-3">
+                                                                    <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                    <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                </div>
+
+                                                                <!-- Nickname -->
+                                                                <div class="mb-3">
+                                                                    <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                    <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                </div>
+
+                                                                <!-- Email -->
+                                                                <div class="mb-3">
+                                                                    <label for="email" class="form-label">Correo electrónico</label>
+                                                                    <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                </div>
+
+                                                                <!-- Phone -->
+                                                                <div class="mb-3">
+                                                                    <label for="phone" class="form-label">Teléfono</label>
+                                                                    <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                </div>
+
+                                                                <!-- Password -->
+                                                                <div class="mb-3">
+                                                                    <label for="password" class="form-label">Contraseña</label>
+                                                                    <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                </div>
+
+                                                                <div>
+                                                                        <!-- Button -->
+                                                                        <div class="d-grid">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Crear nueva cuenta
+                                                                    </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
                                                 <ul>
                                                     <li>
 
@@ -196,7 +499,75 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_4" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-4</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
 
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_2)){{$posicion2_2->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="1" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_5" style="margin-left: 30px;">
@@ -210,6 +581,75 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_5" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-5</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_2)){{$posicion2_2->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="2" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </li>
                                                     <li>
                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_6" style="margin-left: 30px;">
@@ -223,9 +663,79 @@
                                                                 @endif
                                                             </div>
                                                         </a>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="modal_position3_6" tabindex="-1" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Registrar en posición Nivel 3-6</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <form method="POST" action="{{ route('red.store') }}">
+                                                                        @csrf
+                                                                        <input type="hidden" class="form-control" name="id_usuario_location"
+                                                                            value="@if(!is_null($posicion2_2)){{$posicion2_2->id}}@endif " required>
+                                                                        <input type="hidden" class="form-control" name="location" value="3" required>
+
+                                                                        <!-- Username -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                            <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                        </div>
+
+                                                                        <!-- Nickname -->
+                                                                        <div class="mb-3">
+                                                                            <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                            <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                        </div>
+
+                                                                        <!-- Email -->
+                                                                        <div class="mb-3">
+                                                                            <label for="email" class="form-label">Correo electrónico</label>
+                                                                            <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                        </div>
+
+                                                                        <!-- Phone -->
+                                                                        <div class="mb-3">
+                                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                                            <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                        </div>
+
+                                                                        <!-- Password -->
+                                                                        <div class="mb-3">
+                                                                            <label for="password" class="form-label">Contraseña</label>
+                                                                            <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                            <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                        </div>
+
+                                                                        <div>
+                                                                                <!-- Button -->
+                                                                                <div class="d-grid">
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                Crear nueva cuenta
+                                                                            </button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                     </li>
                                                 </ul>
                                             </li>
+                                            <!-- Posicion 2-3 -->
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#moda_position2_3" style="margin-left: 30px;">
                                                     <img src="{{ asset('assets/images/avatar/default.png') }}"
@@ -238,6 +748,76 @@
                                                         @endif
                                                     </div>
                                                 </a>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="modal_position2_3" tabindex="-1" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title">Registrar en posición 2-3</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form method="POST" action="{{ route('red.store') }}">
+                                                                @csrf
+                                                                <input type="hidden" class="form-control" name="id_usuario_location" value="{{ $posicion1_1->id }}" required>
+                                                                <input type="hidden" class="form-control" name="location" value="3" required>
+
+                                                                <!-- Username -->
+                                                                <div class="mb-3">
+                                                                    <label for="nickname_promoter" class="form-label">Código de Promotor/Patrocinador </label>
+                                                                    <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
+                                                                </div>
+
+                                                                <!-- Nickname -->
+                                                                <div class="mb-3">
+                                                                    <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>
+                                                                    <input type="nickname" name="nickname" value="{{old('nickname')}}" class="form-control" id="nickname" required autofocus>
+                                                                </div>
+
+                                                                <!-- Email -->
+                                                                <div class="mb-3">
+                                                                    <label for="email" class="form-label">Correo electrónico</label>
+                                                                    <input type="email" name="email" value="{{old('email')}}" class="form-control" id="email" required>
+                                                                </div>
+
+                                                                <!-- Phone -->
+                                                                <div class="mb-3">
+                                                                    <label for="phone" class="form-label">Teléfono</label>
+                                                                    <input type="phone" name="phone" value="{{old('phone')}}" class="form-control" id="phone" required>
+                                                                </div>
+
+                                                                <!-- Password -->
+                                                                <div class="mb-3">
+                                                                    <label for="password" class="form-label">Contraseña</label>
+                                                                    <input type="password" id="password" class="form-control" name="password" placeholder="" required>
+                                                                </div>
+
+                                                                <div class="mb-3">
+                                                                    <label for="password_confirmation" class="form-label">Confirme Contraseña</label>
+                                                                    <input type="password" name="password_confirmation" class="form-control" id="password_confirmation" required>
+                                                                </div>
+
+                                                                <div>
+                                                                        <!-- Button -->
+                                                                        <div class="d-grid">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        Crear nueva cuenta
+                                                                    </button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+
                                                 <ul>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#moda_position3_7" style="margin-left: 30px;">

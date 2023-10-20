@@ -20,6 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'nickname',
+        'location',
+        'id_usuario_location',
         'is_payed',
         'package_id',
         'nickname_promoter',
