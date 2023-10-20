@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/profile', ProfileController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/compra', CompraController::class);
+    Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
     Route::resource('/red', RedController::class);
 
 

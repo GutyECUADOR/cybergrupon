@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
+
 use App\Models\Red;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+
 
 class RedController extends Controller
 {
@@ -15,9 +21,9 @@ class RedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $NoPosition = new \stdclass();
+        $NoPosition->id = '';
         $NoPosition->nickname = '';
         $posicion2_1 = $NoPosition;
         $posicion2_2 = $NoPosition;
@@ -32,19 +38,26 @@ class RedController extends Controller
         $posicion3_8 = $NoPosition;
         $posicion3_9 = $NoPosition;
 
+        $posicion1_1 =  Auth::user();
+
         $posicion2_1 =  DB::table('users')
             ->where('id_usuario_location', Auth::user()->id)
             ->where('location', 1)
+            ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
+
+
 
         $posicion2_2 =  DB::table('users')
             ->where('id_usuario_location', Auth::user()->id)
             ->where('location', 2)
+            ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
         $posicion2_3 =  DB::table('users')
             ->where('id_usuario_location', Auth::user()->id)
             ->where('location', 3)
+            ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
         if ($posicion2_2 && $posicion2_3) {
@@ -52,47 +65,56 @@ class RedController extends Controller
             $posicion3_1 =  DB::table('users')
             ->where('id_usuario_location',  $posicion2_1->id)
             ->where('location', 1)
+            ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
             $posicion3_2 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 2)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_3 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 3)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
 
             $posicion3_4 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 1)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_5 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 2)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_6 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 3)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_7 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 1)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_8 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 2)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
             $posicion3_9 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 3)
+                ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
         }
 
@@ -100,7 +122,7 @@ class RedController extends Controller
 
 
 
-        return view('red.index', compact('posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
+        return view('red.index', compact('posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
     }
 
     /**
@@ -108,9 +130,9 @@ class RedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+
     }
 
     /**
@@ -119,9 +141,30 @@ class RedController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $custom_messages = [
+            'nickname_promoter.exists' => 'El nick o código del promotor no existe, indique un código correcto.'
+        ];
+
+        $request->validate([
+            'nickname' => ['required', 'string', 'max:191', 'unique:users'],
+            'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
+            'phone' => ['required', 'string', 'max:15'],
+            /* 'package' => ['required', 'string', 'max:15', 'exists:packages,id'], */
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ], $custom_messages);
+
+        $user = User::create([
+            'nickname' => $request->nickname,
+            'nickname_promoter' => $request->nickname_promoter,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            /* 'package_id' => $request->package, */
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito'); ;
     }
 
     /**
