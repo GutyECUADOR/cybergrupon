@@ -103,7 +103,7 @@ class RedController extends Controller
                 ->first();
         }
 
-        if ($posicion2_1) {
+        if ($posicion2_3) {
 
             $posicion3_7 =  DB::table('users')
                 ->where('id_usuario_location',  $posicion2_3->id)
