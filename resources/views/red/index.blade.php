@@ -39,8 +39,7 @@
                                 <ul>
                                     <li>
                                         <a href="#" style="margin-left: 60px;">
-                                            <img src="{{ asset('assets/images/avatar/default.png') }}" alt=""
-                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                             <div class="text-wrap text-break fw-bold text-dark" style="width: 6rem;">
                                                 {{ $posicion1_1->nickname }}
                                             </div>
@@ -50,9 +49,11 @@
                                             <!-- Posicion 2-1 -->
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_1" style="margin-left: 30px;">
-                                                    <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                        alt=""
-                                                        class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @if(!is_null($posicion2_1))
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @endif
                                                     <div class="text-wrap text-break fw-bold text-dark"
                                                         style="width: 6rem;">
                                                         @if(!is_null($posicion2_1))
@@ -134,9 +135,13 @@
                                                 <ul>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_1" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_1))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_1))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_1))
@@ -236,9 +241,13 @@
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_2" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_1))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_2))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_2))
@@ -338,9 +347,13 @@
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_3" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_1))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_3))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_3))
@@ -443,9 +456,11 @@
                                             <!-- Posicion 2-2 -->
                                             <li id="tercerenlace">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_2" style="margin-left: 30px;">
-                                                    <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                        alt=""
-                                                        class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                     @if(!is_null($posicion2_2))
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @endif
                                                     <div class="text-wrap text-break fw-bold text-dark"
                                                         style="width: 6rem;">
                                                         @if(!is_null($posicion2_2))
@@ -527,9 +542,13 @@
                                                     <li>
 
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_4" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_2))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_4))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_4))
@@ -629,9 +648,13 @@
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_5" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_2))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_5))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_5))
@@ -731,9 +754,13 @@
                                                     </li>
                                                     <li>
                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_6" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_2))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_6))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_6))
@@ -836,9 +863,11 @@
                                             <!-- Posicion 2-3 -->
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_3" style="margin-left: 30px;">
-                                                    <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                        alt=""
-                                                        class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @if(!is_null($posicion2_3))
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @else
+                                                        <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                    @endif
                                                     <div class="text-wrap text-break fw-bold text-dark"
                                                         style="width: 6rem;">
                                                         @if(!is_null($posicion2_3))
@@ -919,9 +948,13 @@
                                                 <ul>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_7" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_3))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_7))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_7))
@@ -1021,9 +1054,13 @@
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_8" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_3))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_8))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_8))
@@ -1123,9 +1160,13 @@
                                                     </li>
                                                     <li>
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_9" style="margin-left: 30px;">
-                                                            <img src="{{ asset('assets/images/avatar/default.png') }}"
-                                                                alt=""
-                                                                class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @if(is_null($posicion2_3))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @elseif (!is_null($posicion3_9))
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @else
+                                                                <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                            @endif
                                                             <div class="text-wrap text-break fw-bold text-dark"
                                                                 style="width: 6rem;">
                                                                 @if(!is_null($posicion3_9))

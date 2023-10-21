@@ -148,6 +148,17 @@ class RedController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+
+        $existeUsuarioEnUbicacion = User::where([
+                                                ['location', '=', $request->location],
+                                                ['id_usuario_location', '=', $request->id_usuario_location],
+                                            ])->get();
+
+        if ($existeUsuarioEnUbicacion) {
+            return redirect()->route('red.index')->withErrors(['message' => 'Ya existe un usuario en esta ubicación. Si el problema persiste contacte a soporte']);
+        }
+
+
         $custom_messages = [
             'nickname_promoter.exists' => 'El nick o código del promotor no existe, indique un código correcto.',
             'id_usuario_location.required' => 'Esta ubicación no esta habilitada, selecciona una ubicación directa a otro usuario.'
@@ -157,8 +168,8 @@ class RedController extends Controller
 
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
-            'location' => ['required'],
-            'id_usuario_location' => ['required'],
+            'location' => ['required', 'integer','between:1,3'],
+            'id_usuario_location' => ['required', 'exists:users,id'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
