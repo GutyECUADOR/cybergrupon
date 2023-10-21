@@ -439,7 +439,7 @@
                                                             </div>
                                                         </a>
                                                         @if(!is_null($posicion2_1))
-                                                            @if(is_null($posicion3_2))
+                                                            @if(is_null($posicion3_3))
                                                             <!-- Modal -->
                                                             <div class="modal fade" id="modal_position3_3" tabindex="-1" aria-hidden="true">
                                                                 <div class="modal-dialog">
@@ -510,7 +510,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_3" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -745,7 +745,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_4" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -871,7 +871,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_5" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -997,7 +997,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_6" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -1230,7 +1230,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_7" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -1269,7 +1269,7 @@
                                                         @endif
                                                     </li>
                                                     <li>
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_8" style="margin-left: 30px;">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position3_7" style="margin-left: 30px;">
                                                             @if(is_null($posicion2_3))
                                                                 <img src="{{ asset('assets/images/avatar/UbicacionNoDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                             @elseif (!is_null($posicion3_8))
@@ -1356,7 +1356,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_8" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
@@ -1482,7 +1482,7 @@
                                                                 </div>
                                                             </div>
                                                             @else
-                                                                <div class="modal" id="modal_position2_1" tabindex="-1" aria-hidden="true">
+                                                                <div class="modal" id="modal_position3_9" tabindex="-1" aria-hidden="true">
                                                                     <div class="modal-dialog modal-sm">
                                                                         <div class="modal-content ">
                                                                         <div class="modal-header">
