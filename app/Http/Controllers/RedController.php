@@ -152,7 +152,7 @@ class RedController extends Controller
         $existeUsuarioEnUbicacion = User::where([
                                                 ['location', '=', $request->location],
                                                 ['id_usuario_location', '=', $request->id_usuario_location],
-                                            ])->get();
+                                            ])->first();
 
         if ($existeUsuarioEnUbicacion) {
             return redirect()->route('red.index')->withErrors(['message' => 'Ya existe un usuario en esta ubicación. Si el problema persiste contacte a soporte']);
