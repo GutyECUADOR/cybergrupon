@@ -187,7 +187,7 @@ class RedController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito'); ;
+        return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito'); 
     }
 
     /**

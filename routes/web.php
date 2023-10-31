@@ -13,6 +13,7 @@ use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\TipoInversionController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\RegisterReferido;
 use App\Mail\SoporteUsuarioMaileable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,9 @@ use Illuminate\Support\Facades\Mail;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('referido.create');
+Route::post('/referido', [RegisterReferido::class, 'store'])->name('referido.store');
 
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/pagos/{user}', [PagoController::class, 'create'])->name('pagos.create');
