@@ -56,6 +56,12 @@
     <script src="{{ asset('assets/js/vendors/chart.js')}}"></script>
 
 
+    <script src="{{ asset('assets/libs/inputmask/dist/jquery.inputmask.min.js')}}"></script>
+    <script src="{{ asset('assets/libs/bs-stepper/dist/js/bs-stepper.min.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/beStepper.js')}}"></script>
+    <script src="{{ asset('assets/js/vendors/inputmask.js')}}"></script>
+
+
 </body>
 
 </html>

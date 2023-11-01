@@ -41,7 +41,7 @@
             </li>
             <!-- Nav item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('recargasaldo.index') }}">
                     <i class="nav-icon fe fe-user me-2"></i> Recarga de Saldo
                 </a>
             </li>

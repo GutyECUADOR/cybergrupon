@@ -14,7 +14,7 @@ class RecargaSaldoController extends Controller
      */
     public function index()
     {
-        //
+        return view('recarga-saldo.index');
     }
 
     /**
