@@ -104,7 +104,6 @@ class RegisterReferido extends Controller
 
 
         $array_padres = $array_hijos;
-        $array_hijos = [];
         $nivel = 1;
         $array_totales =[];
         //return $array_padres;
@@ -121,19 +120,17 @@ class RegisterReferido extends Controller
                     if ($verificacion_existe) {
                         array_push($array_totales, $verificacion_existe->id);
                     }else{
-                        return $array_totales;
+                        return (object) array('hijos'=> $array_totales, 'location'=> $cont, 'id_usuario_location'=> $id_padre);
                     }
 
                     $cont++;
                 } while ($verificacion_existe && $cont <=3);
             }
             $array_padres = $array_totales;
-
-            $array_hijos = [];
             $nivel++;
         } while ($verificacion_existe && $nivel <=4);
 
-       return $array_totales;
+        return (object) array('hijos'=> $array_totales, 'location'=> $cont, 'id_usuario_location'=> $id_padre);
 
 
 
