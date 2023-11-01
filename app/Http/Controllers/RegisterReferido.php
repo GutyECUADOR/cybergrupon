@@ -19,7 +19,7 @@ class RegisterReferido extends Controller
      */
     public function index()
     {
-      
+
     }
 
     /**
@@ -38,8 +38,7 @@ class RegisterReferido extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         //dd($request->all());
         $custom_messages = [
@@ -50,57 +49,12 @@ class RegisterReferido extends Controller
         # Obtener el ID del partner promotor
         $ID_Partner = User::where('nickname', '=', $request->nickname_promoter)->first();
         $ID_Partner = $ID_Partner->id; //administrador
-        
-        # recorrer for de 1 a 3 y llenar array con los ID existentes
-        $array_padres = [];
-        $cont = 1;
 
-        do {
-            $verificacion_existe = User::where([
-                ['location', $cont],
-                ['id_usuario_location', $ID_Partner],
-            ])->first();
+        $locations = $this->getLocation($ID_Partner);
 
-            
-            if ($verificacion_existe) {
-                array_push($array_padres, $verificacion_existe->location);
-            }
-            $cont++;
-        } while ($verificacion_existe && $cont <=3);
-
-       dd($array_padres);
-
-       /*  $niveles = 1;
-        while ($niveles <= 4) {
-           
+        dd($locations);
 
 
-
-
-            $niveles++;
-        } */
-
-       /*  $array_hijos = [];
-        foreach ($array_padres as $id_padre) {
-            while (!is_null($verificacion_existe)) { 
-                $verificacion_existe = User::where([
-                    ['location', '=', $cont],
-                    ['id_usuario_location', '=', $id_padre],
-                ])->first();
-                if ($verificacion_existe) {
-                    array_push($array_hijos, $verificacion_existe->id);
-                }else{
-                    $ultimo_id_padre = $id_padre;
-                    $ultimo_id_hijo = $cont;
-                    break;
-                }
-            }
-        }
- */
-
-
-        dd($array_hijos);
-        
         $location = '';
 
         $id_usuario_location = '';
@@ -126,6 +80,98 @@ class RegisterReferido extends Controller
         ]);
 
         return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito');
+    }
+
+    private function getLocation($ID_Partner) {
+        #recorrer for de 1 a 3 y llenar array con los ID existentes
+        $array_padres = [];
+        $array_hijos = [];
+        $cont = 1;
+
+
+        do {
+            $verificacion_existe = User::where([
+                ['location', '=', $cont],
+                ['id_usuario_location', '=', $ID_Partner],
+            ])->first();
+
+
+            if ($verificacion_existe) {
+                array_push($array_hijos, $verificacion_existe->id);
+            }
+            $cont++;
+        } while ($verificacion_existe && $cont <=3);
+
+
+        $array_padres = $array_hijos;
+        $array_hijos = [];
+        $nivel = 1;
+        $array_totales =[];
+        //return $array_padres;
+
+        do {
+            foreach ($array_padres as $id_padre) {
+                $cont = 1;
+                do {
+                    $verificacion_existe = User::where([
+                        ['location', '=', $cont],
+                        ['id_usuario_location', '=', $id_padre],
+                    ])->first();
+
+                    if ($verificacion_existe) {
+                        array_push($array_totales, $verificacion_existe->id);
+                    }else{
+                        return $array_totales;
+                    }
+
+                    $cont++;
+                } while ($verificacion_existe && $cont <=3);
+            }
+            $array_padres = $array_totales;
+
+            $array_hijos = [];
+            $nivel++;
+        } while ($verificacion_existe && $nivel <=4);
+
+       return $array_totales;
+
+
+
+
+
+
+
+
+       /*  $niveles = 1;
+        while ($niveles <= 4) {
+
+
+
+
+
+            $niveles++;
+        } */
+
+       /*  $array_hijos = [];
+        foreach ($array_padres as $id_padre) {
+            while (!is_null($verificacion_existe)) {
+                $verificacion_existe = User::where([
+                    ['location', '=', $cont],
+                    ['id_usuario_location', '=', $id_padre],
+                ])->first();
+                if ($verificacion_existe) {
+                    array_push($array_hijos, $verificacion_existe->id);
+                }else{
+                    $ultimo_id_padre = $id_padre;
+                    $ultimo_id_hijo = $cont;
+                    break;
+                }
+            }
+        }
+        */
+
+
+        dd($array_hijos);
     }
 
     /**
