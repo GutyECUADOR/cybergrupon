@@ -64,12 +64,20 @@
 									</div>
 								</div>
 								<div>
-										<!-- Button -->
-										<div class="d-grid">
-									<button type="submit" class="btn btn-primary">
-										Crear nueva cuenta
-									</button>
-									</div>
+									<!-- Button -->
+                                    @if (!$errors->any())
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">
+                                                Crear nueva cuenta
+                                            </button>
+                                        </div>
+                                    @else
+                                        <div class="d-grid">
+                                            <a href="/" class="btn btn-primary">
+                                                Ir al inicio
+                                            </a>
+                                        </div>
+                                    @endif
 								</div>
 
 							</form>

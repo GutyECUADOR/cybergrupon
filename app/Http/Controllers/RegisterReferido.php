@@ -29,6 +29,16 @@ class RegisterReferido extends Controller
      */
     public function create($nickname)
     {
+         # Obtener el ID del partner promotor
+         $ID_Partner = User::where('nickname', '=', $nickname)->first();
+         $ID_Partner = $ID_Partner->id; //administrador
+
+        $locations = $this->getLocation($ID_Partner);
+
+        if($locations->location > 3) {
+            return view('referido.register', compact('nickname'))->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
+        }
+
         return view('referido.register', compact('nickname'));
     }
 
@@ -52,7 +62,10 @@ class RegisterReferido extends Controller
 
         $locations = $this->getLocation($ID_Partner);
 
-        dd($locations);
+
+        if($locations->location > 3) {
+            return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
+        }
 
 
         $location = '';
@@ -88,7 +101,7 @@ class RegisterReferido extends Controller
         $array_hijos = [];
         $cont = 1;
 
-
+        #PRIMER NIVEL
         do {
             $verificacion_existe = User::where([
                 ['location', '=', $cont],
@@ -98,10 +111,14 @@ class RegisterReferido extends Controller
 
             if ($verificacion_existe) {
                 array_push($array_hijos, $verificacion_existe->id);
+            }else{
+                return (object) array('hijos'=> $array_hijos, 'location'=> $cont, 'id_usuario_location'=> $ID_Partner);
             }
             $cont++;
         } while ($verificacion_existe && $cont <=3);
 
+
+        #2DO NIVEL
 
         $array_padres = $array_hijos;
         $nivel = 1;
