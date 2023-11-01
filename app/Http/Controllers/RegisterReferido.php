@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -60,18 +62,12 @@ class RegisterReferido extends Controller
         $ID_Partner = User::where('nickname', '=', $request->nickname_promoter)->first();
         $ID_Partner = $ID_Partner->id; //administrador
 
-        $locations = $this->getLocation($ID_Partner);
+        $location_free = $this->getLocation($ID_Partner);
 
 
-        if($locations->location > 3) {
+        if($location_free->location > 3) {
             return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
         }
-
-
-        $location = '';
-
-        $id_usuario_location = '';
-
 
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
@@ -84,15 +80,17 @@ class RegisterReferido extends Controller
         $user = User::create([
             'nickname' => $request->nickname,
             'nicklocationname' => $request->location,
-            'location' => $location,
-            'id_usuario_location' => $id_usuario_location,
+            'location' => $location_free->location,
+            'id_usuario_location' => $location_free->id_usuario_location,
             'nickname_promoter' => $request->nickname_promoter,
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito');
+        event(new Registered($user));
+        Auth::login($user);
+        return redirect(RouteServiceProvider::HOME);
     }
 
     private function getLocation($ID_Partner) {
@@ -148,44 +146,6 @@ class RegisterReferido extends Controller
         } while ($verificacion_existe && $nivel <=4);
 
         return (object) array('hijos'=> $array_totales, 'location'=> $cont, 'id_usuario_location'=> $id_padre);
-
-
-
-
-
-
-
-
-       /*  $niveles = 1;
-        while ($niveles <= 4) {
-
-
-
-
-
-            $niveles++;
-        } */
-
-       /*  $array_hijos = [];
-        foreach ($array_padres as $id_padre) {
-            while (!is_null($verificacion_existe)) {
-                $verificacion_existe = User::where([
-                    ['location', '=', $cont],
-                    ['id_usuario_location', '=', $id_padre],
-                ])->first();
-                if ($verificacion_existe) {
-                    array_push($array_hijos, $verificacion_existe->id);
-                }else{
-                    $ultimo_id_padre = $id_padre;
-                    $ultimo_id_hijo = $cont;
-                    break;
-                }
-            }
-        }
-        */
-
-
-        dd($array_hijos);
     }
 
     /**
