@@ -21,7 +21,7 @@ class AnalisisController extends Controller
      */
     public function index()
     {
-
+        return 'indexAPI';
     }
 
     /**

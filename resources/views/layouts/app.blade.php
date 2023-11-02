@@ -53,7 +53,7 @@
     <script src="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/flatpickr.js')}}"></script>
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
-    <script src="{{ asset('assets/js/vendors/chart.js')}}"></script>
+    {{-- <script src="{{ asset('assets/js/vendors/chart.js')}}"></script> --}}
 
 
     <script src="{{ asset('assets/libs/inputmask/dist/jquery.inputmask.min.js')}}"></script>
@@ -61,6 +61,9 @@
     <script src="{{ asset('assets/js/vendors/beStepper.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/inputmask.js')}}"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('assets/js/admin/dashboard.js')}}?<?php echo date('Ymdhiiss')?>" defer></script>
 
 </body>
 

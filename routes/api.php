@@ -5,6 +5,7 @@ use App\Http\Controllers\API\DiasInversionController;
 use App\Http\Controllers\API\InversionController;
 use App\Http\Controllers\API\TipoInversionController;
 use App\Http\Controllers\API\AnalisisController;
+use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,4 @@ Route::apiResource('/diasinversion', DiasInversionController::class)->middleware
 Route::post('/avatar', [AvatarController::class, 'store'])->middleware('auth:sanctum');
 
 Route::apiResource('/analisis', AnalisisController::class);
+Route::apiResource('/dashboard', DashboardController::class);

@@ -14,7 +14,7 @@
 
             </div>
             <!-- Container fluid -->
-            <div class="container-fluid p-4">
+            <div class="container-fluid p-4" id="app">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
                         <div class="border-bottom pb-3 mb-3 d-lg-flex justify-content-between align-items-center">
@@ -112,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+                {{-- Grafica --}}
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-12">
                         <!-- Card -->
@@ -145,6 +146,7 @@
                     </div>
 
                 </div>
+                </div>{{-- Tabla --}}
                 <div class="row">
                     <div class="col-12">
                         <!-- card -->
@@ -164,6 +166,7 @@
                                         <th>Fecha</th>
                                     </tr>
                                     <tr>
+
                                     @foreach (Auth::user()->Movimientos as $movimiento)
                                         <td>{{$movimiento->tipoMovimiento}}</td>
                                         <td>{{$movimiento->valor}}</td>

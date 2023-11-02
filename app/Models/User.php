@@ -78,18 +78,20 @@ class User extends Authenticatable
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
         ->where('user_id', Auth::user()->id)
-        ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ')
-        ->get();
+        ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
+
 
 
         $saldo_compras = DB::table('compras')
         ->where('user_id', Auth::user()->id)
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
-
+        ->union($saldo_recargas)
+        ->orderByDesc('created_at')
+        ->limit(100)
         ->get();
 
-        $movimientos = $saldo_recargas->merge($saldo_compras);
+        //$movimientos = $saldo_recargas->merge($saldo_compras);
 
-        return $movimientos;
+        return $saldo_compras;
     }
 }
