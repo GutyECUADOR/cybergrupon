@@ -94,4 +94,17 @@ class User extends Authenticatable
 
         return $saldo_compras;
     }
+
+    public function getNivelActualAttribute() {
+        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
+        if (!$package_mayor) {
+            return 'Sin paquete';
+        }
+        return $package_mayor;
+    }
+
+    public function getReferidosAttribute() {
+        $cantidadReferidos = User::where('nickname_promoter', Auth::user()->nickname)->count('nickname_promoter') ;
+        return $cantidadReferidos;
+    }
 }

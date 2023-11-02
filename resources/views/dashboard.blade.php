@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    0
+                                    {{ Auth::user()->NivelActual }}
                                 </h2>
                                 <span class="ms-1 fw-medium">paquete actual</span>
                             </div>
@@ -82,10 +82,10 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    1,22,456
+                                     {{ Auth::user()->Referidos }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
-                                        class="fe fe-trending-up me-1"></i>+1200</span>
+                                        class="fe fe-trending-up me-1"></i>+</span>
                                 <span class="ms-1 fw-medium">Referidos</span>
                             </div>
                         </div>
@@ -104,10 +104,10 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    22,786
+                                    0
                                 </h2>
                                 <span class="text-success fw-semibold"><i
-                                        class="fe fe-trending-up me-1"></i>+200</span>
+                                        class="fe fe-trending-up me-1"></i>+USD</span>
                                 <span class="ms-1 fw-medium">Instructor</span>
                             </div>
                         </div>
