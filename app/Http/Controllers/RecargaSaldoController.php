@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RecargaSaldo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RecargaSaldoController extends Controller
 {
@@ -33,9 +35,15 @@ class RecargaSaldoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $request->request->add(['user_id' => Auth::user()->id]);
+        $data = $request->all();
+        $request->validate([
+            'valor' => 'required|numeric|min:200',
+        ]);
+
+        RecargaSaldo::create($data);
+        return redirect()->back()->with('status', 'Se registro la recarga correctamente');
     }
 
     /**
