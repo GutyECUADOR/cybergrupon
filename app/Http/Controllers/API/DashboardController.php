@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use \App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -13,10 +16,7 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return array(
-            'values' => [10, 41, 35],
-            'categories'=> ['uno', 'dos', 'tress']
-        );
+
     }
 
     /**
@@ -48,7 +48,23 @@ class DashboardController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where('user_id', $id)
+        ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
+
+        $saldo_compras = DB::table('compras')
+        ->where('user_id', $id)
+        ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
+        ->union($saldo_recargas)
+        ->orderByDesc('created_at')
+        ->limit(100)
+        ->get();
+
+        return response()->json([
+            'movimientos' => $saldo_compras,
+        ]);
+
     }
 
     /**

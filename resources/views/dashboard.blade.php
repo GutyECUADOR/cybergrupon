@@ -3,6 +3,8 @@
     <!-- Wrapper -->
     <main id="db-wrapper">
 
+        <input id="hiddenuserID" type="hidden" name="hiddenuserID" value="{{Auth::user()->id}}">
+
         <!-- Sidebar -->
         <x-sidebar-menu></x-sidebar-menu>
 
@@ -42,7 +44,7 @@
                                 </h2>
                                 <span class="text-success fw-semibold"><i
                                         class="fe fe-trending-up me-1"></i>$ USD </span>
-                                <span class="ms-1 fw-medium">Disponibled</span>
+                                <span class="ms-1 fw-medium">Disponible</span>
                             </div>
                         </div>
                     </div>
@@ -60,10 +62,9 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    2,456
+                                    0
                                 </h2>
-                                <span class="text-danger fw-semibold">120+</span>
-                                <span class="ms-1 fw-medium">Number of pending</span>
+                                <span class="ms-1 fw-medium">paquete actual</span>
                             </div>
                         </div>
                     </div>
@@ -121,7 +122,7 @@
                             <div
                                 class="card-header align-items-center card-header-height d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h4 class="mb-0">Ganancias</h4>
+                                    <h4 class="mb-0">Balance</h4>
                                 </div>
                                 <div>
                                     <div class="dropdown dropstart">

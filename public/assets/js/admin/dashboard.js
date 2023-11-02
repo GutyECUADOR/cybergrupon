@@ -2,19 +2,27 @@
 const app = new Vue({
     el: '#app',
     data: {
-        baseURL: 'http://ahorraplataentucredito.test',
+        baseURL: '',
+        userID: null,
     },
     methods:{
         async get_apex_movimientos_char() {
 
 
-            const { data } = await axios.get('/api/dashboard/');
-            console.log(data);
+            const { data } = await axios.get(`/api/dashboard/${this.userID}`);
+
+            const valores = data.movimientos.map( row => {
+                return row.valor
+            });
+
+            const categorias = data.movimientos.map( row => {
+                return row.created_at
+            });
 
             const options = {
                 series: [{
-                  name: "Ganancias",
-                  data: data.values
+                  name: "USD",
+                  data: valores
               }],
                 chart: {
                 height: 350,
@@ -36,12 +44,12 @@ const app = new Vue({
                 },
               },
               xaxis: {
-                categories: data.categories,
+                categories: categorias,
               }
-              };
+            };
 
-              const chart = new ApexCharts(document.querySelector("#earning"), options);
-              chart.render();
+            const chart = new ApexCharts(document.querySelector("#earning"), options);
+            chart.render();
 
         }
     },
@@ -68,7 +76,7 @@ const app = new Vue({
         },
     },
     mounted(){
-        //this.cod_credito = document.querySelector('#hiddenCreditoID')?.value;
+        this.userID = document.querySelector('#hiddenuserID')?.value;
         this.get_apex_movimientos_char();
 
 
