@@ -9,6 +9,7 @@ const app = new Vue({
         async get_apex_movimientos_char() {
 
 
+
             const { data } = await axios.get(`/api/dashboard/${this.userID}`);
 
             const valores = data.movimientos.map( row => {
@@ -31,12 +32,11 @@ const app = new Vue({
                   enabled: false
                 }
               },
+              colors: ["#754ffe"],
               dataLabels: {
                 enabled: false
               },
-              stroke: {
-                curve: 'straight'
-              },
+              stroke: { width: 4, curve: "smooth", colors: "#754ffe" },
               grid: {
                 row: {
                   colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
@@ -78,6 +78,7 @@ const app = new Vue({
     mounted(){
         this.userID = document.querySelector('#hiddenuserID')?.value;
         this.get_apex_movimientos_char();
+
 
 
     }
