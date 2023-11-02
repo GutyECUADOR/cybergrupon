@@ -38,11 +38,11 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    $10,800
+                                    {{ Auth::user()->SaldoActual }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
-                                        class="fe fe-trending-up me-1"></i>+20.9$</span>
-                                <span class="ms-1 fw-medium">Number of sales</span>
+                                        class="fe fe-trending-up me-1"></i>$ USD </span>
+                                <span class="ms-1 fw-medium">Disponibled</span>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,40 @@
                     </div>
 
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <!-- card -->
+                        <div class="card h-100">
+                            <!-- card header -->
+                            <div class="card-header">
+                                <h4 class="mb-0">Últimos Movimientos</h4>
+                            </div>
 
+
+                            <!-- table -->
+                            <table class="table mb-0 table-hover table-centered">
+                                <tbody>
+                                    <tr>
+                                        <th>Tipo de Movimiento</th>
+                                        <th>Valor</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                    <tr>
+                                    @foreach (Auth::user()->Movimientos as $movimiento)
+                                        <td>{{$movimiento->tipoMovimiento}}</td>
+                                        <td>{{$movimiento->valor}}</td>
+                                        <td>{{$movimiento->created_at}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </section>
     </main>

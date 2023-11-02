@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -49,4 +50,46 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getSaldoActualAttribute () {
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+
+        $saldo_compras = DB::table('compras')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $movimientos = $saldo_recargas->merge($saldo_compras);
+
+        $saldo_actual = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_actual += $movimiento->valor;
+        }
+
+        return $saldo_actual;
+    }
+
+    public function getMovimientosAttribute () {
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ')
+        ->get();
+
+
+        $saldo_compras = DB::table('compras')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
+
+        ->get();
+
+        $movimientos = $saldo_recargas->merge($saldo_compras);
+
+        return $movimientos;
+    }
 }

@@ -117,8 +117,8 @@
                                                 aria-labelledby="stepperFormtrigger3">
                                                 <!-- Card -->
                                                 <div class="mb-5">
-                                                    <h3 class="mb-1">Payment selection</h3>
-                                                    <p class="mb-0">Please select and enter your billing information.
+                                                    <h3 class="mb-1">Seleccion de Gateway de pago</h3>
+                                                    <p class="mb-0">Por favor seleccione una forma de pago.
                                                     </p>
                                                 </div>
                                                 <!-- Card -->
