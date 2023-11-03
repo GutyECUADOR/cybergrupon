@@ -51,6 +51,16 @@ const app = new Vue({
             const chart = new ApexCharts(document.querySelector("#earning"), options);
             chart.render();
 
+        },
+        async copyToClipboard () {
+            alert('Copiado');
+            try {
+              const element = document.querySelector("#link-referido");
+              await navigator.clipboard.writeText(element.value);
+              console.log("Text copied to clipboard!");
+            } catch (error) {
+              console.error("Failed to copy to clipboard:", error);
+            }
         }
     },
     filters: {

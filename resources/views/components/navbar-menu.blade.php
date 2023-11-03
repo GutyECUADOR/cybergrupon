@@ -6,11 +6,14 @@
 
     <!--Navbar nav -->
     <div class="ms-auto d-flex">
+        <a id="button-referido" href="#" onclick="copyToClipboard()" class="btn btn-outline-primary me-2 ">Copiar tu link de referido <i class="bi bi-clipboard"></i></a>
+        <input id="link-referido" type="hidden" value="{{ 'https://cybergrupon.com/referido/'.auth()->user()->nickname }}">
         <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle ">
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault"></label>
 
         </a>
+
         <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
 
             <!-- List -->

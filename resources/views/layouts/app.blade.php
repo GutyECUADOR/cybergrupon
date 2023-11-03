@@ -64,7 +64,32 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('assets/js/admin/dashboard.js')}}?<?php echo date('Ymdhiiss')?>" defer></script>
+    <script>
+        function copyToClipboard() {
+            // Get the text field
+            let link = document.getElementById("button-referido");
+            let copyText = document.getElementById("link-referido");
 
+
+            link.textContent = "Link Copiado!!!"
+
+            setTimeout(() => {
+                link.textContent = `Copiar tu link de referido `
+                let newI = document.createElement("i");
+                newI.classList.add("bi");
+                newI.classList.add("bi-clipboard");
+                console.log(newI)
+                link.appendChild(newI);
+            }, 1000);
+
+            // Select the text field
+            copyText.select();
+            // Copy the text inside the text field
+            navigator.clipboard.writeText(copyText.value);
+            // Alert the copied text
+            //alert("Link de referido: " + copyText.value);
+        }
+    </script>
 </body>
 
 </html>
