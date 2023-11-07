@@ -395,7 +395,11 @@
                                                                             <p>Posición ya está utilizada.</p>
                                                                         </div>
                                                                         <div class="modal-footer">
-                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aceptar</button>
+                                                                            @if (\Request::route()->getName() === 'red.index')
+                                                                                <a href="{{ route('red.show', $posicion3_2->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                            @endif
+
+                                                                            <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Aceptar</button>
 
                                                                         </div>
                                                                         </div>
