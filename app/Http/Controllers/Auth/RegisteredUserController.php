@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
         ];
 
         $request->validate([
-            'nickname' => ['required', 'string', 'max:191', 'unique:users'],
+            'nickname' => ['required', 'string', 'max:191', 'unique:users','alpha_dash'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
