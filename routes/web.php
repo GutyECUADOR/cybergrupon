@@ -13,7 +13,6 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\TipoInversionController;
-use App\Http\Controllers\BinancePayController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\RegisterReferido;
 use App\Mail\SoporteUsuarioMaileable;
@@ -37,7 +36,6 @@ Route::get('/', function () {
 
 Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('referido.create');
 Route::post('/referido', [RegisterReferido::class, 'store'])->name('referido.store');
-Route::resource('/binancepay', BinancePayController::class);
 
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/pagos/{user}', [PagoController::class, 'create'])->name('pagos.create');
