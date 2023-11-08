@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/compra', CompraController::class);
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
     Route::resource('/red', RedController::class);
-
+    Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
 
 
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');

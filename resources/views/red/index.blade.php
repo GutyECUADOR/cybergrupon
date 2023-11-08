@@ -30,7 +30,7 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                @if (\Request::route()->getName() === 'red.show')
+                @if (\Request::route()->getName() === 'red.subred')
                     <a href="{{ route('red.index') }}" class="btn btn-sm btn-outline-primary me-2 "><i class="bi bi-arrow-return-left"></i> Regresar al nivel principal</a>
                 @endif
 
@@ -274,7 +274,16 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_1->id) }}" class="btn">Ver nivel 4 y 5 </a>
+
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_1->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
+
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -403,7 +412,15 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_2->id) }}" class="btn">Ver nivel 4 y 5 </a>
+
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_2->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                             @endif
 
                                                                             <button type="button" class="btn btn-sm btn-secondary btn-sm" data-bs-dismiss="modal">Aceptar</button>
@@ -533,7 +550,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_3->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_3->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm  btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -771,7 +795,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_4->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                @csrf
+                                                                                <input type="hidden" name="id" value="{{$posicion3_4->id}}">
+                                                                                <button type="submit" class="btn btn-sm btn-success">
+                                                                                    <span data-feather="bar-chart-2"></span>
+                                                                                    Ver nivel 4 y 5
+                                                                                </button>
+                                                                            </form>
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -900,7 +931,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_5->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_5->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -1029,7 +1067,15 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_6->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_6->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
+
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -1265,7 +1311,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_7->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_7->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -1394,7 +1447,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                         @if (\Request::route()->getName() === 'red.index')
-                                                                            <a href="{{ route('red.show', $posicion3_8->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                            <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_8->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                         @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 
@@ -1523,7 +1583,14 @@
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             @if (\Request::route()->getName() === 'red.index')
-                                                                                <a href="{{ route('red.show', $posicion3_9->id) }}" class="btn">Ver nivel 4 y 5 </a>
+                                                                                 <form method="POST" action="{{ route('red.subred') }}">
+                                                                                    @csrf
+                                                                                    <input type="hidden" name="id" value="{{$posicion3_9->id}}">
+                                                                                    <button type="submit" class="btn btn-sm btn-success">
+                                                                                        <span data-feather="bar-chart-2"></span>
+                                                                                        Ver nivel 4 y 5
+                                                                                    </button>
+                                                                                </form>
                                                                             @endif
                                                                             <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Aceptar</button>
 

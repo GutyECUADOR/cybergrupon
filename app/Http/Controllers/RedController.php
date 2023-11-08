@@ -192,8 +192,20 @@ class RedController extends Controller
      * @param  \App\Models\Red  $red
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id){
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Red  $red
+     * @return \Illuminate\Http\Response
+     */
+    public function subred(Request $request)
     {
+        $id = $request->get('id');
+
         // Validar ids a nietos permitidos
         $nietos = $this->getListNietos(Auth::user()->id);
 
