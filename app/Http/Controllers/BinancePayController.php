@@ -57,7 +57,7 @@ class BinancePayController extends Controller
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
-        $client->getConfig()->setIsSandbox(true);
+        //$client->getConfig()->setIsSandbox(true);
 
         $response = $client->checkIpn($notify);
         dd($response);

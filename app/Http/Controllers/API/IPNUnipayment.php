@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Models\RecargaSaldo;
 
 class IPNUnipayment extends Controller
 {
@@ -12,13 +13,9 @@ class IPNUnipayment extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        Log::build([
-            'driver' => 'single',
-            'path' => public_path('logs/logUnipayment.log'),
-          ])->info($request->all());
-        return $request->all();
+        //
     }
 
     /**
@@ -39,7 +36,10 @@ class IPNUnipayment extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $IPN_invoice = $request->all();
+        $recargaSaldo = RecargaSaldo::where('orderID_gateway', $IPN_invoice['invoice_id'])->first();
+        $recargaSaldo->status =  $IPN_invoice['status'];
+        return $recargaSaldo->save();
     }
 
     /**

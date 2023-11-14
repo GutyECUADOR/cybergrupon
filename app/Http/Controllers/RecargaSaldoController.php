@@ -56,7 +56,7 @@ class RecargaSaldoController extends Controller
         $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
         $createInvoiceRequest->setPriceAmount($request->valor);
         $createInvoiceRequest->setPriceCurrency("USD");
-        $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/notify");
+        $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify");
         $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/recargasaldo");
         $createInvoiceRequest->setOrderId($order_ID);
         $createInvoiceRequest->setTitle("Recarga de saldo");
