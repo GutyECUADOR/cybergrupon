@@ -13,6 +13,7 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\BinancePayController;
+use App\Http\Controllers\IPNUnipayment;
 use App\Http\Controllers\TipoInversionController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\RegisterReferido;
@@ -39,6 +40,7 @@ Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('r
 Route::post('/referido', [RegisterReferido::class, 'store'])->name('referido.store');
 Route::get('/callbackpay', [BinancePayController::class, 'callbackpay'])->name('callbackpay');
 Route::resource('/binancepay', BinancePayController::class);
+Route::resource('/notify', IPNUnipayment::class);
 
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/pagos/{user}', [PagoController::class, 'create'])->name('pagos.create');

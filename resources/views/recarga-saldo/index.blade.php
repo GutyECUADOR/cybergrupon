@@ -153,7 +153,7 @@
                                                     <!-- Button -->
                                                     <button type="submit" class="btn btn-primary mt-3"
                                                         onclick=" location.href='order-summary.html' ">
-                                                        Procesar pago
+                                                        Proceder a pagar
                                                     </button>
                                                 </div>
                                             </div>
