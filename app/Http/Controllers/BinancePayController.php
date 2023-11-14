@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use ExplorerCash\PaymentRequest;
+
+use \UniPayment\Client\UniPaymentClient;
 
 class BinancePayController extends Controller
 {
@@ -13,59 +16,45 @@ class BinancePayController extends Controller
      */
     public function index()
     {
-        // Generate nonce string
-        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $nonce = '';
-        for($i=1; $i <= 32; $i++)
-        {
-            $pos = mt_rand(0, strlen($chars) - 1);
-            $char = $chars[$pos];
-            $nonce .= $char;
-        }
-        $ch = curl_init();
-        $timestamp = round(microtime(true) * 1000);
-        // Request body
-            $request = array(
-            "env" => array(
-                    "terminalType" => "APP"
-                ),
-            "merchantTradeNo" => mt_rand(982538,9825382937292),
-            "orderAmount" => 25.17,
-            "currency" => "USDT",
-            "goods" => array(
-                    "goodsType" => "02",
-                    "goodsCategory" => "Z000",
-                    "referenceGoodsId" => "7876763A3BASDASD",
-                    "goodsName" => "Ice Cream",
-                    "goodsDetail" => "Greentea ice cream cone"
-                    )
-        );
-
-        $json_request = json_encode($request);
-        $payload = $timestamp."\n".$nonce."\n".$json_request."\n";
-        $binance_pay_key = 'kjn7s5zfpynudkqrfmfawcygxq5bia01pxmgcg76cezmusvdli7cnqmeg46bzrs9';
-        $binance_pay_secret = '6injualy9gq5hwpodskmfiv6b6ov3k8pqf8yul0irxnec6wncjbxazbsx0bs4i1a';
-        $signature = strtoupper(hash_hmac('SHA512',$payload,$binance_pay_secret));
-        $headers = array();
-        $headers[] = "Content-Type: application/json";
-        $headers[] = "BinancePay-Timestamp: $timestamp";
-        $headers[] = "BinancePay-Nonce: $nonce";
-        $headers[] = "BinancePay-Certificate-SN: $binance_pay_key";
-        $headers[] = "BinancePay-Signature: $signature";
-
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_URL, "https://bpay.binanceapi.com/binancepay/openapi/v2/order");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_request);
-
-        $result = curl_exec($ch);
-        if (curl_errno($ch)) { echo 'Error:' . curl_error($ch); }
-        curl_close ($ch);
 
 
-        return $result;
+      /*   $client_id='9c80218f-8b9e-4d34-af75-1ae19e317784';
+        $client_secret='Q1kKtfukhCdmCQmSV9JsMGXfpny7iCmmC';
+        $app_id = '29b6c199-5c7f-4df3-9eab-fa91eb9b5d20';
 
+        $client = new \UniPayment\Client\UniPaymentClient();
+        $client->getConfig()->setClientId($client_id);
+        $client->getConfig()->setClientSecret($client_secret);
+
+        $response = $client->getInvoiceById("KbMiKuGTFMaJXKJLTdS56M");
+        dd($response); */
+
+        $client = new \UniPayment\Client\UniPaymentClient();
+        $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
+        $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
+        $client->getConfig()->setIsSandbox(true);
+
+        $createInvoiceRequest = new \UniPayment\Client\Model\CreateInvoiceRequest();
+        $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
+        $createInvoiceRequest->setPriceAmount("10");
+        $createInvoiceRequest->setPriceCurrency("USD");
+        $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/notify");
+        $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/recargasaldo");
+        $createInvoiceRequest->setOrderId("#123456");
+        $createInvoiceRequest->setTitle("Paquete 20USDT");
+        $createInvoiceRequest->setDescription("Paquete de pruebas");
+
+
+        $client = new \UniPayment\Client\UniPaymentClient();
+        $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
+        $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
+
+        $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest));
+        return($create_invoice_response->data);
+    }
+
+    public function callbackpay() {
+        return 'callback';
     }
 
 
@@ -98,7 +87,7 @@ class BinancePayController extends Controller
      */
     public function show($id)
     {
-        //
+        return $id;
     }
 
     /**

@@ -129,15 +129,14 @@
                                                             <div class="form-check">
                                                                 <!-- checkbox -->
                                                                 <input class="form-check-input" type="radio"
-                                                                    name="gateway" id="gatewayDefault" value="gatewayDefault" checked>
-                                                                <label class="form-check-label ms-2" for="gatewayDefault">
+                                                                    name="gateway" id="UniPayment" value="UniPayment" checked>
+                                                                <label class="form-check-label ms-2" for="UniPayment">
 
                                                                 </label>
                                                             </div>
                                                             <div>
-                                                                <h5 class="mb-1"> Pago directo</h5>
-                                                                <p class="mb-0 fs-6">Se realizará la recarga de
-                                                                saldo directo.
+                                                                <h5 class="mb-1"> UniPayment</h5>
+                                                                <p class="mb-0 fs-6">UniPayment Gateway.
                                                                 </p>
                                                             </div>
                                                         </div>

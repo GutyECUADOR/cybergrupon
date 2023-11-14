@@ -18,6 +18,9 @@ class CreateRecargaSaldosTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->decimal('valor');
             $table->string('gateway'); //La pasarela de pago utilizada
+            $table->string('orderID_interno');
+            $table->string('orderID_gateway')->nullable();
+            $table->string('status')->default('pending');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

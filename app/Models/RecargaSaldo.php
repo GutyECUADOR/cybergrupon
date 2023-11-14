@@ -12,6 +12,9 @@ class RecargaSaldo extends Model
     protected $fillable = [
         'user_id',
         'valor',
-        'gateway'
+        'gateway',
+        'orderID_interno',
+        'orderID_gateway',
+        'status'
     ];
 }
