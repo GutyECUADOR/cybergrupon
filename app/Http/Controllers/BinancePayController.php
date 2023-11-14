@@ -16,8 +16,6 @@ class BinancePayController extends Controller
      */
     public function index()
     {
-
-
       /*   $client_id='9c80218f-8b9e-4d34-af75-1ae19e317784';
         $client_secret='Q1kKtfukhCdmCQmSV9JsMGXfpny7iCmmC';
         $app_id = '29b6c199-5c7f-4df3-9eab-fa91eb9b5d20';
@@ -52,7 +50,7 @@ class BinancePayController extends Controller
         $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest));
         return($create_invoice_response->data); */
 
-        $notify='{"ipn_type":"invoice","event":"invoice_created","app_id":"de5076a5-71aa-4a4a-a35f-bdb424af5658","invoice_id":"XjwyQQanwVVUtJXVMGXtCe","order_id":"#0001","price_amount":10,"price_currency":"USD","network":null,"address":null,"pay_currency":"USDT","pay_amount":0,"exchange_rate":0,"paid_amount":0,"confirmed_amount":0,"refunded_price_amount":0,"create_time":"2023-05-05T03:54:29.5708901Z","expiration_time":"2023-05-05T15:54:29.5708934Z","status":"New","error_status":"None","ext_args":null,"transactions":null,"notify_id":"714c8f9e-b06d-49b9-9ebc-203f7cadcaa0","notify_time":"2023-05-05T03:55:49.1566646Z"}';
+        /* $notify='{"ipn_type":"invoice","event":"invoice_created","app_id":"de5076a5-71aa-4a4a-a35f-bdb424af5658","invoice_id":"XjwyQQanwVVUtJXVMGXtCe","order_id":"#0001","price_amount":10,"price_currency":"USD","network":null,"address":null,"pay_currency":"USDT","pay_amount":0,"exchange_rate":0,"paid_amount":0,"confirmed_amount":0,"refunded_price_amount":0,"create_time":"2023-05-05T03:54:29.5708901Z","expiration_time":"2023-05-05T15:54:29.5708934Z","status":"New","error_status":"None","ext_args":null,"transactions":null,"notify_id":"714c8f9e-b06d-49b9-9ebc-203f7cadcaa0","notify_time":"2023-05-05T03:55:49.1566646Z"}';
 
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
@@ -60,7 +58,26 @@ class BinancePayController extends Controller
         //$client->getConfig()->setIsSandbox(true);
 
         $response = $client->checkIpn($notify);
-        dd($response);
+        dd($response); */
+
+
+        $client = new \UniPayment\Client\UniPaymentClient();
+        $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
+        $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
+        /* $client->getConfig()->setIsSandbox(true); */
+
+
+        $createWithdrawRequest = new \UniPayment\Client\Model\CreateWithdrawalRequest();
+        $createWithdrawRequest->setNetwork('NETWORK_TRX');
+        $createWithdrawRequest->setAddress('TQu8XqRU8H7EfT1q31yLzG5nRAcgc4fwkc');
+        $createWithdrawRequest->setAssetType('USDT');
+        $createWithdrawRequest->setAmount('2');
+        $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/notify_withdraw');
+
+
+        $create_withdraw_response = $client->createWithdrawal($createWithdrawRequest);
+        return ($create_withdraw_response);
+
     }
 
     public function callbackpay() {
