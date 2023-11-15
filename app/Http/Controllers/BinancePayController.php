@@ -72,7 +72,7 @@ class BinancePayController extends Controller
         $createWithdrawRequest->setAddress('TQu8XqRU8H7EfT1q31yLzG5nRAcgc4fwkc');
         $createWithdrawRequest->setAssetType('USDT');
         $createWithdrawRequest->setAmount('2');
-        $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/notify_withdraw');
+        $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/api/notify_withdrawal');
 
 
         $create_withdraw_response = $client->createWithdrawal($createWithdrawRequest);

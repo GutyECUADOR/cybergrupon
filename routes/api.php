@@ -8,6 +8,7 @@ use App\Http\Controllers\API\AnalisisController;
 use App\Http\Controllers\API\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\IPNUnipayment;
+use App\Http\Controllers\API\IPNUnipaymentWithdrawal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,3 +42,4 @@ Route::post('/avatar', [AvatarController::class, 'store'])->middleware('auth:san
 Route::apiResource('/analisis', AnalisisController::class);
 Route::apiResource('/dashboard', DashboardController::class);
 Route::apiResource('/notify', IPNUnipayment::class);
+Route::apiResource('/notify_withdrawal', IPNUnipaymentWithdrawal::class);
