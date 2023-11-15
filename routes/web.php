@@ -43,8 +43,6 @@ Route::resource('/binancepay', BinancePayController::class);
 Route::resource('/notify', IPNUnipayment::class);
 
 Route::middleware(['auth','role'])->group(function () {
-    Route::get('/pagos/{user}', [PagoController::class, 'create'])->name('pagos.create');
-    Route::post('/pagos/{user}', [PagoController::class, 'store'])->name('pagos.update');
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-list');
 });
 
@@ -53,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class);
     Route::resource('/recargasaldo', RecargaSaldoController::class);
+    Route::resource('/pagos', PagoController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/compra', CompraController::class);
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');

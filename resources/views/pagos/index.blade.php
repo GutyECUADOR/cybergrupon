@@ -1,98 +1,209 @@
 <x-app-layout>
-    <x-navbar-menu></x-navbar-menu>
-  
-   
 
-    <div class="container-fluid">
-        <div class="row">
-            <x-sidebar-menu></x-sidebar-menu>
+    <!-- Wrapper -->
+    <main id="db-wrapper">
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Registrar pago para usuario: {{ $user->nickname}}</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                    
-                            <a href="{{ route('users-list')}}" class="btn btn-sm btn-outline-primary">
-                                <span data-feather="corner-down-left"></span>
-                                    Regresar a la lista
-                            </a>
-                    </div>
-                </div>
+        <!-- Sidebar -->
+        <x-sidebar-menu></x-sidebar-menu>
 
-                <div class="container">
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-6">
-                            <form method="POST" action="{{ route('pagos.update', $user) }}">
-                                @csrf
-                                
-                                @if (session('status'))
-                                    <div class="alert alert-success">
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-                
-                                <!-- Validation Errors -->
-                                <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <!-- Page Content -->
+        <section id="page-content">
+            <div class="header">
+                <!-- navbar -->
+                <x-navbar-menu></x-sidebar-menu>
 
-                                <div class="form-floating mb-3">
-                                    <input type="date" name="fecha_pago" value="{{ date('Y-m-d'); }}" class="form-control" id="fecha_pago" required>
-                                    <label for="fecha_pago">Fecha Pago</label>
-                                </div>
+            </div>
 
-                                <div class="form-floating mb-3">
-                                    <input type="number" name="monto" value="0" step="0.0" class="form-control" id="monto" required>
-                                    <label for="monto">Monto de pago</label>
-                                </div>
-
-                                <div class="d-grid gap-2">
-                                    <button class="btn-block btn btn-lg btn-primary" type="submit">Registrar Pago</button>
-                                </div>
-                
-                            </form>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <p>Total comisión ganada: ${{ $user->ComisionGanada }}</p> 
-                                    <p>Total 10% de equipos: ${{ $user->ComisionGanadaMenorEquipo }}</p> 
-                                    <p>Total: <span class="text-success">${{ $user->ComisionGanada + $user->ComisionGanadaMenorEquipo }}</span></p> 
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-sm table-hover">
-                                          <thead>
-                                            <tr>
-                                              <th scope="col">Fecha</th>
-                                              <th scope="col">Cantidad</th>
-                                              
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            @foreach ($user->PagosRecibidos as $pago)
-                                              <tr>
-                                                <td>{{ $pago->fecha_pago }}</td>
-                                                <td>{{ $pago->monto }}</td>
-                                              </tr>
-                                            @endforeach
-                                          </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer">
-                                    Total Pagado: $ <span class="text-success">{{ $user->PagosRecibidos->sum('monto')}}</span>
-                                </div>
+            <!-- Container fluid -->
+            <section class="container-fluid p-4">
+                <div class="row ">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Page header -->
+                        <div class="border-bottom pb-3 mb-3">
+                            <div class="mb-2 mb-lg-0">
+                                <h1 class="mb-0 h2 fw-bold"> Pagos  </h1>
+                                <!-- Breadcrumb -->
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="#">Pagos </a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            Retiro de Dinero
+                                        </li>
+                                    </ol>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+                <!-- row -->
+                <div class="row" style="justify-content: space-around;">
+                    <div class="col-xl-8 col-lg-7">
 
-            </main>
+                        <!-- Flash messages -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            
-        </div>
-    </div>
-       
-    
+                        <!-- stepper -->
+                        <div id="stepperForm" class="bs-stepper">
+                            <!-- card -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <!-- Stepper Button -->
+                                    <div class="bs-stepper-header p-0 bg-transparent" role="tablist">
+                                        <div class="step" data-target="#test-l-1">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                id="stepperFormtrigger1" aria-controls="test-l-1">
+                                                <span class="bs-stepper-circle p-2 me-2"><i
+                                                        class="fe fe-user lh-2"></i></span>
+                                                <span class="bs-stepper-label">Información del Pago</span>
+                                            </button>
+                                        </div>
+                                        <div class="bs-stepper-line"></div>
+                                        <!-- Stepper Button -->
+                                        <div class="step" data-target="#test-l-3">
+                                            <button type="button" class="step-trigger" role="tab"
+                                                id="stepperFormtrigger3" aria-controls="test-l-3">
+                                                <span class="bs-stepper-circle p-2 me-2"><i
+                                                        class="fe fe-credit-card lh-2"></i></span>
+                                                <span class="bs-stepper-label">Forma de Pago</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Stepper content -->
+                                    <div class="bs-stepper-content">
+
+                                        <form method="POST" action="{{ route('pagos.store') }}">
+                                            @csrf
+
+                                            <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade"
+                                                aria-labelledby="stepperFormtrigger1">
+                                                <!-- heading -->
+                                                <div class="mb-5">
+                                                    <h3 class="mb-1">Información de Pago</h3>
+                                                    <p class="mb-0">Indique a continuación la información para el retiro. Verifique los datos correctos.
+                                                    </p>
+                                                </div>
+                                                <!-- row -->
+                                                <div class="row gx-3">
+                                                   
+                                                    <!-- input -->
+                                                    <div class="mb-3 col-12">
+                                                      <label class="form-label" for="wallet">Wallet (Que recibirá los fondos)</label>
+                                                      <input type="text" class="form-control " placeholder="Ejemplo: TA9gi1vG58oNMAwaHEvEcpFpjwy9PbXXXX" name="wallet" id="wallet">
+                                                    </div>
+                                                     <!-- input -->
+                                                    <div class="mb-3 col-12">
+                                                        <label class="form-label" for="wallet">Valor a retirar</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon1">$</span>
+                                                            </div>
+                                                            <input type="text" class="form-control text-center text-dark" name="valor" placeholder="10" aria-label="USD" aria-describedby="basic-addon1">
+                                                            </div>
+                                                    </div>
+                                                   
+                                                    <!-- select -->
+                                                    <div class="mb-3 col-12">
+                                                      <label class="form-label">Network</label>
+                                                      <select class="form-select text-dark" name="network">
+                                                        <option selected value="NETWORK_TRX">NETWORK_TRX</option>
+                                                        <option value="NETWORK_BTC">NETWORK_BTC</option>
+                                                        <option value="NETWORK_ETH">NETWORK_ETH</option>
+                                                        <option value="NETWORK_BSC">NETWORK_BSC</option>
+                                                      </select>
+                                                    </div>
+
+                                                    <!-- select -->
+                                                    <div class="mb-3 col-12">
+                                                        <label class="form-label">Crypto currency</label>
+                                                        <select class="form-select text-dark" name="network">
+                                                          <option selected value="USDT">USDT</option>
+                                                          <option value="BTC">BTC</option>
+                                                          <option value="ETH">ETH</option>
+                                                        </select>
+                                                      </div>
+                                                   
+                                                  </div>
+
+                                                <!-- Button -->
+                                                <div class="d-flex justify-content-end">
+                                                    <button type="button" class="btn btn-primary" onclick="stepperForm.next()">
+                                                        Continuar al pago <i class="fe fe-credit-card ms-2"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Content three -->
+                                            <div id="test-l-3" role="tabpanel" class="bs-stepper-pane fade"
+                                                aria-labelledby="stepperFormtrigger3">
+                                                <!-- Card -->
+                                                <div class="mb-5">
+                                                    <h3 class="mb-1">Seleccion de Gateway de pago</h3>
+                                                    <p class="mb-0">Por favor seleccione una forma de pago.
+                                                    </p>
+                                                </div>
+                                                <!-- Card -->
+                                                <div class="card card-bordered shadow-none mb-2">
+                                                    <!-- card body -->
+                                                    <div class="card-body">
+                                                        <div class="d-flex">
+                                                            <div class="form-check">
+                                                                <!-- checkbox -->
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="gateway" id="UniPayment" value="UniPayment" checked>
+                                                                <label class="form-check-label ms-2" for="UniPayment">
+
+                                                                </label>
+                                                            </div>
+                                                            <div>
+                                                                <h5 class="mb-1"> UniPayment</h5>
+                                                                <p class="mb-0 fs-6">UniPayment Gateway.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Button -->
+                                                <div class="d-flex justify-content-between">
+                                                    <!-- Button -->
+                                                    <button class="btn btn-outline-primary mt-3"
+                                                        onclick="stepperForm.previous()">
+                                                        Regresar
+                                                    </button>
+                                                    <!-- Button -->
+                                                    <button type="submit" class="btn btn-primary mt-3"
+                                                        onclick=" location.href='order-summary.html' ">
+                                                        Solicitar retiro
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+        </section>
+    </main>
+
+
 </x-app-layout>

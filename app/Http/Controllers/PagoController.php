@@ -15,7 +15,7 @@ class PagoController extends Controller
      */
     public function index()
     {
-       
+        return view('pagos.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class PagoController extends Controller
      */
     public function create(Request $request, User $user)
     {
-        return view('pagos.index', compact('user'));
+       
     }
 
     /**

@@ -61,8 +61,8 @@
             </li>
             <!-- Nav item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="nav-icon fe fe-lock me-2"></i> Retiros
+                <a class="nav-link" href="{{ route('pagos.index') }}">
+                    <i class="nav-icon fe fe-lock me-2"></i> Pagos / Retiros
                 </a>
             </li>
             <!-- Nav item -->
