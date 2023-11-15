@@ -62,19 +62,23 @@ class PagoController extends Controller
         $createWithdrawRequest->setAmount($request->valor);
         $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/api/notify_withdrawal');
 
-       ;
-
         if (  $create_withdraw_response = json_decode($client->createWithdrawal($createWithdrawRequest))) {
 
-            Pago::create([
-                'user_id' => Auth::user()->id,
-                'wallet' => $request->wallet,
-                'currency' => $request->currency,
-                'valor' => $request->valor,
-                'network' => $request->network,
-                'gateway' => $request->gateway,
-                'orderID_gateway' => $create_withdraw_response->data->id
-            ]);
+            if($create_withdraw_response->code === 'OK')
+            {
+                //dd($create_withdraw_response);
+                Pago::create([
+                    'user_id' => Auth::user()->id,
+                    'wallet' => $request->wallet,
+                    'currency' => $request->currency,
+                    'valor' => $request->valor,
+                    'network' => $request->network,
+                    'gateway' => $request->gateway,
+                    'orderID_gateway' => $create_withdraw_response->data->id
+                ]);
+            }else{
+                return redirect()->back()->withErrors(['message' => 'No se pudo generar el pago, contacte a soporte. '.$create_withdraw_response->msg]);
+            }
 
             return redirect()->back()->with('status', 'La solicitud de retiro se registro correctamente, el pago será realizado en un plazo no mayor de 72 horas. Su numero de orden es #'.$create_withdraw_response->data->id);
         }

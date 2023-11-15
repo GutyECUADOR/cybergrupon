@@ -14,6 +14,7 @@ class Pago extends Model
         'wallet',
         'gateway',
         'fecha_pago',
-        'valor'
+        'valor',
+        'orderID_gateway'
     ];
 }
