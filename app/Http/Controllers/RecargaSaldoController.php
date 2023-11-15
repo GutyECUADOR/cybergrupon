@@ -50,8 +50,7 @@ class RecargaSaldoController extends Controller
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
-        $client->getConfig()->setIsSandbox(true);
-
+        
         $createInvoiceRequest = new \UniPayment\Client\Model\CreateInvoiceRequest();
         $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
         $createInvoiceRequest->setPriceAmount($request->valor);
@@ -70,7 +69,7 @@ class RecargaSaldoController extends Controller
 
         if ( $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest))) {
 
-            $recargaSaldo = RecargaSaldo::create([
+            RecargaSaldo::create([
                 'user_id' => Auth::user()->id,
                 'valor' => $request->valor,
                 'gateway' => $request->gateway,

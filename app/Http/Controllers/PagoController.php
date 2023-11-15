@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pago;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagoController extends Controller
 {
@@ -36,15 +37,50 @@ class PagoController extends Controller
      */
     public function store(Request $request, User $user)
     {
-        $request->request->add(['user_id' => $user->id]);
+        $request->request->add(['user_id' => Auth::user()->id]);
+        $request->request->add(['network' => 'NETWORK_TRX']);
+        $request->request->add(['currency' => 'USDT']);
+        $request->request->add(['gateway' => 'UniPayment']);
         $data = $request->all();
+        //dd($data);
         $request->validate([
-            'fecha_pago' => 'required',
-            'monto' => 'required|numeric|min:1',
+            'wallet' => 'required',
+            'valor' => 'required|numeric',
+            'network' => 'required',
+            'currency' => 'required',
+
         ]);
 
-        Pago::create($data);
-        return redirect()->back()->with('status', 'Se registro el pago correctamente');
+        $client = new \UniPayment\Client\UniPaymentClient();
+        $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
+        $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
+       
+        $createWithdrawRequest = new \UniPayment\Client\Model\CreateWithdrawalRequest();
+        $createWithdrawRequest->setNetwork($request->network);
+        $createWithdrawRequest->setAddress($request->wallet);
+        $createWithdrawRequest->setAssetType($request->currency);
+        $createWithdrawRequest->setAmount($request->valor);
+        $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/api/notify_withdrawal');
+
+       ;
+
+        if (  $create_withdraw_response = json_decode($client->createWithdrawal($createWithdrawRequest))) {
+
+            Pago::create([
+                'user_id' => Auth::user()->id,
+                'wallet' => $request->wallet,
+                'currency' => $request->currency,
+                'valor' => $request->valor,
+                'network' => $request->network,
+                'gateway' => $request->gateway,
+                'orderID_gateway' => $create_withdraw_response->data->id
+            ]);
+
+            return redirect()->back()->with('status', 'La solicitud de retiro se registro correctamente, el pago será realizado en un plazo no mayor de 72 horas. Su numero de orden es #'.$create_withdraw_response->data->id);
+        }
+
+        return redirect()->back()->withErrors(['message' => 'No se pudo generar el pago, contacte a soporte']);
+
     }
 
     /**

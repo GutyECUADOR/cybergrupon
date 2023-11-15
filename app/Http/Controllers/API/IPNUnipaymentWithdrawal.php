@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pago;
 use Illuminate\Http\Request;
 
 class IPNUnipaymentWithdrawal extends Controller
@@ -35,7 +36,10 @@ class IPNUnipaymentWithdrawal extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $IPN_Withdrawal = $request->all();
+        $pago = Pago::where('orderID_gateway', $IPN_Withdrawal['withdrawal_id'])->first();
+        $pago->status =  $IPN_Withdrawal['status'];
+        return $pago->save();
     }
 
     /**

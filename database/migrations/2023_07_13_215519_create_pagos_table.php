@@ -17,8 +17,11 @@ class CreatePagosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->date('fecha_pago');
-            $table->decimal('monto',6,2);
+            $table->string('wallet');
+            $table->string('gateway')->nullable();
+            $table->decimal('valor',6,2);
+            $table->string('orderID_gateway')->nullable();
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

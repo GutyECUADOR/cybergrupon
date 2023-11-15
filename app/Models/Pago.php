@@ -11,7 +11,9 @@ class Pago extends Model
 
     protected $fillable = [
         'user_id',
+        'wallet',
+        'gateway',
         'fecha_pago',
-        'monto'
+        'valor'
     ];
 }
