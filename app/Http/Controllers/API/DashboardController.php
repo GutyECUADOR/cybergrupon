@@ -53,6 +53,7 @@ class DashboardController extends Controller
         ->where('user_id', $id)
         ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
 
+
         $saldo_compras = DB::table('compras')
         ->where('user_id', $id)
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
