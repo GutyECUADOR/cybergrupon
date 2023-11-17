@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compra;
 use App\Models\Packages;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
 use App\Models\Red;
+use App\Models\TransferenciaSaldo;
 use App\Models\User;
+use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -162,13 +165,37 @@ class RedController extends Controller
             'id_usuario_location.required' => 'Esta ubicación no esta habilitada, selecciona una ubicación directa a otro usuario.'
         ];
 
-        //dd($request->all());
+        // Validar que usuario tenga saldo
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+
+        $saldo_compras = DB::table('compras')
+        ->where('user_id', Auth::user()->id)
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $movimientos = $saldo_recargas->merge($saldo_compras);
+
+        $saldo_actual = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_actual += $movimiento->valor;
+        }
+
+        if ($saldo_actual <= $request->valor) {
+            return redirect()->route('tienda.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'.$saldo_actual]);
+        }
 
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
             'location' => ['required', 'integer','between:1,3'],
             'id_usuario_location' => ['required', 'exists:users,id'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
+            'paquete' => ['exists:packages,id'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -184,6 +211,20 @@ class RedController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
+
+        $paquete = Packages::findOrFail($request->paquete);
+        Compra::create([
+            'user_id' => $user->id,
+            'package_id' => $request->paquete,
+            'valor' => $paquete->PrecioAcumuladoWithOutID
+        ]);
+
+        TransferenciaSaldo::create([
+            'user_envio' => Auth::user()->id,
+            'user_recibe' => $user->id,
+            'valor' => $paquete->PrecioAcumuladoWithOutID,
+        ]);
+
 
         return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito');
     }
