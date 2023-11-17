@@ -106,6 +106,17 @@
                                                                         <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                     </div>
 
+                                                                    <!-- Paquete -->
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Paquete</label>
+                                                                        <select class="form-select text-dark" name="paquete">
+                                                                            <option selected>Seleccione el paquete</option>
+                                                                            @foreach ($packages as $package)
+                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @endforeach
+                                                                        </select>
+                                                                    </div>
+
                                                                     <!-- Nickname -->
                                                                     <div class="mb-3">
                                                                         <label for="nickname" class="form-label">Crea un nickname único (Sin espacios)</label>

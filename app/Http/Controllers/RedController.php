@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Packages;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
@@ -124,7 +125,8 @@ class RedController extends Controller
                 ->first();
         }
 
-        return view('red.index', compact('posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
+        $packages = Packages::all();
+        return view('red.index', compact('packages','posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
     }
 
     /**

@@ -30,6 +30,12 @@
                 <!-- Validation Errors -->
                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+                @if ($packages->isEmpty())
+                    <div class="alert alert-primary" role="alert">
+                        No hay paquetes disponibles en este momento
+                    </div>
+                @endif
+
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     @foreach ($packages as $package)
                         <div class="col">
@@ -74,6 +80,8 @@
                             </div>
                         </div>
                     @endforeach
+
+
 
                 </div>
         </section>

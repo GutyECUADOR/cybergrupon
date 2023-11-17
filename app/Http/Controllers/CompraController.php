@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comision;
 use App\Models\Compra;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,46 @@ class CompraController extends Controller
         ]);
 
         Compra::create($data);
+
+        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
+        for ($cont=0; $cont < $package_mayor; $cont++) {
+            $id_usuario_pago = Auth::user()->id_usuario_location;
+            $package_mayor_comision = Compra::where('user_id', $id_usuario_pago)->max('package_id') ;
+            if ($package_mayor_comision >= $package_mayor) {
+                $comision_valor = $this->getComision($cont);
+                Comision::create([
+                    'user_id' => $id_usuario_pago,
+                    'valor' => $comision_valor
+                ]);
+            }
+        }
+
+
         return redirect()->route('tienda.index')->with('status', 'Has adquirido el paquete '.$request->package_name.' con éxito!');
+    }
+
+
+    private function getComision(int $nivel){
+        switch ($nivel) {
+            case 1:
+                return 20;
+
+            case 2:
+                return 40;
+
+            case 3:
+                return 60;
+
+            case 4:
+                return 120;
+
+            case 5:
+                return 240;
+
+            default:
+                return 0;
+
+        }
     }
 
     /**

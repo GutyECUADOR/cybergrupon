@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Compra;
+use App\Models\RecargaSaldo;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -31,17 +33,40 @@ class UserSeeder extends Seeder
             ],
         ));
 
-         foreach (range(1,31) as $index) {
-            User::create([
-                'nickname' => 'partner'.$index,
-                'is_payed' => true,
-                'package_id' => 1,
-                'nickname_promoter' => 'administrador',
-                'email' => 'partner'.$index.'@cybergrupon.com',
-                'phone' => '+593',
-                'password' => Hash::make('admin2023'),
-                'imagen_recibo' => null
-            ]);
+         foreach (range(1,120) as $index) {
+
+            for ($position=1; $position <= 3; $position++) {
+
+                $user = User::create([
+                    'nickname' => 'partner'.$index.$position,
+                    'is_payed' => true,
+                    'package_id' => 1,
+                    'nickname_promoter' => 'administrador',
+                    'email' => 'partner'.$index.$position.'@cybergrupon.com',
+                    'phone' => '+593',
+                    'password' => Hash::make('admin2023'),
+                    'imagen_recibo' => null,
+                    'location' => $position,
+                    'id_usuario_location' => $index
+                ]);
+
+                RecargaSaldo::create([
+                    'user_id' => $user->id,
+                    'valor' => '640',
+                    'gateway' => 'Saldo Inicial',
+                    'orderID_interno' => 'DBSeed',
+                    'orderID_gateway' => 'DBSeed',
+                    'status' => 'Payed'
+                ]);
+
+                Compra::create([
+                    'user_id' => $user->id,
+                    'package_id' => 5,
+                    'valor' => '640'
+                ]);
+
+
+            }
         }
 
 

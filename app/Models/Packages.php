@@ -28,4 +28,11 @@ class Packages extends Model
 
         return $precioAcumulado;
     }
+
+    public function getPrecioAcumuladoWithOutIDAttribute () {
+
+        $precioAcumulado = Packages::all()->where('nivel', '<=', $this->nivel)->sum('price');
+
+        return $precioAcumulado;
+    }
 }
