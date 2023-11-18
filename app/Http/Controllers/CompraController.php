@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comision;
 use App\Models\Compra;
+use App\Models\Packages;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -52,46 +53,38 @@ class CompraController extends Controller
             'valor' => 'required|int'
         ]);
 
+        $paquete_anterior = Packages::findOrFail(Auth::user()->NivelActual);
+        $paquete_comprado = Packages::findOrFail($request->package_id);
+
         Compra::create($data);
-
-        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
-        for ($cont=0; $cont < $package_mayor; $cont++) {
-            $id_usuario_pago = Auth::user()->id_usuario_location;
-            $package_mayor_comision = Compra::where('user_id', $id_usuario_pago)->max('package_id') ;
-            if ($package_mayor_comision >= $package_mayor) {
-                $comision_valor = $this->getComision($cont);
-                Comision::create([
-                    'user_id' => $id_usuario_pago,
-                    'valor' => $comision_valor
-                ]);
-            }
-        }
-
+        $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
 
         return redirect()->route('tienda.index')->with('status', 'Has adquirido el paquete '.$request->package_name.' con éxito!');
     }
 
+    public function generateComisions($user, $paquete_anterior, $paquete_comprado) {
 
-    private function getComision(int $nivel){
-        switch ($nivel) {
-            case 1:
-                return 20;
+        $cont2 = 0;
+        $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
+        for ($cont=1; $cont <= $paquete_anterior->nivel; $cont++) {
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
+            $cont2 = $cont;
+        }
 
-            case 2:
-                return 40;
+        for ($cont2; $cont2 <= $paquete_comprado->nivel; $cont2++) {
+            $valor = 0;
+            $paquete = Packages::FindOrFail($cont2);
 
-            case 3:
-                return 60;
+            if ($usuario_pago->NivelActual >= $paquete_comprado->nivel) {
 
-            case 4:
-                return 120;
+                $valor += $paquete->price;
+                Comision::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
+            }
 
-            case 5:
-                return 240;
-
-            default:
-                return 0;
-
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
         }
     }
 

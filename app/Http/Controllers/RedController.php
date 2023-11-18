@@ -218,7 +218,7 @@ class RedController extends Controller
 
         $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
         for ($cont=1; $cont <= $paquete_comprado->nivel; $cont++) {
-            $array = [];
+
             $valor = 0;
             $paquete = Packages::FindOrFail($cont);
 
@@ -230,9 +230,6 @@ class RedController extends Controller
                     'valor' => $valor
                 ]);
             }
-            $subarray = [$usuario_pago->id, $usuario_pago->NivelActual, $paquete_comprado->nivel];
-            array_push($array, $subarray);
-
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
         }
     }
