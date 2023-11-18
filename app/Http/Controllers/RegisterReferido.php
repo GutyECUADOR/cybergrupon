@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Packages;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
@@ -36,12 +37,13 @@ class RegisterReferido extends Controller
          $ID_Partner = $ID_Partner->id; //administrador
 
         $locations = $this->getLocation($ID_Partner);
+        $packages = Packages::all();
 
         if($locations->location > 3) {
-            return view('referido.register', compact('nickname'))->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
+            return view('referido.register', compact('nickname', 'packages'))->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
         }
 
-        return view('referido.register', compact('nickname'));
+        return view('referido.register', compact('nickname', 'packages'));
     }
 
     /**

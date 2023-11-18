@@ -28,7 +28,8 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $packages = Packages::all();
+        return view('auth.register', compact('packages'));
     }
 
     /**
@@ -61,7 +62,6 @@ class RegisteredUserController extends Controller
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
-            /* 'package' => ['required', 'string', 'max:15', 'exists:packages,id'], */
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);
 
@@ -70,7 +70,6 @@ class RegisteredUserController extends Controller
             'nickname_promoter' => $request->nickname_promoter,
             'email' => $request->email,
             'phone' => $request->phone,
-            /* 'package_id' => $request->package, */
             'password' => Hash::make($request->password),
         ]);
 
