@@ -40,31 +40,9 @@ class CompraController extends Controller
     public function store(Request $request)
     {
         // Validar que usuario tenga saldo
-
-        $saldo_recargas = DB::table('recarga_saldos')
-        ->where('user_id', Auth::user()->id)
-        ->selectRaw('user_id, sum(valor) as valor')
-        ->groupBy('user_id')
-        ->get();
-
-
-        $saldo_compras = DB::table('compras')
-        ->where('user_id', Auth::user()->id)
-        ->selectRaw('user_id, -sum(valor) as valor')
-        ->groupBy('user_id')
-        ->get();
-
-        $movimientos = $saldo_recargas->merge($saldo_compras);
-
-        $saldo_actual = 0;
-        foreach ($movimientos as $movimiento ) {
-            $saldo_actual += $movimiento->valor;
+        if (Auth::user()->SaldoActual <= $request->valor) {
+            return redirect()->route('tienda.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de: '. Auth::user()->SaldoActual]);
         }
-
-        if ($saldo_actual <= $request->valor) {
-            return redirect()->route('tienda.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'.$saldo_actual]);
-        }
-
 
         $request->request->add(['user_id' => Auth::user()->id]);
         $data = $request->all();

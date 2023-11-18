@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransferenciaSaldo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransferenciaSaldoController extends Controller
 {
@@ -14,7 +16,7 @@ class TransferenciaSaldoController extends Controller
      */
     public function index()
     {
-        //
+        return view('transferencia-saldos.index');
     }
 
     /**
@@ -35,7 +37,22 @@ class TransferenciaSaldoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validar que usuario tenga saldo
+        if (Auth::user()->SaldoActual <= $request->valor) {
+            return redirect()->route('transferencia.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        }
+
+        $request->validate([
+            'nickname' => ['exists:users,nickname','string'],
+            'valor' => 'required|numeric|min:100'
+        ]);
+
+        $user_recibe = User::where('nickname', $request->nickname)->firstOrFail();
+        TransferenciaSaldo::create([
+            'user_envio' => Auth::user()->id,
+            'user_recibe' => $user_recibe->id,
+            'valor' => $request->valor,
+        ]);
     }
 
     /**

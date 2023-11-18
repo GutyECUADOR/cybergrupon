@@ -64,13 +64,28 @@ class User extends Authenticatable
         ->groupBy('user_id')
         ->get();
 
+        $saldo_transferencias_salida = DB::table('transferencia_saldos')
+        ->where('user_envio', Auth::user()->id)
+        ->selectRaw('user_envio as user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_transferencias_recibe = DB::table('transferencia_saldos')
+        ->where('user_recibe', Auth::user()->id)
+        ->selectRaw('user_recibe as user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
         $saldo_compras = DB::table('compras')
         ->where('user_id', Auth::user()->id)
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
-        $movimientos = $saldo_recargas->merge($saldo_compras)->merge($saldo_transferencias);
+        $movimientos = $saldo_recargas
+                        ->merge($saldo_compras)
+                        ->merge($saldo_transferencias_salida)
+                        ->merge($saldo_transferencias_recibe);
 
         $saldo_actual = 0;
         foreach ($movimientos as $movimiento ) {
@@ -85,20 +100,24 @@ class User extends Authenticatable
         ->where('user_id', Auth::user()->id)
         ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
 
-        $saldo_transferencias = DB::table('transferencia_saldos')
+        $saldo_transferencias_salida = DB::table('transferencia_saldos')
         ->where('user_envio', Auth::user()->id)
         ->selectRaw('user_envio as user_id, -(valor) as valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
+
+        $saldo_transferencias_recibe = DB::table('transferencia_saldos')
+        ->where('user_recibe', Auth::user()->id)
+        ->selectRaw('user_recibe as user_id, valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
 
         $saldo_compras = DB::table('compras')
         ->where('user_id', Auth::user()->id)
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
         ->union($saldo_recargas)
-        ->union($saldo_transferencias)
+        ->union($saldo_transferencias_salida)
+        ->union($saldo_transferencias_recibe)
         ->orderByDesc('created_at')
         ->limit(100)
         ->get();
 
-        //$movimientos = $saldo_recargas->merge($saldo_compras);
 
         return $saldo_compras;
     }

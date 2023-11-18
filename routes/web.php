@@ -10,6 +10,7 @@ use App\Http\Controllers\CompraController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\TransferenciaSaldoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\BinancePayController;
@@ -52,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/profile', ProfileController::class);
     Route::resource('/recargasaldo', RecargaSaldoController::class);
     Route::resource('/pagos', PagoController::class);
+    Route::resource('/transferencia', TransferenciaSaldoController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/compra', CompraController::class);
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');

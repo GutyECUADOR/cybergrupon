@@ -6,6 +6,7 @@ use App\Models\Pago;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PagoController extends Controller
 {
@@ -26,7 +27,7 @@ class PagoController extends Controller
      */
     public function create(Request $request, User $user)
     {
-       
+
     }
 
     /**
@@ -37,6 +38,11 @@ class PagoController extends Controller
      */
     public function store(Request $request, User $user)
     {
+        // Validar que usuario tenga saldo
+        if (Auth::user()->SaldoActual <= $request->valor) {
+            return redirect()->route('pagos.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        }
+
         $request->request->add(['user_id' => Auth::user()->id]);
         $request->request->add(['network' => 'NETWORK_TRX']);
         $request->request->add(['currency' => 'USDT']);
@@ -45,7 +51,7 @@ class PagoController extends Controller
         //dd($data);
         $request->validate([
             'wallet' => 'required',
-            'valor' => 'required|numeric',
+            'valor' => 'required|numeric|min:100',
             'network' => 'required',
             'currency' => 'required',
 
@@ -54,7 +60,7 @@ class PagoController extends Controller
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
-       
+
         $createWithdrawRequest = new \UniPayment\Client\Model\CreateWithdrawalRequest();
         $createWithdrawRequest->setNetwork($request->network);
         $createWithdrawRequest->setAddress($request->wallet);
