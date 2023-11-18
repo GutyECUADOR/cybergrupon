@@ -40,7 +40,6 @@ class UserSeeder extends Seeder
                 $user = User::create([
                     'nickname' => 'partner'.$index.$position,
                     'is_payed' => true,
-                    'package_id' => 1,
                     'nickname_promoter' => 'administrador',
                     'email' => 'partner'.$index.$position.'@cybergrupon.com',
                     'phone' => '+593',

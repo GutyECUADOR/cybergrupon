@@ -17,8 +17,8 @@ class RegisteredUserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('usuarios.index', compact('users'));
+        /* $users = User::all();
+        return view('usuarios.index', compact('users')); */
     }
 
     /**
@@ -28,8 +28,7 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        $packages = Packages::all();
-        return view('auth.register', compact('packages'));
+        return view('auth.register');
     }
 
     /**

@@ -14,6 +14,7 @@ use App\Http\Controllers\TransferenciaSaldoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
 use App\Http\Controllers\BinancePayController;
+use App\Http\Controllers\CheckPagoController;
 use App\Http\Controllers\IPNUnipayment;
 use App\Http\Controllers\TipoInversionController;
 use App\Http\Controllers\FileController;
@@ -43,11 +44,13 @@ Route::get('/callbackpay', [BinancePayController::class, 'callbackpay'])->name('
 Route::resource('/binancepay', BinancePayController::class);
 Route::resource('/notify', IPNUnipayment::class);
 
+Route::resource('/check-pago', CheckPagoController::class);
+
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-list');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','checkPago'])->group(function () {
 
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class);
@@ -59,8 +62,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
     Route::resource('/red', RedController::class);
     Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
-
-
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });
 

@@ -26,8 +26,8 @@ class CreateUsersTable extends Migration
             $table->string('role')->default('USER_ROLE');
             $table->string('phone');
             $table->string('avatar')->default('default.png');
-            $table->unsignedBigInteger('package_id')->default(1);
-            $table->foreign('package_id')->references('id')->on('packages');
+            $table->string('link-publicidad')->nullable();
+            $table->string('link-redireccion')->nullable();
             $table->boolean('is_payed')->default(false);
             $table->string('imagen_recibo')->nullable();
             $table->timestamps();
