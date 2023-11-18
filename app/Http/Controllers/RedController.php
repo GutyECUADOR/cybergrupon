@@ -166,11 +166,6 @@ class RedController extends Controller
             'id_usuario_location.required' => 'Esta ubicación no esta habilitada, selecciona una ubicación directa a otro usuario.'
         ];
 
-        // Validar que usuario tenga saldo
-        if (Auth::user()->SaldoActual <= $request->valor) {
-            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
-        }
-
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
             'location' => ['required', 'integer','between:1,3'],
@@ -181,6 +176,13 @@ class RedController extends Controller
             'phone' => ['required', 'string', 'max:15'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);
+
+        // Validar que usuario tenga saldo
+        $paquete = Packages::findOrFail($request->paquete);
+
+        if (Auth::user()->SaldoActual <= $paquete->PrecioAcumuladoWithOutID) {
+            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        }
 
         $user = User::create([
             'nickname' => $request->nickname,
@@ -193,7 +195,7 @@ class RedController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $paquete = Packages::findOrFail($request->paquete);
+
         Compra::create([
             'user_id' => $user->id,
             'package_id' => $request->paquete,
