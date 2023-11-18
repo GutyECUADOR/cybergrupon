@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comision;
 use App\Models\Compra;
 use App\Models\Packages;
 use App\Providers\RouteServiceProvider;
@@ -167,7 +168,7 @@ class RedController extends Controller
 
         // Validar que usuario tenga saldo
         if (Auth::user()->SaldoActual <= $request->valor) {
-            return redirect()->route('tienda.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
         }
 
         $request->validate([
@@ -205,8 +206,33 @@ class RedController extends Controller
             'valor' => $paquete->PrecioAcumuladoWithOutID,
         ]);
 
+        $this->generateComisions($user, $paquete);
 
         return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito');
+    }
+
+
+    public function generateComisions($user, $paquete_comprado) {
+
+        $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
+        for ($cont=1; $cont <= $paquete_comprado->nivel; $cont++) {
+            $array = [];
+            $valor = 0;
+            $paquete = Packages::FindOrFail($cont);
+
+            if ($usuario_pago->NivelActual >= $paquete_comprado->nivel) {
+
+                $valor += $paquete->price;
+                Comision::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
+            }
+            $subarray = [$usuario_pago->id, $usuario_pago->NivelActual, $paquete_comprado->nivel];
+            array_push($array, $subarray);
+
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
+        }
     }
 
     /**
@@ -335,8 +361,8 @@ class RedController extends Controller
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
             }
-
-            return view('red.index', compact('posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
+            $packages = Packages::all();
+            return view('red.index', compact('packages','posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
 
 
         }

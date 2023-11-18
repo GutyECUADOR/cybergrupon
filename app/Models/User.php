@@ -53,31 +53,31 @@ class User extends Authenticatable
 
     public function getSaldoActualAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $this->id)
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
         $saldo_transferencias = DB::table('transferencia_saldos')
-        ->where('user_envio', Auth::user()->id)
+        ->where('user_envio', $this->id)
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
-        ->where('user_envio', Auth::user()->id)
+        ->where('user_envio', $this->id)
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
         $saldo_transferencias_recibe = DB::table('transferencia_saldos')
-        ->where('user_recibe', Auth::user()->id)
+        ->where('user_recibe', $this->id)
         ->selectRaw('user_recibe as user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
         $saldo_compras = DB::table('compras')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $this->id)
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -97,19 +97,19 @@ class User extends Authenticatable
 
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $this->id)
         ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
-        ->where('user_envio', Auth::user()->id)
+        ->where('user_envio', $this->id)
         ->selectRaw('user_envio as user_id, -(valor) as valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
 
         $saldo_transferencias_recibe = DB::table('transferencia_saldos')
-        ->where('user_recibe', Auth::user()->id)
+        ->where('user_recibe', $this->id)
         ->selectRaw('user_recibe as user_id, valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
 
         $saldo_compras = DB::table('compras')
-        ->where('user_id', Auth::user()->id)
+        ->where('user_id', $this->id)
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
         ->union($saldo_recargas)
         ->union($saldo_transferencias_salida)
@@ -123,7 +123,7 @@ class User extends Authenticatable
     }
 
     public function getNivelActualAttribute() {
-        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
+        $package_mayor = Compra::where('user_id', $this->id)->max('package_id') ;
         if (!$package_mayor) {
             return 'Sin paquete';
         }
