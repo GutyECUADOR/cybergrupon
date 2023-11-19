@@ -44,7 +44,9 @@ Route::get('/callbackpay', [BinancePayController::class, 'callbackpay'])->name('
 Route::resource('/binancepay', BinancePayController::class);
 Route::resource('/notify', IPNUnipayment::class);
 
-Route::resource('/check-pago', CheckPagoController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/check-pago', CheckPagoController::class);
+});
 
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-list');

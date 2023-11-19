@@ -17,7 +17,7 @@ class CheckPago
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->is_payed == 1 ){
+        if(Auth::user()->NivelActual >= 1 ){
             return $next($request);
         }
 
