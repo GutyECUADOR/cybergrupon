@@ -78,7 +78,7 @@
                                     <!-- Stepper content -->
                                     <div class="bs-stepper-content">
 
-                                        <form method="POST" action="{{ route('recargasaldo.store') }}">
+                                        <form method="POST" action="{{ route('check-pago.store') }}">
                                             @csrf
 
                                             <div id="test-l-1" role="tabpanel" class="bs-stepper-pane fade"

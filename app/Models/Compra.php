@@ -12,6 +12,10 @@ class Compra extends Model
     protected $fillable = [
         'user_id',
         'package_id',
-        'valor'
+        'valor',
+        'gateway',
+        'orderID_interno',
+        'orderID_gateway',
+        'status'
     ];
 }

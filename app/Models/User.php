@@ -129,7 +129,7 @@ class User extends Authenticatable
     }
 
     public function getNivelActualAttribute() {
-        $package_mayor = Compra::where('user_id', $this->id)->max('package_id') ;
+        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Payed']])->max('package_id') ;
         if (!$package_mayor) {
             return 0;
         }

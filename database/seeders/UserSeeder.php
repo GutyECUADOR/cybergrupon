@@ -45,7 +45,11 @@ class UserSeeder extends Seeder
         Compra::create([
             'user_id' => $admin->id,
             'package_id' => 5,
-            'valor' => '640'
+            'valor' => '640',
+            'gateway' => 'DBInit',
+            'orderID_interno' => 'DBSeed',
+            'orderID_gateway' => 'DBSeed',
+            'status' => 'Payed'
         ]);
 
         foreach (range(1,120) as $index) {
@@ -76,7 +80,11 @@ class UserSeeder extends Seeder
                 Compra::create([
                     'user_id' => $user->id,
                     'package_id' => 5,
-                    'valor' => '640'
+                    'valor' => '640',
+                    'gateway' => 'DBInit',
+                    'orderID_interno' => 'DBSeed',
+                    'orderID_gateway' => 'DBSeed',
+                    'status' => 'Payed'
                 ]);
 
 

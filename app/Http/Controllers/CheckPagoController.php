@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Compra;
 use App\Models\Packages;
 use App\Models\RecargaSaldo;
 use Illuminate\Http\Request;
@@ -46,19 +47,22 @@ class CheckPagoController extends Controller
             'package' => ['exists:packages,id']
         ]);
 
+        $package = Packages::findOrFail($request->package);
+        //dd($request->all());
+
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
 
         $createInvoiceRequest = new \UniPayment\Client\Model\CreateInvoiceRequest();
         $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
-        $createInvoiceRequest->setPriceAmount($request->valor);
+        $createInvoiceRequest->setPriceAmount($package->PrecioAcumuladoWithOutID);
         $createInvoiceRequest->setPriceCurrency("USD");
-        $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify");
+        $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify_pago");
         $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/recargasaldo");
         $createInvoiceRequest->setOrderId($order_ID);
-        $createInvoiceRequest->setTitle("Recarga de saldo");
-        $createInvoiceRequest->setDescription("Recarga de saldo");
+        $createInvoiceRequest->setTitle("Compra de paquete");
+        $createInvoiceRequest->setDescription("Compra de paquete - ". $package->name);
 
 
         $client = new \UniPayment\Client\UniPaymentClient();
@@ -68,12 +72,14 @@ class CheckPagoController extends Controller
 
         if ( $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest))) {
 
-            RecargaSaldo::create([
+            Compra::create([
                 'user_id' => Auth::user()->id,
-                'valor' => $request->valor,
+                'package_id' => $request->paquete,
+                'valor' => $package->PrecioAcumuladoWithOutID,
                 'gateway' => $request->gateway,
                 'orderID_interno' => $order_ID,
-                'orderID_gateway' => $create_invoice_response->data->invoice_id
+                'orderID_gateway' => $create_invoice_response->data->invoice_id,
+                'status' => 'pending',
             ]);
 
             return redirect()->to($create_invoice_response->data->invoice_url);
@@ -81,6 +87,10 @@ class CheckPagoController extends Controller
 
         return redirect()->back()->withErrors(['message' => 'No se pudo generar el link de pago, contacte a soporte']);
 
+    }
+
+    private function generateUniqueCode($limit=10) {
+        return strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit));
     }
 
     /**
