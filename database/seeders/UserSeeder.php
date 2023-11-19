@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert(array([
+        $admin = User::create([
             'nickname' => 'administrador',
             'nickname_promoter' => '',
             'email' => 'admin@admin.com',
@@ -31,9 +31,24 @@ class UserSeeder extends Seeder
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'is_payed' => 1,
             ],
-        ));
+        );
 
-         foreach (range(1,120) as $index) {
+        RecargaSaldo::create([
+            'user_id' => $admin->id,
+            'valor' => '640',
+            'gateway' => 'Saldo Inicial',
+            'orderID_interno' => 'DBSeed',
+            'orderID_gateway' => 'DBSeed',
+            'status' => 'Payed'
+        ]);
+
+        Compra::create([
+            'user_id' => $admin->id,
+            'package_id' => 5,
+            'valor' => '640'
+        ]);
+
+        foreach (range(1,120) as $index) {
 
             for ($position=1; $position <= 3; $position++) {
 
