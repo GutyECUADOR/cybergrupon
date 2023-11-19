@@ -74,7 +74,7 @@ class CheckPagoController extends Controller
 
             Compra::create([
                 'user_id' => Auth::user()->id,
-                'package_id' => $request->paquete,
+                'package_id' => $request->package,
                 'valor' => $package->PrecioAcumuladoWithOutID,
                 'gateway' => $request->gateway,
                 'orderID_interno' => $order_ID,
