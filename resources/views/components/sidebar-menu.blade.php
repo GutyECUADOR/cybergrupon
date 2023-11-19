@@ -27,8 +27,8 @@
                 <div id="navCourses" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Referidos
+                            <a class="nav-link" href="{{ route('mis-referidos.index') }}">
+                                Mis Referidos
                             </a>
                         </li>
                         <li class="nav-item">

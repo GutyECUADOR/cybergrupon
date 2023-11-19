@@ -18,6 +18,7 @@ use App\Http\Controllers\CheckPagoController;
 use App\Http\Controllers\IPNUnipayment;
 use App\Http\Controllers\TipoInversionController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ReferidosController;
 use App\Http\Controllers\RegisterReferido;
 use App\Mail\SoporteUsuarioMaileable;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ Route::middleware(['auth','checkPago'])->group(function () {
 
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class);
+    Route::resource('/mis-referidos', ReferidosController::class);
     Route::resource('/recargasaldo', RecargaSaldoController::class);
     Route::resource('/pagos', PagoController::class);
     Route::resource('/transferencia', TransferenciaSaldoController::class);

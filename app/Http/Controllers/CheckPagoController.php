@@ -59,7 +59,7 @@ class CheckPagoController extends Controller
         $createInvoiceRequest->setPriceAmount($package->PrecioAcumuladoWithOutID);
         $createInvoiceRequest->setPriceCurrency("USD");
         $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify_pago");
-        $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/recargasaldo");
+        $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/dashboard");
         $createInvoiceRequest->setOrderId($order_ID);
         $createInvoiceRequest->setTitle("Compra de paquete");
         $createInvoiceRequest->setDescription("Compra de paquete - ". $package->name);
