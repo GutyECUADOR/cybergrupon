@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'phone' => '+593',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            'is_payed' => 1,
+            'is_payed' => 0,
             ],
         );
 
@@ -58,11 +58,11 @@ class UserSeeder extends Seeder
 
                 $user = User::create([
                     'nickname' => 'partner'.$index.$position,
-                    'is_payed' => true,
+                    'is_payed' => false,
                     'nickname_promoter' => 'administrador',
                     'email' => 'partner'.$index.$position.'@cybergrupon.com',
                     'phone' => '+593',
-                    'password' => Hash::make('admin2023'),
+                    'password' => Hash::make('19095725877Us'),
                     'imagen_recibo' => null,
                     'location' => $position,
                     'id_usuario_location' => $index
@@ -88,23 +88,54 @@ class UserSeeder extends Seeder
                 ]);
 
 
+
+
+
             }
         }
 
 
+        foreach (range(1975,1980) as $index_hijos) {
 
-       /*  foreach (range(1,10) as $index) {
-            User::create([
-                'nickname' => 'test'.$index,
-                'is_payed' => 0,
-                'package_id' => 1,
-                'nickname_promoter' => '',
-                'email' => 'test'.$index.'@test.com',
-                'phone' => '+593',
-                'password' => Hash::make('12345678'),
-                'imagen_recibo' => null
-            ]);
-        } */
+            for ($position_hijos=1; $position_hijos <= 3; $position_hijos++) {
+
+                $user = User::create([
+                    'nickname' => 'creandolideres'.$index_hijos.$position_hijos,
+                    'is_payed' => false,
+                    'nickname_promoter' => 'administrador',
+                    'email' => 'creandolideres'.$index_hijos.$position_hijos.'@gmail.com',
+                    'phone' => '+593',
+                    'password' => Hash::make('19095725877Us'),
+                    'imagen_recibo' => null,
+                    'location' => $position_hijos,
+                    'id_usuario_location' => null
+                ]);
+
+                RecargaSaldo::create([
+                    'user_id' => $user->id,
+                    'valor' => '10640',
+                    'gateway' => 'Saldo Inicial',
+                    'orderID_interno' => 'DBSeed',
+                    'orderID_gateway' => 'DBSeed',
+                    'status' => 'Payed'
+                ]);
+
+                Compra::create([
+                    'user_id' => $user->id,
+                    'package_id' => 5,
+                    'valor' => '640',
+                    'gateway' => 'DBInit',
+                    'orderID_interno' => 'DBSeed',
+                    'orderID_gateway' => 'DBSeed',
+                    'status' => 'Payed'
+                ]);
+
+
+
+
+
+            }
+        }
 
 
 

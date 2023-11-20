@@ -199,7 +199,11 @@ class RedController extends Controller
         Compra::create([
             'user_id' => $user->id,
             'package_id' => $request->paquete,
-            'valor' => $paquete->PrecioAcumuladoWithOutID
+            'valor' => $paquete->PrecioAcumuladoWithOutID,
+            'gateway' => 'Saldos',
+            'orderID_interno' => 'DBSeed',
+            'orderID_gateway' => 'DBSeed',
+            'status' => 'Payed'
         ]);
 
         TransferenciaSaldo::create([

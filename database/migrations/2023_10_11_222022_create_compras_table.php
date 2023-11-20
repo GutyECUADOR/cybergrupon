@@ -18,7 +18,7 @@ class CreateComprasTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('package_id');
             $table->decimal('valor');
-            $table->string('gateway'); //La pasarela de pago utilizada
+            $table->string('gateway')->default('Saldos');; //La pasarela de pago utilizada
             $table->string('orderID_interno');
             $table->string('orderID_gateway')->nullable();
             $table->string('status')->default('pending');
