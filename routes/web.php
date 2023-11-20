@@ -43,8 +43,6 @@ Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('r
 Route::post('/referido', [RegisterReferido::class, 'store'])->name('referido.store');
 Route::get('/callbackpay', [BinancePayController::class, 'callbackpay'])->name('callbackpay');
 Route::resource('/binancepay', BinancePayController::class);
-Route::resource('/notify', IPNUnipayment::class);
-Route::resource('/notify_pago', IPNPagoUnipayment::class);
 
 Route::middleware(['auth','checkPagoOk'])->group(function () {
     Route::resource('/check-pago', CheckPagoController::class);

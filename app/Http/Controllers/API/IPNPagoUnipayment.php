@@ -37,9 +37,19 @@ class IPNPagoUnipayment extends Controller
     public function store(Request $request)
     {
         $IPN_invoice = $request->all();
+
+        //dd($IPN_invoice);
         $pago = Pago::where('orderID_gateway', $IPN_invoice['invoice_id'])->first();
         $pago->status =  $IPN_invoice['status'];
+
+        $location_free = $this->getLocation($ID_Partner);
+        if($location_free->location > 3) {
+            return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
+        }
+
         return $pago->save();
+
+
     }
 
     /**
