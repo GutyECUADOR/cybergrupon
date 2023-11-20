@@ -70,8 +70,8 @@
                                                     class="fe fe-settings nav-icon"></i>Editar perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="student-subscriptions.html"><i
-                                                    class="fe fe-calendar nav-icon"></i>Mis planes</a>
+                                            <a class="nav-link" href="{{ route('tienda.index')}}"><i
+                                                    class="fe fe-calendar nav-icon"></i>Comprar planes</a>
                                         </li>
 
                                     </ul>
@@ -123,11 +123,6 @@
                                         <!-- Validation Errors -->
                                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-                                        <!-- First name -->
-                                        <div class="mb-3 col-12 col-md-6">
-                                            <label class="form-label" for="fname">Nombre</label>
-                                            <input type="text" id="fname" class="form-control" value="{{ $usuario->name }}" required>
-                                        </div>
                                         <!-- Last name -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="lname">Nickname</label>
@@ -137,7 +132,7 @@
                                         <!-- Phone -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="phone">Teléfono</label>
-                                            <input type="text" id="phone" name="phone" class="form-control" value="{{ $usuario->phone }}" required>
+                                            <input type="text" id="phone" name="phone" class="form-control text-dark" value="{{ $usuario->phone }}" required>
                                         </div>
                                         <!-- Birthday -->
                                         <div class="mb-3 col-12 col-md-6">
@@ -149,23 +144,19 @@
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="address">Correo</label>
                                             <input type="email" id="address" class="form-control"
-                                                placeholder="Correo" value="{{ $usuario->email }}" required>
+                                                placeholder="Correo" value="{{ $usuario->email }}" disabled required>
                                         </div>
-                                        <!-- Address -->
+
+                                        <!-- Link Publicidad -->
                                         <div class="mb-3 col-12 col-md-6">
-                                            <label class="form-label" for="address2">Dirección</label>
-                                            <input type="text" id="address2" class="form-control" value="{{ $usuario->address }}" required>
+                                            <label class="form-label" for="address2">Link de Publicidad</label>
+                                            <input type="url" id="link_publicidad" name="link_publicidad" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_publicidad }}" required>
                                         </div>
-                                        <!-- State -->
+
+                                        <!-- Link Redirección -->
                                         <div class="mb-3 col-12 col-md-6">
-                                            <label class="form-label">País</label>
-                                            <select class="form-select" name="country">
-                                                <option value="">Select State</option>
-                                                <option value="1">Colombia</option>
-                                                <option value="2">Ecuador</option>
-                                                <option value="2">Perú</option>
-                                                <option value="999">Otro</option>
-                                            </select>
+                                            <label class="form-label" for="address2">Link de Redirección </label>
+                                            <input type="url" id="link_redireccion" name="link_redireccion" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion }}" required>
                                         </div>
 
                                         <div class="col-12">

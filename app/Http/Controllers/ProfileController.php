@@ -72,10 +72,14 @@ class ProfileController extends Controller
         $usuario = User::find($id_usuario);
 
         $request->validate([
-            'phone' => 'required|numeric|digits_between:10,13'
+            'phone' => 'required|string|max:25',
+            'link_publicidad' => 'required|string|max:190',
+            'link_redireccion' => 'required|string|max:190',
         ]);
 
         $usuario->phone = $request->phone;
+        $usuario->link_publicidad = $request->link_publicidad;
+        $usuario->link_redireccion = $request->link_redireccion;
 
         $usuario->save();
         return redirect()->route('profile.index')->with('status', 'Perfil de: '.$request->nickname.' actualizado con éxito!');

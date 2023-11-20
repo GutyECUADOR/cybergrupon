@@ -44,12 +44,6 @@
                                 <i class="fe fe-user me-2"></i> Perfil
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" href="">
-                                <i class="fe fe-star me-2"></i> Pagos & Subscripciones
-                            </a>
-                        </li>
-
                     </ul>
                     <div class="dropdown-divider"></div>
                     <ul class="list-unstyled">

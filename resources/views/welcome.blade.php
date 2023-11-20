@@ -220,7 +220,7 @@
                     <!-- text -->
                     <h2 class="h1 text-white">Conviertete en inversor</h2>
                     <p class="mb-0">Invierte en publicidad en tu negocio y obten grandes beneficios. Notros te ayudamos paso a paso en todo el proceso.</p>
-                    <a href="#" class="btn btn-white mt-4">Comience a invertir hoy</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-white mt-4">Comience a invertir hoy</a>
                   </div>
                 </div>
               </div>
@@ -601,6 +601,34 @@
     </footer>
 
 
+      <!-- modal -->
+    <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach ($linksPublicidad as $publicidad)
+                            <div class="col col-md-6 text-center">
+                                <iframe width="100%" height="200px"
+                                    src="{{ $publicidad->link_publicidad }}"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen></iframe>
+                                <a href="{{ $publicidad->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                            </div>
+                        @endforeach
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <!-- Libs JS -->
 
@@ -617,6 +645,13 @@
     <script src="{{ asset('assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/tooltip.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/popup.js')}}"></script>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#modalpromo').modal('show');
+        });
+    </script>
+
 
 </body>
 

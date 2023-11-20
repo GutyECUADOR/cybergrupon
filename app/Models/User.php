@@ -29,7 +29,9 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'imagen_recibo'
+        'imagen_recibo',
+        'link_publicidad',
+        'link_redireccion'
     ];
 
     /**

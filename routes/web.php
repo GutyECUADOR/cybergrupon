@@ -21,6 +21,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ReferidosController;
 use App\Http\Controllers\RegisterReferido;
 use App\Mail\SoporteUsuarioMaileable;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +37,15 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //$referidos = User::where('nickname_promoter', )->get()->sortBy('NivelActual');
+    $linksPublicidad = User::select('users.id','users.link_publicidad', 'users.link_redireccion', 'compras.package_id')
+                ->join('compras', 'users.id', '=', 'compras.user_id')
+                ->whereNotNull('users.link_publicidad')
+                ->inRandomOrder()->limit(4)
+                ->get();
+
+    //dd($links_publicidad);
+    return view('welcome', compact('linksPublicidad'));
 });
 
 Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('referido.create');
