@@ -16,7 +16,7 @@ class IPNUnipayment extends Controller
     {
         Log::build([
             'driver' => 'single',
-            'path' => public_path('logs/logUnipayment.log'),
+            'path' => storage_path('logs/logUnipayment.log'),
           ])->info($request->all());
         return $request->all();
     }
