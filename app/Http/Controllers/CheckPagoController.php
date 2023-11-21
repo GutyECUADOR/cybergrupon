@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comision;
 use App\Models\Compra;
 use App\Models\Packages;
 use App\Models\RecargaSaldo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,6 +74,7 @@ class CheckPagoController extends Controller
 
         if ( $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest))) {
 
+            // IPN PagoUnipayment actualiza los status a Complete
             Compra::create([
                 'user_id' => Auth::user()->id,
                 'package_id' => $request->package,
@@ -82,6 +85,17 @@ class CheckPagoController extends Controller
                 'status' => 'pending',
             ]);
 
+            RecargaSaldo::create([
+                'user_id' => Auth::user()->id,
+                'valor' => $package->PrecioAcumuladoWithOutID,
+                'gateway' => $request->gateway,
+                'orderID_interno' => $order_ID,
+                'orderID_gateway' => $create_invoice_response->data->invoice_id,
+                'status' => 'pending',
+            ]);
+
+            $this->generateComisions(Auth::user(), $package);
+
             return redirect()->to($create_invoice_response->data->invoice_url);
         }
 
@@ -91,6 +105,26 @@ class CheckPagoController extends Controller
 
     private function generateUniqueCode($limit=10) {
         return strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit));
+    }
+
+    public function generateComisions($user, $paquete_comprado) {
+
+        $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
+        for ($cont=1; $cont <= $paquete_comprado->nivel; $cont++) {
+
+            $valor = 0;
+            $paquete = Packages::FindOrFail($cont);
+
+            if ($usuario_pago->NivelActual >= $paquete_comprado->nivel) {
+
+                $valor += $paquete->price;
+                Comision::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
+            }
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
+        }
     }
 
     /**

@@ -57,17 +57,19 @@ class IPNPagoUnipayment extends Controller
             ], 400);
         }
 
-
-
         $IPN_invoice = $request->all();
         $IPN_invoice_id = $request->get('invoice_id');
         $compra = Compra::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
+        $recargaSaldo = RecargaSaldo::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
         $user_compra = User::where('id', $compra->user_id)->firstOrFail(); // Usuario de la compra
         $user_promoter = User::where('nickname', '=', $user_compra->nickname_promoter)->first(); // promotor ejem: administrador
         $ID_Partner = $user_promoter->id;
 
         $compra->status =  $IPN_invoice['status'];
         $compra->save();
+
+        $recargaSaldo->status =  $IPN_invoice['status'];
+        $recargaSaldo->save();
 
         if ($user_compra->location || $user_compra->id_usuario_location) {
             Log::build([
@@ -90,21 +92,10 @@ class IPNPagoUnipayment extends Controller
         $user_compra->id_usuario_location = $location_free->id_usuario_location;
         $user_compra->save();
 
-
-
-        RecargaSaldo::create([
-            'user_id' => $user_compra->id,
-            'valor' => $compra->valor,
-            'gateway' => 'UniPayment',
-            'orderID_interno' => $compra->orderID_interno,
-            'orderID_gateway' => $compra->orderID_gateway,
-            'status' => $IPN_invoice['status'],
-        ]);
-
         Log::build([
             'driver' => 'single',
             'path' => storage_path('logs/log-AsignacionEnArbol.log'),
-          ])->info([$request->all(), $location_free]);
+          ])->info([$request->all(), $location_free, $compra, $recargaSaldo]);
         return $request->all();
     }
 
