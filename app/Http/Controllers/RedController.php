@@ -226,7 +226,7 @@ class RedController extends Controller
             $valor = 0;
             $paquete = Packages::FindOrFail($cont);
 
-            if ($usuario_pago->NivelActual >= $paquete_comprado->nivel) {
+            if ($usuario_pago->NivelActual >= $cont) {
 
                 $valor += $paquete->price;
                 Comision::create([

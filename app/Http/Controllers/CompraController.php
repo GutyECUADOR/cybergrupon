@@ -75,7 +75,7 @@ class CompraController extends Controller
             $valor = 0;
             $paquete = Packages::FindOrFail($cont2);
 
-            if ($usuario_pago->NivelActual >= $paquete_comprado->nivel) {
+            if ($usuario_pago->NivelActual >= $cont2) {
 
                 $valor += $paquete->price;
                 Comision::create([
