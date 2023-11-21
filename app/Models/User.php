@@ -108,27 +108,27 @@ class User extends Authenticatable
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
         ->where([['user_id', $this->id], ['status', 'Complete']])
-        ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
+        ->selectRaw('user_id, valor, created_at, status, "Recarga de Saldo" as tipoMovimiento ');
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
         ->where('user_envio', $this->id)
-        ->selectRaw('user_envio as user_id, -(valor) as valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
+        ->selectRaw('user_envio as user_id, -(valor) as valor, created_at, "Completo" as status, "Transferencia de Saldo" as tipoMovimiento ');
 
         $saldo_transferencias_recibe = DB::table('transferencia_saldos')
         ->where('user_recibe', $this->id)
-        ->selectRaw('user_recibe as user_id, valor, created_at, "Transferencia de Saldo" as tipoMovimiento ');
+        ->selectRaw('user_recibe as user_id, valor, created_at, "Completo" as status, "Transferencia de Saldo" as tipoMovimiento ');
 
         $saldo_comisiones = DB::table('comisions')
         ->where('user_id', $this->id)
-        ->selectRaw('user_id, valor, created_at, "Comision" as tipoMovimiento ');
+        ->selectRaw('user_id, valor, created_at, "Completo" as status, "Comision" as tipoMovimiento ');
 
         $saldo_pagos = DB::table('pagos')
         ->where('user_id', $this->id)
-        ->selectRaw('user_id, -(valor) as valor, created_at, "Pago/Retiro de dinero" as tipoMovimiento ');
+        ->selectRaw('user_id, -(valor) as valor, created_at, status, "Pago" as tipoMovimiento ');
 
         $saldo_compras = DB::table('compras')
         ->where([['user_id', $this->id], ['status', 'Complete']])
-        ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
+        ->selectRaw('user_id, -(valor) as valor, created_at, status, "Compra" as tipoMovimiento ')
         ->union($saldo_recargas)
         ->union($saldo_transferencias_salida)
         ->union($saldo_transferencias_recibe)

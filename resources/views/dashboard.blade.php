@@ -165,6 +165,7 @@
                                         <th>Tipo de Movimiento</th>
                                         <th>Valor</th>
                                         <th>Fecha</th>
+                                        <th>Estado</th>
                                     </tr>
                                     <tr>
 
@@ -172,6 +173,15 @@
                                         <td>{{$movimiento->tipoMovimiento}}</td>
                                         <td>{{$movimiento->valor}}</td>
                                         <td>{{$movimiento->created_at}}</td>
+                                        @if (in_array($movimiento->status, ['Complete', 'Completo', 'Success']))
+                                            <td><span class="badge bg-success">Completo</span></td>
+                                        @elseif (in_array($movimiento->status, ['Payed']))
+                                            <td><span class="badge bg-info text-dark">Pagada</span></td>
+                                        @elseif (in_array($movimiento->status, ['Expired']))
+                                            <td><span class="badge bg-danger">Expirado</span></td>
+                                        @else
+                                            <td><span class="badge bg-primary">En proceso</span></td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>
