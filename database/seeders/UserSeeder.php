@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'gateway' => 'Saldo Inicial',
             'orderID_interno' => 'DBSeed',
             'orderID_gateway' => 'DBSeed',
-            'status' => 'Payed'
+            'status' => 'Complete'
         ]);
 
         Compra::create([
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
             'gateway' => 'DBInit',
             'orderID_interno' => 'DBSeed',
             'orderID_gateway' => 'DBSeed',
-            'status' => 'Payed'
+            'status' => 'Complete'
         ]);
 
         foreach (range(1,120) as $index) {
@@ -74,7 +74,7 @@ class UserSeeder extends Seeder
                     'gateway' => 'Saldo Inicial',
                     'orderID_interno' => 'DBSeed',
                     'orderID_gateway' => 'DBSeed',
-                    'status' => 'Payed'
+                    'status' => 'Complete'
                 ]);
 
                 Compra::create([
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
                     'gateway' => 'DBInit',
                     'orderID_interno' => 'DBSeed',
                     'orderID_gateway' => 'DBSeed',
-                    'status' => 'Payed'
+                    'status' => 'Complete'
                 ]);
 
 
@@ -117,7 +117,7 @@ class UserSeeder extends Seeder
                     'gateway' => 'Saldo Inicial',
                     'orderID_interno' => 'DBSeed',
                     'orderID_gateway' => 'DBSeed',
-                    'status' => 'Payed'
+                    'status' => 'Complete'
                 ]);
 
                 Compra::create([
@@ -127,7 +127,7 @@ class UserSeeder extends Seeder
                     'gateway' => 'DBInit',
                     'orderID_interno' => 'DBSeed',
                     'orderID_gateway' => 'DBSeed',
-                    'status' => 'Payed'
+                    'status' => 'Complete'
                 ]);
 
 

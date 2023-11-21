@@ -98,7 +98,7 @@ class IPNPagoUnipayment extends Controller
             'gateway' => 'UniPayment',
             'orderID_interno' => $compra->orderID_interno,
             'orderID_gateway' => $compra->orderID_gateway,
-            'status' => 'Payed',
+            'status' => $IPN_invoice['status'],
         ]);
 
         Log::build([

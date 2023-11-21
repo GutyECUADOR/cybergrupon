@@ -55,7 +55,7 @@ class User extends Authenticatable
 
     public function getSaldoActualAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
-        ->where([['user_id', $this->id], ['status', 'Payed']])
+        ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -73,7 +73,7 @@ class User extends Authenticatable
         ->get();
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Payed']])
+        ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -100,7 +100,7 @@ class User extends Authenticatable
 
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
-        ->where([['user_id', $this->id], ['status', 'Payed']])
+        ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, valor, created_at, "Recarga de Saldo" as tipoMovimiento ');
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
@@ -116,7 +116,7 @@ class User extends Authenticatable
         ->selectRaw('user_id, valor, created_at, "Comision" as tipoMovimiento ');
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Payed']])
+        ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
         ->union($saldo_recargas)
         ->union($saldo_transferencias_salida)
@@ -131,7 +131,7 @@ class User extends Authenticatable
     }
 
     public function getNivelActualAttribute() {
-        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Payed']])->max('package_id') ;
+        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Complete']])->max('package_id') ;
         if (!$package_mayor) {
             return 0;
         }

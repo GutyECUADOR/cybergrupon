@@ -201,9 +201,9 @@ class RedController extends Controller
             'package_id' => $request->paquete,
             'valor' => $paquete->PrecioAcumuladoWithOutID,
             'gateway' => 'Saldos',
-            'orderID_interno' => 'DBSeed',
-            'orderID_gateway' => 'DBSeed',
-            'status' => 'Payed'
+            'orderID_interno' => 'Saldos',
+            'orderID_gateway' => 'Saldos',
+            'status' => 'Complete'
         ]);
 
         TransferenciaSaldo::create([
