@@ -20,6 +20,7 @@ use App\Http\Controllers\TipoInversionController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\ReferidosController;
 use App\Http\Controllers\RegisterReferido;
+use App\Http\Controllers\TestController;
 use App\Mail\SoporteUsuarioMaileable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -52,6 +53,7 @@ Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('r
 Route::post('/referido', [RegisterReferido::class, 'store'])->name('referido.store');
 Route::get('/callbackpay', [BinancePayController::class, 'callbackpay'])->name('callbackpay');
 Route::resource('/binancepay', BinancePayController::class);
+Route::resource('/test', TestController::class);
 
 Route::middleware(['auth','checkPagoOk'])->group(function () {
     Route::resource('/check-pago', CheckPagoController::class);
