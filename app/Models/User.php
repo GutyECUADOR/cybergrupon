@@ -78,6 +78,12 @@ class User extends Authenticatable
         ->groupBy('user_id')
         ->get();
 
+        $saldo_pagos = DB::table('pagos')
+        ->where([['user_id', $this->id], ['status', 'Success']])
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
         $saldo_comisiones = DB::table('comisions')
         ->where('user_id', $this->id)
         ->selectRaw('user_id, sum(valor) as valor')
@@ -88,6 +94,7 @@ class User extends Authenticatable
                         ->merge($saldo_compras)
                         ->merge($saldo_transferencias_salida)
                         ->merge($saldo_transferencias_recibe)
+                        ->merge($saldo_pagos)
                         ->merge($saldo_comisiones);
 
         $saldo_actual = 0;
@@ -115,12 +122,17 @@ class User extends Authenticatable
         ->where('user_id', $this->id)
         ->selectRaw('user_id, valor, created_at, "Comision" as tipoMovimiento ');
 
+        $saldo_pagos = DB::table('pagos')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, -(valor) as valor, created_at, "Pago/Retiro de dinero" as tipoMovimiento ');
+
         $saldo_compras = DB::table('compras')
         ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, -(valor) as valor, created_at, "Compra" as tipoMovimiento ')
         ->union($saldo_recargas)
         ->union($saldo_transferencias_salida)
         ->union($saldo_transferencias_recibe)
+        ->union($saldo_pagos)
         ->union($saldo_comisiones)
         ->orderByDesc('created_at')
         ->limit(100)
