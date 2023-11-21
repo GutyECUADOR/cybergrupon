@@ -134,12 +134,7 @@
                                             <label class="form-label" for="phone">Teléfono</label>
                                             <input type="text" id="phone" name="phone" class="form-control text-dark" value="{{ $usuario->phone }}" required>
                                         </div>
-                                        <!-- Birthday -->
-                                        <div class="mb-3 col-12 col-md-6">
-                                            <label class="form-label" for="tipousuario">Tipo de usuario</label>
-                                            <input class="form-control" type="text"
-                                                placeholder="Tipo Usuario" id="tipousuario" value="{{ $usuario->role }}" disabled>
-                                        </div>
+
                                         <!-- Address -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="address">Correo</label>

@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('profile.index') }}">
                     <i class="nav-icon fe fe-user me-2"></i> Mi Perfil
                 </a>
             </li>
