@@ -56,7 +56,15 @@ class CompraController extends Controller
         $paquete_anterior = Packages::findOrFail(Auth::user()->NivelActual);
         $paquete_comprado = Packages::findOrFail($request->package_id);
 
-        Compra::create($data);
+        Compra::create([
+            'user_id' => Auth::user()->id,
+            'package_id' => $request->package_id,
+            'valor' => $request->valor,
+            'gateway' => 'Saldos',
+            'orderID_interno' => 'Saldos',
+            'orderID_gateway' => 'Saldos',
+            'status' => 'Complete'
+        ]);
         $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
 
         return redirect()->route('tienda.index')->with('status', 'Has adquirido el paquete '.$request->package_name.' con éxito!');
