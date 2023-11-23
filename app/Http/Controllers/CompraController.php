@@ -76,7 +76,7 @@ class CompraController extends Controller
         $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
         for ($cont=1; $cont <= $paquete_anterior->nivel; $cont++) {
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
-            $cont2 = $cont;
+            $cont2 = $cont+1;
         }
 
         for ($cont2; $cont2 <= $paquete_comprado->nivel; $cont2++) {
