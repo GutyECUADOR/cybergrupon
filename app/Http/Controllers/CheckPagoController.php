@@ -94,8 +94,6 @@ class CheckPagoController extends Controller
                 'status' => 'pending',
             ]);
 
-            $this->generateComisions(Auth::user(), $package);
-
             return redirect()->to($create_invoice_response->data->invoice_url);
         }
 
@@ -107,25 +105,7 @@ class CheckPagoController extends Controller
         return strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit));
     }
 
-    public function generateComisions($user, $paquete_comprado) {
 
-        $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
-        for ($cont=1; $cont <= $paquete_comprado->nivel; $cont++) {
-
-            $valor = 0;
-            $paquete = Packages::FindOrFail($cont);
-
-            if ($usuario_pago->NivelActual >= $cont) {
-
-                $valor += $paquete->price;
-                Comision::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
-            }
-            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
-        }
-    }
 
     /**
      * Display the specified resource.

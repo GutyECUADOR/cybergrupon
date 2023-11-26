@@ -220,20 +220,29 @@ class RedController extends Controller
 
     public function generateComisions($user, $paquete_comprado) {
 
-        $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
-        for ($cont=1; $cont <= $paquete_comprado->nivel; $cont++) {
+        $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
+        $paquete_inicial = Packages::FindOrFail(1);
+        Comision::create([
+            'user_id' => $usuario_promotor->id,
+            'valor' => $paquete_inicial->price
+        ]);
+
+        $usuario_transicion = User::where('id', $user->id_usuario_location)->firstOrFail();
+        $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->firstOrFail();
+        for ($cont=2; $cont <= $paquete_comprado->nivel; $cont++) {
 
             $valor = 0;
             $paquete = Packages::FindOrFail($cont);
 
             if ($usuario_pago->NivelActual >= $cont) {
 
-                $valor += $paquete->price;
+                $valor = $paquete->price;
                 Comision::create([
                     'user_id' => $usuario_pago->id,
                     'valor' => $valor
                 ]);
             }
+
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
         }
     }

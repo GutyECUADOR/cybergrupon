@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comision;
 use App\Models\Compra;
+use App\Models\Packages;
 use App\Models\Pago;
 use App\Models\RecargaSaldo;
 use App\Models\User;
@@ -92,6 +94,12 @@ class IPNPagoUnipayment extends Controller
         $user_compra->id_usuario_location = $location_free->id_usuario_location;
         $user_compra->save();
 
+        if ($IPN_invoice['status'] == 'Complete') {
+            $paquete = Packages::findOrFail($compra->package_id);
+            $this->generateComisions($user_compra, $paquete);
+        }
+
+
         Log::build([
             'driver' => 'single',
             'path' => storage_path('logs/log-AsignacionEnArbol.log'),
@@ -152,6 +160,39 @@ class IPNPagoUnipayment extends Controller
         } while ($verificacion_existe && $nivel <=4);
 
         return (object) array('hijos'=> $array_totales, 'location'=> $cont, 'id_usuario_location'=> $id_padre);
+    }
+
+    public function generateComisions($user, $paquete_comprado) {
+
+        $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
+        $paquete_inicial = Packages::FindOrFail(1);
+        Comision::create([
+            'user_id' => $usuario_promotor->id,
+            'valor' => $paquete_inicial->price
+        ]);
+
+        $usuario_transicion = User::where('id', $user->id_usuario_location)->firstOrFail();
+        $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->firstOrFail();
+        for ($cont=2; $cont <= $paquete_comprado->nivel; $cont++) {
+
+            $valor = 0;
+            $paquete = Packages::FindOrFail($cont);
+
+            if ($usuario_pago->NivelActual >= $cont) {
+
+                $valor = $paquete->price;
+                Comision::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
+            }
+
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
+        }
+    }
+
+    private function generateUniqueCode($limit=10) {
+        return strtoupper(substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, $limit));
     }
 
     /**
