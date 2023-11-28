@@ -60,7 +60,7 @@
 								<div class="mb-3">
 									<div class="form-check">
 										<input type="checkbox" class="form-check-input" id="agreeCheck" required>
-										<label class="form-check-label" for="agreeCheck"><span>Acepto los <a href="/terminos-condiciones">Términos</a> y <a href="terms-condition-page.html">Condiciones.</a></span></label>
+										<label class="form-check-label" for="agreeCheck"><span>Acepto los <a href="#" data-bs-toggle="modal" data-bs-target="#modalterminos">Términos y Condiciones.</a></span></label>
 									</div>
 								</div>
 								<div>
@@ -79,4 +79,6 @@
 			</div>
 		</section>
 	</main>
+
+    <x-modal-terminos></x-modal-terminos>
 </x-guest-layout>

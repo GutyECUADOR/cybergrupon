@@ -30,7 +30,7 @@
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
 
-    <title>{{ config('app.name', 'App') }} :. Marketing & Inversiones</title>
+    <title>{{ config('app.name', 'App') }} :. Marketing & Publicidad</title>
 </head>
 
 <body class="bg-white">
@@ -116,9 +116,9 @@
                                         <i class="bi bi-cash-coin fs-3 text-primary"></i>
                                         <div class="ms-3">
                                             <h5 class="mb-0">
-                                                Inversiones
+                                                Publicidad
                                             </h5>
-                                            <p class="mb-0 fs-6">Opciones de inversión sencilla y rentable</p>
+                                            <p class="mb-0 fs-6">Opciones de publicidad sencilla y rentable</p>
                                         </div>
                                     </div>
                                 </a>
@@ -218,9 +218,9 @@
                 <div class="col-lg-5 col-12">
                   <div class="text-white p-5 p-lg-0">
                     <!-- text -->
-                    <h2 class="h1 text-white">Conviertete en inversor</h2>
-                    <p class="mb-0">Invierte en publicidad en tu negocio y obten grandes beneficios. Notros te ayudamos paso a paso en todo el proceso.</p>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-white mt-4">Comience a invertir hoy</a>
+                    <h2 class="h1 text-white">COMPRA YA TU PAQUETE</h2>
+                    <p class="mb-0">Compra tu paquete de publicidad y obten grandes beneficios. Notros te ayudamos paso a paso en todo el proceso.</p>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-white mt-4">Comienza a pautar hoy</a>
                   </div>
                 </div>
               </div>
@@ -237,7 +237,7 @@
                     </div>
                     <div class="lh-1">
                       <h2 class="mb-1">316,000+</h2>
-                      <span>Inversores</span>
+                      <span>Ventas</span>
                     </div>
                   </div>
 
@@ -250,7 +250,7 @@
                     </div>
                     <!-- text -->
                     <div class="lh-1">
-                      <h2 class="mb-1">1.8 Billion+</h2>
+                      <h2 class="mb-1">1.8 Milliones+</h2>
                       <span>Ganancias Globales</span>
                     </div>
                   </div>
@@ -264,7 +264,7 @@
                     </div>
                     <!-- text -->
                     <div class="lh-1">
-                      <h2 class="mb-1">41,000+</h2>
+                      <h2 class="mb-1">5,000+</h2>
                       <span>Paginas de contacto</span>
                     </div>
                   </div>
@@ -278,7 +278,7 @@
                     </div>
                     <!-- text -->
                     <div class="lh-1">
-                      <h2 class="mb-1">179,000+</h2>
+                      <h2 class="mb-1">10,000+</h2>
                       <span>Videos de publicidad</span>
                     </div>
                   </div>
@@ -458,65 +458,12 @@
                     </div>
                   </div>
                   <div class="mt-10 text-center">
-                    <a href="#" class="btn btn-outline-primary">Mas preguntas? Visita nuestro centro
-                      de ayuda.</a>
+                    <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalterminos">Más preguntas? Revisa nuestros terminos y condiciones</a>
                   </div>
                 </div>
               </div>
             </div>
         </section>
-
-         <!-- section -->
-
-         <section class="bg-light py-7 bg-cover">
-            <div class="container text-center">
-
-              <div class="row">
-                <div class="col-xl-12 col-md-12 col-12">
-                  <div class="text-center mb-6">
-                    <span class="text-uppercase text-gray-400 ls-md fw-semibold">Algunos de nuestros clientes</span>
-                  </div>
-                </div>
-                <div class="col-xl-10 offset-xl-1">
-                  <div class="table-responsive-lg">
-                    <div class=" row row-cols-lg-5 row-cols-md-3 row-cols-2 g-4 flex-nowrap">
-                      <div class="col">
-                        <div class="text-center mb-3">
-                          <img src="{{ asset('assets/images/brand/gray-logo-airbnb.svg')}}" alt="airbnb" class="img-fluid">
-
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center mb-3">
-                          <img src="{{ asset('assets/images/brand/gray-logo-digitalocean.svg')}}" alt="digitalocean" class="img-fluid">
-
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center mb-3">
-                          <img src="{{ asset('assets/images/brand/gray-logo-discord.svg')}}" alt="discord" class="img-fluid">
-
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center mb-3">
-                          <img src="{{ asset('assets/images/brand/gray-logo-intercom.svg')}}" alt="intercom" class="img-fluid">
-
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="text-center mb-3">
-                          <img src="{{ asset('assets/images/brand/gray-logo-netflix.svg')}}" alt="netflix" class="img-fluid">
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </section>
-
     </main>
     <!-- footer -->
     <!-- footer -->
@@ -570,7 +517,7 @@
                     <div class="mb-4">
                         <h3 class="fw-bold mb-3">Get in touch</h3>
                         <p>339 McDermott Points Hettingerhaven, NV 15283</p>
-                        <p class="mb-1">Email: <a href="#">support@geeksui.com</a></p>
+                        <p class="mb-1">Email: <a href="#">support@cybergrupon.com</a></p>
                         <p>Phone: <span class="text-dark fw-semibold">(000) 123 456 789</span></p>
 
                     </div>
@@ -601,7 +548,7 @@
     </footer>
 
 
-      <!-- modal -->
+    <!-- modal -->
     <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -628,6 +575,8 @@
             </div>
         </div>
     </div>
+
+    <x-modal-terminos></x-modal-terminos>
 
     <!-- Scripts -->
     <!-- Libs JS -->
