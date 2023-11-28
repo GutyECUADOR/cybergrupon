@@ -91,38 +91,6 @@
                             </div>
                             <!-- Card body -->
                             <div class="card-body">
-                                {{-- <div class="d-lg-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center mb-4 mb-lg-0">
-                                        <img src="{{ asset('assets/images/avatar/'.auth()->user()->avatar)}}" id="img-uploaded"
-                                            class="avatar-xl rounded-circle" alt="avatar">
-                                        <div class="ms-3">
-                                            <h4 class="mb-0">Tu avatar</h4>
-                                            <p class="mb-0">
-                                                PNG or JPG no mayor a 800px de ancho y alto.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
-                                    </div>
-                                </div> --}}
-
-                                <div>
-                                    <h4 class="mb-0">Previsualización de publicidad</h4>
-                                    <p class="mb-4">
-                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
-                                    </p>
-                                    <div class="col col-md-12 text-center">
-                                        <iframe width="100%" height="200px"
-                                            src="{{ auth()->user()->link_publicidad }}"
-                                            title="YouTube video player" frameborder="0"
-                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                            allowfullscreen></iframe>
-                                        <a href="{{ auth()->user()->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
-                                    </div>
-                                </div>
-
-                                <hr class="my-5">
                                 <div>
                                     <h4 class="mb-0">Detalles personales</h4>
                                     <p class="mb-4">
@@ -152,12 +120,14 @@
                                         </div>
 
                                         <!-- Address -->
-                                        <div class="mb-3 col-12 col-md-6">
+                                        <div class="mb-3 col-12">
                                             <label class="form-label" for="address">Correo</label>
                                             <input type="email" id="address" class="form-control"
                                                 placeholder="Correo" value="{{ $usuario->email }}" disabled required>
                                         </div>
 
+                                        <hr class="my-5">
+                                        <h3>Nivel 1</h3>
                                         <!-- Link Publicidad -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="address2">Link de Publicidad</label>
@@ -170,6 +140,71 @@
                                             <input type="url" id="link_redireccion" name="link_redireccion" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion }}" required>
                                         </div>
 
+                                        @if (Auth::user()->NivelActual >= 2)
+                                            <hr class="my-5">
+                                            <h3>Nivel 2</h3>
+                                            <!-- Link Publicidad -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Publicidad</label>
+                                                <input type="url" id="link_publicidad" name="link_publicidad2" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_publicidad2 }}" required>
+                                            </div>
+
+                                            <!-- Link Redirección -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Redirección </label>
+                                                <input type="url" id="link_redireccion" name="link_redireccion2" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion2 }}" required>
+                                            </div>
+                                        @endif
+
+
+                                        @if (Auth::user()->NivelActual >= 3)
+                                            <hr class="my-5">
+                                            <h3>Nivel 3</h3>
+                                            <!-- Link Publicidad -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Publicidad</label>
+                                                <input type="url" id="link_publicidad" name="link_publicidad3" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_publicidad3 }}" required>
+                                            </div>
+
+                                            <!-- Link Redirección -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Redirección </label>
+                                                <input type="url" id="link_redireccion" name="link_redireccion3" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion3 }}" required>
+                                            </div>
+                                        @endif
+
+                                        @if (Auth::user()->NivelActual >= 4)
+                                            <hr class="my-5">
+                                            <h3>Nivel 4</h3>
+                                            <!-- Link Publicidad -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Publicidad</label>
+                                                <input type="url" id="link_publicidad" name="link_publicidad4" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_publicidad4 }}" required>
+                                            </div>
+
+                                            <!-- Link Redirección -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Redirección </label>
+                                                <input type="url" id="link_redireccion" name="link_redireccion4" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion4 }}" required>
+                                            </div>
+                                        @endif
+
+                                        @if (Auth::user()->NivelActual >= 5)
+                                            <hr class="my-5">
+                                            <h3>Nivel 5</h3>
+                                            <!-- Link Publicidad -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Publicidad</label>
+                                                <input type="url" id="link_publicidad" name="link_publicidad5" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_publicidad5 }}" required>
+                                            </div>
+
+                                            <!-- Link Redirección -->
+                                            <div class="mb-3 col-12 col-md-6">
+                                                <label class="form-label" for="address2">Link de Redirección </label>
+                                                <input type="url" id="link_redireccion" name="link_redireccion5" class="form-control text-dark" placeholder="Ejemplo: http://www.google.com.ec/" value="{{ $usuario->link_redireccion5 }}" required>
+                                            </div>
+                                        @endif
+
                                         <div class="col-12">
                                             <!-- Button -->
                                             <button class="btn btn-primary" type="submit">
@@ -178,9 +213,87 @@
                                         </div>
                                     </form>
 
-
                                 </div>
 
+                                <hr class="my-5">
+                                <div>
+                                    <h4 class="mt-4">Previsualización de publicidad #1</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
+                                </div>
+
+                                <hr class="my-5">
+                                <div>
+                                    <h4 class="mt-4">Previsualización de publicidad #2</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad2 }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion2 }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
+                                </div>
+
+                                <hr class="my-5">
+                                <div>
+                                    <h4 class="mt-4">Previsualización de publicidad #3</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad3 }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion3 }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
+                                </div>
+
+                                <hr class="my-5">
+                                <div>
+                                    <h4 class="mt-4">Previsualización de publicidad #4</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad4 }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion4 }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
+                                </div>
+
+                                <hr class="my-5">
+                                <div>
+                                    <h4 class="mt-4">Previsualización de publicidad #5</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad5 }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion5 }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>

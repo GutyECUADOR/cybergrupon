@@ -38,14 +38,33 @@ use Illuminate\Support\Facades\Mail;
 */
 
 Route::get('/', function () {
-    //$referidos = User::where('nickname_promoter', )->get()->sortBy('NivelActual');
-    $linksPublicidad = User::select('users.id','users.link_publicidad', 'users.link_redireccion', 'compras.package_id')
-                ->join('compras', 'users.id', '=', 'compras.user_id')
-                ->whereNotNull('users.link_publicidad')
-                ->inRandomOrder()->limit(4)
-                ->get();
+    $linksPublicidad1 = User::select('users.id','users.link_publicidad', 'users.link_redireccion', 'compras.package_id')
+    ->join('compras', 'users.id', '=', 'compras.user_id')
+    ->whereNotNull('users.link_publicidad');
 
-    //dd($links_publicidad);
+    $linksPublicidad2 = User::select('users.id','users.link_publicidad2 as link_publicidad', 'users.link_redireccion2 as link_redireccion', 'compras.package_id')
+    ->join('compras', 'users.id', '=', 'compras.user_id')
+    ->whereNotNull('users.link_publicidad2');
+
+    $linksPublicidad3 = User::select('users.id','users.link_publicidad3 as link_publicidad', 'users.link_redireccion3 as link_redireccion', 'compras.package_id')
+    ->whereNotNull('users.link_publicidad3')
+    ->join('compras', 'users.id', '=', 'compras.user_id');
+
+    $linksPublicidad4 = User::select('users.id','users.link_publicidad4 as link_publicidad', 'users.link_redireccion4 as link_redireccion', 'compras.package_id')
+    ->whereNotNull('users.link_publicidad4')
+    ->join('compras', 'users.id', '=', 'compras.user_id');
+
+    $linksPublicidad = User::select('users.id','users.link_publicidad5 as link_publicidad', 'users.link_redireccion5 as link_redireccion', 'compras.package_id')
+    ->join('compras', 'users.id', '=', 'compras.user_id')
+    ->whereNotNull('users.link_publicidad5')
+    ->unionAll($linksPublicidad1)
+    ->unionAll($linksPublicidad2)
+    ->unionAll($linksPublicidad3)
+    ->unionAll($linksPublicidad4)
+    ->inRandomOrder()->limit(4)
+    ->get();
+
+    //dd($linksPublicidad);
     return view('welcome', compact('linksPublicidad'));
 });
 

@@ -31,7 +31,15 @@ class User extends Authenticatable
         'password',
         'imagen_recibo',
         'link_publicidad',
-        'link_redireccion'
+        'link_redireccion',
+        'link_publicidad2',
+        'link_redireccion2',
+        'link_publicidad3',
+        'link_redireccion3',
+        'link_publicidad4',
+        'link_redireccion4',
+        'link_publicidad5',
+        'link_redireccion5'
     ];
 
     /**

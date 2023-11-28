@@ -28,6 +28,14 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->default('default.png');
             $table->string('link_publicidad')->nullable();
             $table->string('link_redireccion')->nullable();
+            $table->string('link_publicidad2')->nullable();
+            $table->string('link_redireccion2')->nullable();
+            $table->string('link_publicidad3')->nullable();
+            $table->string('link_redireccion3')->nullable();
+            $table->string('link_publicidad4')->nullable();
+            $table->string('link_redireccion4')->nullable();
+            $table->string('link_publicidad5')->nullable();
+            $table->string('link_redireccion5')->nullable();
             $table->boolean('is_payed')->default(false);
             $table->string('imagen_recibo')->nullable();
             $table->timestamps();

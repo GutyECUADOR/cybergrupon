@@ -75,11 +75,27 @@ class ProfileController extends Controller
             'phone' => 'required|string|max:25',
             'link_publicidad' => 'required|string|max:190',
             'link_redireccion' => 'required|string|max:190',
+            'link_publicidad2' => 'string|max:190',
+            'link_redireccion2' => 'string|max:190',
+            'link_publicidad3' => 'string|max:190',
+            'link_redireccion3' => 'string|max:190',
+            'link_publicidad4' => 'string|max:190',
+            'link_redireccion4' => 'string|max:190',
+            'link_publicidad5' => 'string|max:190',
+            'link_redireccion5' => 'string|max:190',
         ]);
 
         $usuario->phone = $request->phone;
         $usuario->link_publicidad = $request->link_publicidad;
         $usuario->link_redireccion = $request->link_redireccion;
+        $usuario->link_publicidad2 = $request->link_publicidad2;
+        $usuario->link_redireccion2 = $request->link_redireccion2;
+        $usuario->link_publicidad3 = $request->link_publicidad3;
+        $usuario->link_redireccion3 = $request->link_redireccion3;
+        $usuario->link_publicidad4 = $request->link_publicidad4;
+        $usuario->link_redireccion4 = $request->link_redireccion4;
+        $usuario->link_publicidad5 = $request->link_publicidad5;
+        $usuario->link_redireccion5 = $request->link_redireccion5;
 
         $usuario->save();
         return redirect()->route('profile.index')->with('status', 'Perfil actualizado con éxito!');
