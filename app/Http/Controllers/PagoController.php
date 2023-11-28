@@ -57,6 +57,8 @@ class PagoController extends Controller
 
         ]);
 
+        $valor_retiro = $request->valor * 0.95;
+
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
@@ -65,7 +67,7 @@ class PagoController extends Controller
         $createWithdrawRequest->setNetwork($request->network);
         $createWithdrawRequest->setAddress($request->wallet);
         $createWithdrawRequest->setAssetType($request->currency);
-        $createWithdrawRequest->setAmount($request->valor);
+        $createWithdrawRequest->setAmount($valor_retiro);
         $createWithdrawRequest->setNotifyUrl('https://cybergrupon.com/api/notify_withdrawal');
 
         if (  $create_withdraw_response = json_decode($client->createWithdrawal($createWithdrawRequest))) {
@@ -77,7 +79,7 @@ class PagoController extends Controller
                     'user_id' => Auth::user()->id,
                     'wallet' => $request->wallet,
                     'currency' => $request->currency,
-                    'valor' => $request->valor,
+                    'valor' => $valor_retiro,
                     'network' => $request->network,
                     'gateway' => $request->gateway,
                     'orderID_gateway' => $create_withdraw_response->data->id

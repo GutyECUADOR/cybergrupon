@@ -82,7 +82,7 @@ class ProfileController extends Controller
         $usuario->link_redireccion = $request->link_redireccion;
 
         $usuario->save();
-        return redirect()->route('profile.index')->with('status', 'Perfil de: '.$request->nickname.' actualizado con éxito!');
+        return redirect()->route('profile.index')->with('status', 'Perfil actualizado con éxito!');
     }
 
     /**

@@ -91,7 +91,7 @@
                             </div>
                             <!-- Card body -->
                             <div class="card-body">
-                                <div class="d-lg-flex align-items-center justify-content-between">
+                                {{-- <div class="d-lg-flex align-items-center justify-content-between">
                                     <div class="d-flex align-items-center mb-4 mb-lg-0">
                                         <img src="{{ asset('assets/images/avatar/'.auth()->user()->avatar)}}" id="img-uploaded"
                                             class="avatar-xl rounded-circle" alt="avatar">
@@ -105,7 +105,23 @@
                                     <div>
                                         <a href="#" class="btn btn-outline-secondary btn-sm">Update</a>
                                     </div>
+                                </div> --}}
+
+                                <div>
+                                    <h4 class="mb-0">Previsualización de publicidad</h4>
+                                    <p class="mb-4">
+                                        Edite la información del link_publicidad y redirección, si no son visibles a continuación, el link proporcionado es incorrecto. Si desea agregar un video desde youtube. El formato del link es: https://www.youtube.com/embed/tgbNymZ7vqY
+                                    </p>
+                                    <div class="col col-md-12 text-center">
+                                        <iframe width="100%" height="200px"
+                                            src="{{ auth()->user()->link_publicidad }}"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            allowfullscreen></iframe>
+                                        <a href="{{ auth()->user()->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                    </div>
                                 </div>
+
                                 <hr class="my-5">
                                 <div>
                                     <h4 class="mb-0">Detalles personales</h4>
@@ -161,7 +177,11 @@
                                             </button>
                                         </div>
                                     </form>
+
+
                                 </div>
+
+
                             </div>
                         </div>
                     </div>
