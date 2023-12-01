@@ -50,7 +50,7 @@ class RecargaSaldoController extends Controller
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
         $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
-        
+
         $createInvoiceRequest = new \UniPayment\Client\Model\CreateInvoiceRequest();
         $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
         $createInvoiceRequest->setPriceAmount($request->valor);
@@ -77,7 +77,7 @@ class RecargaSaldoController extends Controller
                 'orderID_gateway' => $create_invoice_response->data->invoice_id
             ]);
 
-            return redirect()->to($create_invoice_response->data->invoice_url);
+            return redirect()->away($create_invoice_response->data->invoice_url);
         }
 
         return redirect()->back()->withErrors(['message' => 'No se pudo generar el link de pago, contacte a soporte']);

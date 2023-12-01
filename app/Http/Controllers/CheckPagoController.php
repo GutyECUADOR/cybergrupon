@@ -94,7 +94,7 @@ class CheckPagoController extends Controller
                 'status' => 'pending',
             ]);
 
-            return redirect()->to($create_invoice_response->data->invoice_url);
+            return redirect()->away($create_invoice_response->data->invoice_url);
         }
 
         return redirect()->back()->withErrors(['message' => 'No se pudo generar el link de pago, contacte a soporte']);
