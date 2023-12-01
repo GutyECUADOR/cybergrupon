@@ -90,6 +90,12 @@
             //alert("Link de referido: " + copyText.value);
         }
     </script>
+
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#modalpromo').modal('show');
+        });
+    </script>
 </body>
 
 </html>

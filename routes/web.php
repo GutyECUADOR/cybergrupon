@@ -36,12 +36,12 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
+/* Route::get('/', function () {
     return redirect()->to('login');
-});
+}); */
 
 
-Route::get('/cambios', function () {
+Route::get('/', function () {
     $linksPublicidad1 = User::select('users.id','users.link_publicidad', 'users.link_redireccion', 'compras.package_id')
     ->join('compras', 'users.id', '=', 'compras.user_id')
     ->whereNotNull('users.link_publicidad');

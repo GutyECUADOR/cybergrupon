@@ -61,6 +61,7 @@ class IPNPagoUnipayment extends Controller
 
         $IPN_invoice = $request->all();
         $IPN_invoice_id = $request->get('invoice_id');
+
         $compra = Compra::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
         $recargaSaldo = RecargaSaldo::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
         $user_compra = User::where('id', $compra->user_id)->firstOrFail(); // Usuario de la compra
@@ -94,16 +95,16 @@ class IPNPagoUnipayment extends Controller
         $user_compra->id_usuario_location = $location_free->id_usuario_location;
         $user_compra->save();
 
+        $comisiones_pagadas = [];
         if ($IPN_invoice['status'] == 'Complete') {
             $paquete = Packages::findOrFail($compra->package_id);
-            $this->generateComisions($user_compra, $paquete);
+            $comisiones_pagadas = $this->generateComisions($user_compra, $paquete);
         }
-
 
         Log::build([
             'driver' => 'single',
             'path' => storage_path('logs/log-AsignacionEnArbol.log'),
-          ])->info([$request->all(), $location_free, $compra, $recargaSaldo]);
+          ])->info([$request->all(), $comisiones_pagadas, $location_free, $compra, $recargaSaldo, $IPN_invoice]);
         return $request->all();
     }
 
@@ -164,12 +165,16 @@ class IPNPagoUnipayment extends Controller
 
     public function generateComisions($user, $paquete_comprado) {
 
+        $comisiones_pagadas = [];
+
         $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
         $paquete_inicial = Packages::FindOrFail(1);
-        Comision::create([
+        $comision = Comision::create([
             'user_id' => $usuario_promotor->id,
             'valor' => $paquete_inicial->price
         ]);
+
+        array_push($comisiones_pagadas, $comision);
 
         $usuario_transicion = User::where('id', $user->id_usuario_location)->firstOrFail();
         $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->firstOrFail();
@@ -181,14 +186,18 @@ class IPNPagoUnipayment extends Controller
             if ($usuario_pago->NivelActual >= $cont) {
 
                 $valor = $paquete->price;
-                Comision::create([
+                $comision = Comision::create([
                     'user_id' => $usuario_pago->id,
                     'valor' => $valor
                 ]);
+
+                array_push($comisiones_pagadas, $comision);
             }
 
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
         }
+
+        return $comisiones_pagadas;
     }
 
     private function generateUniqueCode($limit=10) {
