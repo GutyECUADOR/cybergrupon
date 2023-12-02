@@ -34,7 +34,7 @@
                                 <div class="embed-responsive embed-responsive-16by9 mb-3" style="border-width: 4px; margin-top:5%; border-radius: 5px;">
                                     <iframe class="embed-responsive-item" style="border: 6px solid #CCCCCC; border-radius:25px; width: 100%; height: 470px;" src="https://www.youtube.com/embed/Rs-PC7KtFAQ?autoplay=1&controls=1&mute=1"></iframe>
                                 </div>
-                                <a href="{{ asset('/assets/videos/publicidad.mp4') }}" class="btn btn-primary">Descargar Video</a>
+                                <a href="{{ asset('/assets/videos/publicidad.mp4') }}" download class="btn btn-primary">Descargar Video</a>
                                 <p class="lead  px-lg-8 mb-6">O si prefieres contacta con nuestro centro de soporte via WhatsApp.</p>
 
                             </div>
