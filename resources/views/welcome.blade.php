@@ -167,7 +167,7 @@
                     <p class="pe-lg-10 mb-5">El punto de encuentro de los emprendedores más existosos del mundo.</p>
                     <!-- btn -->
                     <a href="{{ route('register') }}" class="btn btn-primary">Registrarme ahora</a>
-                    <a href="{{ asset('/assets/videos/publicidad.mp4') }}" class="popup-youtube fs-4 text-inherit ms-3">
+                    <a href="https://www.youtube.com/watch?v=Rs-PC7KtFAQ" class="popup-youtube fs-4 text-inherit ms-3">
                       <img src="{{ asset('/assets/images/svg/play-btn.svg') }}" alt="play" class="me-2">Video introducción</a>
 
 
