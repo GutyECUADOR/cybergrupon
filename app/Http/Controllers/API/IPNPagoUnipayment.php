@@ -62,50 +62,60 @@ class IPNPagoUnipayment extends Controller
         $IPN_invoice = $request->all();
         $IPN_invoice_id = $request->get('invoice_id');
 
-        $compra = Compra::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
-        $recargaSaldo = RecargaSaldo::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
-        $user_compra = User::where('id', $compra->user_id)->firstOrFail(); // Usuario de la compra
-        $user_promoter = User::where('nickname', '=', $user_compra->nickname_promoter)->first(); // promotor ejem: administrador
-        $ID_Partner = $user_promoter->id;
+        if ($IPN_invoice['status'] == 'Complete') {
 
-        $compra->status =  $IPN_invoice['status'];
-        $compra->save();
+            $compra = Compra::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
+            $recargaSaldo = RecargaSaldo::where('orderID_gateway', $IPN_invoice_id)->firstOrFail();
+            $user_compra = User::where('id', $compra->user_id)->firstOrFail(); // Usuario de la compra
+            $user_promoter = User::where('nickname', '=', $user_compra->nickname_promoter)->first(); // promotor ejem: administrador
+            $ID_Partner = $user_promoter->id;
 
-        $recargaSaldo->status =  $IPN_invoice['status'];
-        $recargaSaldo->save();
+            $compra->status =  $IPN_invoice['status'];
+            $compra->save();
 
-        if ($user_compra->location || $user_compra->id_usuario_location) {
+            $recargaSaldo->status =  $IPN_invoice['status'];
+            $recargaSaldo->save();
+
+            if ($user_compra->location || $user_compra->id_usuario_location) {
+                Log::build([
+                    'driver' => 'single',
+                    'path' => storage_path('logs/log-AsignacionEnArbol.log'),
+                ])->info(['El usuario ya tiene posicion asignada', $request->all()]);
+                return response([
+                    'errors' => 'El usuario ya tiene posicion asignada',
+                    'message' => 'Uno o más campos requeridos no pasaron la validación'
+                ], 400);
+            }
+
+            $location_free = $this->getLocation($ID_Partner);
+            if($location_free->location > 3) {
+                return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos contacte a soporte o su patrocinador.']);
+            }
+
+            // Actualizacion en DB
+            $user_compra->location = $location_free->location;
+            $user_compra->id_usuario_location = $location_free->id_usuario_location;
+            $user_compra->save();
+
+            $comisiones_pagadas = [];
+
+            $paquete = Packages::findOrFail($compra->package_id);
+            $comisiones_pagadas = $this->generateComisions($user_compra, $paquete);
+
             Log::build([
                 'driver' => 'single',
                 'path' => storage_path('logs/log-AsignacionEnArbol.log'),
-              ])->info(['El usuario ya tiene posicion asignada', $request->all()]);
-            return response([
-                'errors' => 'El usuario ya tiene posicion asignada',
-                'message' => 'Uno o más campos requeridos no pasaron la validación'
-            ], 400);
+              ])->info([$request->all(), $comisiones_pagadas, $location_free, $compra, $recargaSaldo, $IPN_invoice]);
+            return $request->all();
+
+        }else {
+            Log::build([
+                'driver' => 'single',
+                'path' => storage_path('logs/log-AsignacionEnArbol.log'),
+              ])->info(['Transacción no Complete', $request->all()]);
+            return $request->all();
         }
 
-        $location_free = $this->getLocation($ID_Partner);
-        if($location_free->location > 3) {
-            return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos contacte a soporte o su patrocinador.']);
-        }
-
-        // Actualizacion en DB
-        $user_compra->location = $location_free->location;
-        $user_compra->id_usuario_location = $location_free->id_usuario_location;
-        $user_compra->save();
-
-        $comisiones_pagadas = [];
-        if ($IPN_invoice['status'] == 'Complete') {
-            $paquete = Packages::findOrFail($compra->package_id);
-            $comisiones_pagadas = $this->generateComisions($user_compra, $paquete);
-        }
-
-        Log::build([
-            'driver' => 'single',
-            'path' => storage_path('logs/log-AsignacionEnArbol.log'),
-          ])->info([$request->all(), $comisiones_pagadas, $location_free, $compra, $recargaSaldo, $IPN_invoice]);
-        return $request->all();
     }
 
     private function getLocation($ID_Partner) {
