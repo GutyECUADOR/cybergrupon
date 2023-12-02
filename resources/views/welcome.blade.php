@@ -26,9 +26,11 @@
     <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet" >
     <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css')}}" rel="stylesheet" >
     <link href="{{ asset('assets/libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" >
 
     <title>{{ config('app.name', 'App') }} :. Marketing & Publicidad</title>
 </head>
@@ -157,7 +159,7 @@
                   <div class="">
                     <!-- heading -->
                     <h5 class="text-dark mb-4"><i
-                        class="fe fe-check icon-xxs icon-shape bg-light-success text-success rounded-circle me-2"></i>La mas
+                        class="fe fe-check icon-xxs icon-shape bg-light-success text-success rounded-circle me-2"></i>La más
                       efectiva plataforma de marketing</h5>
                     <!-- heading -->
                     <h1 class="display-3 fw-bold mb-3">Bienvenido a Cybergrupon.com</h1>
@@ -165,8 +167,8 @@
                     <p class="pe-lg-10 mb-5">El punto de encuentro de los emprendedores más existosos del mundo.</p>
                     <!-- btn -->
                     <a href="{{ route('register') }}" class="btn btn-primary">Registrarme ahora</a>
-                    <a href="https://www.youtube.com/watch?v=Ikxo8jQ7GZA" class="popup-youtube fs-4 text-inherit ms-3">
-                      <img src="./assets/images/svg/play-btn.svg" alt="play" class="me-2">Video introducción</a>
+                    <a href="{{ asset('/assets/videos/publicidad.mp4') }}" class="popup-youtube fs-4 text-inherit ms-3">
+                      <img src="{{ asset('/assets/images/svg/play-btn.svg') }}" alt="play" class="me-2">Video introducción</a>
 
 
                   </div>
@@ -220,7 +222,7 @@
                     <!-- text -->
                     <h2 class="h1 text-white">COMPRA YA TU PAQUETE</h2>
                     <p class="mb-0">Compra tu paquete de publicidad y obten grandes beneficios. Notros te ayudamos paso a paso en todo el proceso.</p>
-                    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-white mt-4">Comienza a pautar hoy</a>
+                    <a href="{{ route('register')}}" class="btn btn-white mt-4">Comienza a pautar hoy</a>
                   </div>
                 </div>
               </div>
@@ -475,7 +477,7 @@
                     <div class="mb-4">
                         <img src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" style="max-width: 50px;" alt="LOGO" class="logo-inverse ">
                         <div class="mt-4">
-                            <p>Geek is feature-rich components and beautifully Bootstrap UIKit for developers, built with bootstrap responsive framework.</p>
+                            <p>Cybergrupon Inc.</p>
                             <!-- social media -->
                             <div class="fs-4 mt-4">
                                 <a href="#" class="mdi mdi-facebook fs-4 text-muted me-2"></a>
@@ -515,7 +517,7 @@
                 <div class="col-lg-3 col-md-12">
                     <!-- contact info -->
                     <div class="mb-4">
-                        <h3 class="fw-bold mb-3">Get in touch</h3>
+                        <h3 class="fw-bold mb-3">Contáctanos</h3>
                         <p>339 McDermott Points Hettingerhaven, NV 15283</p>
                         <p class="mb-1">Email: <a href="#">support@cybergrupon.com</a></p>
                         <p>Phone: <span class="text-dark fw-semibold">(000) 123 456 789</span></p>
@@ -577,6 +579,7 @@
     </div>
 
     <x-modal-terminos></x-modal-terminos>
+    <x-whatsapp-fab></x-whatsapp-fab>
 
     <!-- Scripts -->
     <!-- Libs JS -->
@@ -598,6 +601,13 @@
     <script type="text/javascript">
         $(window).on('load', function() {
             $('#modalpromo').modal('show');
+            $('[data-toggle="popover"]').popover()
+            $("#whatspopover").popover("show");
+
+            $("#modalpromo").on('hidden.bs.modal', function (e) {
+            $("#modalpromo iframe").attr("src", $("#modalpromo iframe").attr("src"));
+            $('#modal-fin').modal('show');
+        });
         });
     </script>
 

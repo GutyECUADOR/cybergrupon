@@ -27,18 +27,20 @@
     <link href="{{ asset('assets/libs/bootstrap-icons/font/bootstrap-icons.css')}}" rel="stylesheet" >
     <link href="{{ asset('assets/libs/@mdi/font/css/materialdesignicons.min.css')}}" rel="stylesheet" >
     <link href="{{ asset('assets/libs/simplebar/dist/simplebar.min.css')}}" rel="stylesheet" >
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
-     <link href="{{ asset('assets/css/arbol.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/css/arbol.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" >
     <title>{{ config('app.name', 'App') }} :. Panel de Administración</title>
 </head>
 
 <body>
 
     {{ $slot }}
+
+    <x-whatsapp-fab></x-whatsapp-fab>
 
     <!-- Scripts -->
     <!-- Libs JS -->
@@ -94,6 +96,11 @@
     <script type="text/javascript">
         $(window).on('load', function() {
             $('#modalpromo').modal('show');
+            $("#modalpromo").on('hidden.bs.modal', function (e) {
+                $("#modalpromo iframe").attr("src", $("#modalpromo iframe").attr("src"));
+                $('#modal-fin').modal('show');
+            });
+
         });
     </script>
 </body>
