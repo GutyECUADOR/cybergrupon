@@ -21,6 +21,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\ReferidosController;
 use App\Http\Controllers\RegisterReferido;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\AdvertisingHelperController;
 use App\Mail\SoporteUsuarioMaileable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -42,32 +43,7 @@ use Illuminate\Support\Facades\Mail;
 
 
 Route::get('/', function () {
-    $linksPublicidad1 = User::select('users.id','users.link_publicidad', 'users.link_redireccion', 'compras.package_id')
-    ->join('compras', 'users.id', '=', 'compras.user_id')
-    ->whereNotNull('users.link_publicidad');
-
-    $linksPublicidad2 = User::select('users.id','users.link_publicidad2 as link_publicidad', 'users.link_redireccion2 as link_redireccion', 'compras.package_id')
-    ->join('compras', 'users.id', '=', 'compras.user_id')
-    ->whereNotNull('users.link_publicidad2');
-
-    $linksPublicidad3 = User::select('users.id','users.link_publicidad3 as link_publicidad', 'users.link_redireccion3 as link_redireccion', 'compras.package_id')
-    ->whereNotNull('users.link_publicidad3')
-    ->join('compras', 'users.id', '=', 'compras.user_id');
-
-    $linksPublicidad4 = User::select('users.id','users.link_publicidad4 as link_publicidad', 'users.link_redireccion4 as link_redireccion', 'compras.package_id')
-    ->whereNotNull('users.link_publicidad4')
-    ->join('compras', 'users.id', '=', 'compras.user_id');
-
-    $linksPublicidad = User::select('users.id','users.link_publicidad5 as link_publicidad', 'users.link_redireccion5 as link_redireccion', 'compras.package_id')
-    ->join('compras', 'users.id', '=', 'compras.user_id')
-    ->whereNotNull('users.link_publicidad5')
-    ->unionAll($linksPublicidad1)
-    ->unionAll($linksPublicidad2)
-    ->unionAll($linksPublicidad3)
-    ->unionAll($linksPublicidad4)
-    ->inRandomOrder()->limit(4)
-    ->get();
-
+    $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
     //dd($linksPublicidad);
     return view('welcome', compact('linksPublicidad'));
 });
@@ -91,14 +67,14 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
     Route::resource('/profile', ProfileController::class);
     Route::resource('/mis-referidos', ReferidosController::class);
+    Route::resource('/red', RedController::class);
+    Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
+    Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
     Route::resource('/recargasaldo', RecargaSaldoController::class);
     Route::resource('/pagos', PagoController::class);
     //Route::resource('/transferencia', TransferenciaSaldoController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/compra', CompraController::class);
-    Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
-    Route::resource('/red', RedController::class);
-    Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });
 

@@ -16,7 +16,8 @@ class RecargaSaldoController extends Controller
      */
     public function index()
     {
-        return view('recarga-saldo.index');
+        $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
+        return view('recarga-saldo.index', compact('linksPublicidad'));
     }
 
     /**

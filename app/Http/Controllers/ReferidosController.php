@@ -15,8 +15,9 @@ class ReferidosController extends Controller
      */
     public function index()
     {
+        $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
         $referidos = User::where('nickname_promoter', Auth::user()->nickname)->get()->sortBy('NivelActual');
-        return view('mis-referidos.index', compact('referidos'));
+        return view('mis-referidos.index', compact('referidos','linksPublicidad'));
     }
 
     /**

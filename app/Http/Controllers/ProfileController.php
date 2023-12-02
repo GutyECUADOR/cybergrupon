@@ -14,8 +14,9 @@ class ProfileController extends Controller
      */
     public function index()
     {
+        $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
         $usuario = Auth::user();
-        return view('profile.edit', compact('usuario'));
+        return view('profile.edit', compact('usuario', 'linksPublicidad'));
     }
 
     /**
