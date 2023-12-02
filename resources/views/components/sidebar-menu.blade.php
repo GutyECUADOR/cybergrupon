@@ -67,7 +67,7 @@
             </li>
             <!-- Nav item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ route('ayuda.index') }}">
                     <i class="nav-icon fe fe-shopping-bag me-2"></i> Ayuda y Herramientas
                 </a>
             </li>

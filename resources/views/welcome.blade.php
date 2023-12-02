@@ -605,9 +605,9 @@
             $("#whatspopover").popover("show");
 
             $("#modalpromo").on('hidden.bs.modal', function (e) {
-            $("#modalpromo iframe").attr("src", $("#modalpromo iframe").attr("src"));
-            $('#modal-fin').modal('show');
-        });
+                $("#modalpromo iframe").attr("src", $("#modalpromo iframe").attr("src"));
+                $('#modal-fin').modal('show');
+            });
         });
     </script>
 
