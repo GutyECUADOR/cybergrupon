@@ -68,12 +68,6 @@ class RegisterReferido extends Controller
         $ID_Partner = User::where('nickname', '=', $request->nickname_promoter)->first();
         $ID_Partner = $ID_Partner->id; //administrador
 
-        $location_free = $this->getLocation($ID_Partner);
-
-
-        if($location_free->location > 3) {
-            return redirect()->route('referido.create', [$request->nickname_promoter])->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
-        }
 
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users','alpha_dash'],
@@ -86,8 +80,6 @@ class RegisterReferido extends Controller
         $user = User::create([
             'nickname' => $request->nickname,
             'nicklocationname' => $request->location,
-            'location' => $location_free->location,
-            'id_usuario_location' => $location_free->id_usuario_location,
             'nickname_promoter' => $request->nickname_promoter,
             'email' => $request->email,
             'phone' => $request->phone,
