@@ -32,10 +32,14 @@ class RegisterReferido extends Controller
      */
     public function create($nickname)
     {
-         # Obtener el ID del partner promotor
-         $ID_Partner = User::where('nickname', '=', $nickname)->first();
-         $ID_Partner = $ID_Partner->id; //administrador
+        # Obtener el ID del partner promotor
+        $ID_Partner = User::where('nickname', '=', $nickname)->first();
 
+        if (!$ID_Partner) {
+            return view('referido.register', compact('nickname'))->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
+        }
+
+        $ID_Partner = $ID_Partner->id; //administrador
         $locations = $this->getLocation($ID_Partner);
         $packages = Packages::all();
 
