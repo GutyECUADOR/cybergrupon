@@ -6,6 +6,7 @@ use App\Models\RecargaSaldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class RecargaSaldoController extends Controller
 {
@@ -70,13 +71,18 @@ class RecargaSaldoController extends Controller
 
         if ( $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest))) {
 
-            RecargaSaldo::create([
+            $recarga = RecargaSaldo::create([
                 'user_id' => Auth::user()->id,
                 'valor' => $request->valor,
                 'gateway' => $request->gateway,
                 'orderID_interno' => $order_ID,
                 'orderID_gateway' => $create_invoice_response->data->invoice_id
             ]);
+
+            Log::build([
+                'driver' => 'single',
+                'path' => storage_path('logs/log-recargasaldos.log'),
+            ])->info([$request->all(), $recarga, $create_invoice_response]);
 
             return redirect()->away($create_invoice_response->data->invoice_url);
         }
