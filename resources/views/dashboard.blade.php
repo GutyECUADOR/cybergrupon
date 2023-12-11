@@ -104,11 +104,11 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    0
+                                    {{ Auth::user()->GananciasTotales }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
                                         class="fe fe-trending-up me-1"></i>+USD</span>
-                                <span class="ms-1 fw-medium">Instructor</span>
+                                <span class="ms-1 fw-medium">Comisiones</span>
                             </div>
                         </div>
                     </div>

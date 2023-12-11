@@ -61,6 +61,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function getGananciasTotalesAttribute() {
+        $saldo_comisiones = DB::table('comisions')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->first();
+
+        return $saldo_comisiones->valor;
+    }
+
     public function getSaldoActualAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
         ->where([['user_id', $this->id], ['status', 'Complete']])
