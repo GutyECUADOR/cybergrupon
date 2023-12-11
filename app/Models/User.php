@@ -68,7 +68,10 @@ class User extends Authenticatable
         ->groupBy('user_id')
         ->first();
 
-        return $saldo_comisiones->valor;
+        if ($saldo_comisiones) {
+            return $saldo_comisiones->valor;
+        }
+        return 0;
     }
 
     public function getSaldoActualAttribute () {
