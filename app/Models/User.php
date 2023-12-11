@@ -87,7 +87,7 @@ class User extends Authenticatable
         ->get();
 
         $saldo_pagos = DB::table('pagos')
-        ->where([['user_id', $this->id], ['status', 'Success']])
+        ->where([['user_id', $this->id]])
         ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
         ->groupBy('user_id')
         ->get();

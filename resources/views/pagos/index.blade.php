@@ -21,12 +21,12 @@
                         <!-- Page header -->
                         <div class="border-bottom pb-3 mb-3">
                             <div class="mb-2 mb-lg-0">
-                                <h1 class="mb-0 h2 fw-bold"> Pagos  </h1>
+                                <h1 class="mb-0 h2 fw-bold"> Retiros  </h1>
                                 <!-- Breadcrumb -->
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="#">Pagos </a>
+                                            <a href="#">Retiros </a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
                                             Retiro de Dinero
@@ -58,7 +58,7 @@
                                                 id="stepperFormtrigger1" aria-controls="test-l-1">
                                                 <span class="bs-stepper-circle p-2 me-2"><i
                                                         class="fe fe-user lh-2"></i></span>
-                                                <span class="bs-stepper-label">Información del Pago</span>
+                                                <span class="bs-stepper-label">Información del Retiro</span>
                                             </button>
                                         </div>
 
@@ -74,8 +74,11 @@
                                                 aria-labelledby="stepperFormtrigger1">
                                                 <!-- heading -->
                                                 <div class="mb-5">
-                                                    <h3 class="mb-1">Información de Pago</h3>
-                                                    <p class="mb-0">Indique a continuación la información para el retiro. Verifique los datos correctos.
+                                                    <h3 class="mb-1">Información de Retiro</h3>
+                                                    <p class="mb-0">Indique a continuación la información para el retiro. Pagos en USDT red TRX - TRC20
+                                                    </p>
+                                                    </p>
+                                                    <p class="mb-0 text-danger">Cualquier retiro por otra red o moneda podria perderse en el sistema.
                                                     </p>
                                                 </div>
                                                 <!-- row -->

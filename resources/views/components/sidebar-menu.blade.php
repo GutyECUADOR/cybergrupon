@@ -73,9 +73,16 @@
             </li>
             <!-- Nav item -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="nav-icon fe fe-power me-2"></i> Salir
-                </a>
+                <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a class="nav-link" href="#"
+                            onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            <i class="fe fe-power me-2"></i>
+                            {{ __('Cerrar Sesión') }}
+                        </a>
+                </form>
+
             </li>
                 </a>
             </li>

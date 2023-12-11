@@ -60,16 +60,13 @@ class CheckPagoController extends Controller
         $createInvoiceRequest->setAppId(env('UNIPAYMENT_CLIENT_APPID'));
         $createInvoiceRequest->setPriceAmount($package->PrecioAcumuladoWithOutID);
         $createInvoiceRequest->setPriceCurrency("USD");
+        $createInvoiceRequest->setPayCurrency("USDT");
+        $createInvoiceRequest->setNetwork("NETWORK_TRX");
         $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify_pago");
         $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/dashboard");
         $createInvoiceRequest->setOrderId($order_ID);
         $createInvoiceRequest->setTitle("Compra de paquete");
         $createInvoiceRequest->setDescription("Compra de paquete - ". $package->name);
-
-
-        $client = new \UniPayment\Client\UniPaymentClient();
-        $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
-        $client->getConfig()->setClientSecret(env('UNIPAYMENT_CLIENT_SECRET'));
 
 
         if ( $create_invoice_response = json_decode($client->createInvoice($createInvoiceRequest))) {
