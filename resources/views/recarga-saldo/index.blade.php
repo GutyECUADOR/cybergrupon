@@ -86,10 +86,10 @@
                                                 <!-- heading -->
                                                 <div class="mb-5">
                                                     <h3 class="mb-1">Información de Recarga</h3>
-                                                    <p class="mb-0">Indique a continuación la cantidad a recargar. Pagos en USDT red TRX - TRC20
+                                                    <p class="mb-0">Indique a continuación la cantidad a recargar. Pagos en USDT.
                                                     </p>
                                                      </p>
-                                                    <p class="mb-0 text-danger">Cualquier pago por otra red o moneda podria perderse en el sistema.
+                                                    <p class="mb-0 text-danger">Cualquier error en el pago por otra red o moneda podria perderse en el sistema.
                                                     </p>
                                                 </div>
                                                 <!-- row -->

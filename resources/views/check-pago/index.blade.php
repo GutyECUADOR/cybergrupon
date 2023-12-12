@@ -86,9 +86,9 @@
                                                 <!-- heading -->
                                                 <div class="mb-5">
                                                     <h3 class="mb-1">Información de Paquete</h3>
-                                                    <p class="mb-0">Indique a continuación el paquete que vas adquirir. Pagos en USDT red TRX - TRC20
+                                                    <p class="mb-0">Indique a continuación el paquete que vas adquirir. Pagos en USDT.
                                                     </p>
-                                                    <p class="mb-0 text-danger">Cualquier pago por otra red o moneda podria perderse en el sistema.
+                                                    <p class="mb-0 text-danger">Cualquier error en el pago por otra red o moneda podria perderse en el sistema.
                                                     </p>
                                                 </div>
                                                 <!-- row -->

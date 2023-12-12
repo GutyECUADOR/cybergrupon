@@ -61,7 +61,7 @@ class CheckPagoController extends Controller
         $createInvoiceRequest->setPriceAmount($package->PrecioAcumuladoWithOutID);
         $createInvoiceRequest->setPriceCurrency("USD");
         $createInvoiceRequest->setPayCurrency("USDT");
-        $createInvoiceRequest->setNetwork("NETWORK_TRX");
+        /* $createInvoiceRequest->setNetwork("NETWORK_TRX"); */
         $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify_pago");
         $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/dashboard");
         $createInvoiceRequest->setOrderId($order_ID);

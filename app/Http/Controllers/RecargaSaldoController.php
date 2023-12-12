@@ -58,7 +58,7 @@ class RecargaSaldoController extends Controller
         $createInvoiceRequest->setPriceAmount($request->valor);
         $createInvoiceRequest->setPriceCurrency("USD");
         $createInvoiceRequest->setPayCurrency("USDT");
-        $createInvoiceRequest->setNetwork("NETWORK_TRX");
+       /*  $createInvoiceRequest->setNetwork("NETWORK_TRX"); */
         $createInvoiceRequest->setNotifyUrl("https://cybergrupon.com/api/notify");
         $createInvoiceRequest->setRedirectUrl("https://cybergrupon.com/recargasaldo");
         $createInvoiceRequest->setOrderId($order_ID);
