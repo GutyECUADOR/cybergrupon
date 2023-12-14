@@ -19,7 +19,7 @@
                     <div class="col-lg-12 col-md-12 col-12">
                         <div class="border-bottom pb-3 mb-3 d-lg-flex justify-content-between align-items-center">
                             <div class="mb-3 mb-lg-0">
-                                <h1 class="mb-0 h2 fw-bold">Tienda</h1>
+                                <h1 class="mb-0 h2 fw-bold">Tienda VIP</h1>
                                 <!-- Breadcrumb -->
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -27,7 +27,7 @@
                                             <a href="#">Tienda</a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
-                                            Paquetes Standard
+                                            Paquetes VIP
                                         </li>
                                     </ol>
                                 </nav>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DiasInversionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TiendaController;
+use App\Http\Controllers\TiendaVIPController;
 use App\Http\Controllers\RecargaSaldoController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\CompraController;
@@ -75,6 +76,7 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::resource('/pagos', PagoController::class);
     //Route::resource('/transferencia', TransferenciaSaldoController::class);
     Route::resource('/tienda', TiendaController::class);
+    Route::resource('/tienda-VIP', TiendaVIPController::class);
     Route::resource('/compra', CompraController::class);
     Route::resource('/ayuda', AyudaController::class);
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');

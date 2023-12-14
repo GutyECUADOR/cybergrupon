@@ -22,7 +22,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navCourses"
                     aria-expanded="false" aria-controls="navCourses">
-                    <i class="nav-icon fe fe-book me-2"></i> Genealogia
+                    <i class="nav-icon fe fe-git-merge me-2"></i> Genealogia
                 </a>
                 <div id="navCourses" class="collapse " data-bs-parent="#sideNavbar">
                     <ul class="nav flex-column">
@@ -42,16 +42,24 @@
             <!-- Nav item -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('recargasaldo.index') }}">
-                    <i class="nav-icon fe fe-user me-2"></i> Recarga de Saldo
+                    <i class="nav-icon fe fe-dollar-sign me-2"></i> Recarga de Saldo
                 </a>
             </li>
 
             <!-- Nav item -->
             <li class="nav-item ">
                 <a class="nav-link" href="{{ route('tienda.index') }}">
-                    <i class="nav-icon fe fe-book-open me-2"></i> Tienda
+                    <i class="nav-icon fe fe-shopping-cart me-2"></i> Tienda
                 </a>
             </li>
+
+            <!-- Nav item -->
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ route('tienda-VIP.index') }}">
+                    <i class="nav-icon fe fe-star me-2"></i> Tienda VIP
+                </a>
+            </li>
+
             <!-- Nav item -->
             {{-- <li class="nav-item ">
                 <a class="nav-link" href="{{ route('transferencia.index') }}">
@@ -68,7 +76,7 @@
             <!-- Nav item -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('ayuda.index') }}">
-                    <i class="nav-icon fe fe-shopping-bag me-2"></i> Ayuda y Herramientas
+                    <i class="nav-icon fe fe-help-circle me-2"></i> Ayuda y Herramientas
                 </a>
             </li>
             <!-- Nav item -->
