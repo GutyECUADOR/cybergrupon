@@ -55,9 +55,9 @@ class CompraVIPController extends Controller
 
 
 
-       /*  $paquete_anterior = Packages::findOrFail(Auth::user()->NivelActual);
+        $paquete_anterior = Packages::findOrFail(Auth::user()->NivelActualVIP);
         $paquete_comprado = Packages::findOrFail($request->package_id);
- */
+
         Compra::create([
             'user_id' => Auth::user()->id,
             'package_id' => $request->package_id,
@@ -67,9 +67,10 @@ class CompraVIPController extends Controller
             'orderID_gateway' => 'Saldos',
             'status' => 'Complete'
         ]);
-        //$this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
 
-        return redirect()->route('tienda-VIP.index')->with('status', 'Has adquirido el paquete VIP'.$request->package_name.' con éxito!');
+        $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
+
+        return redirect()->route('tienda-VIP.index')->with('status', 'Has adquirido el paquete VIP '.$request->package_name.' con éxito!');
     }
 
     public function generateComisions($user, $paquete_anterior, $paquete_comprado) {

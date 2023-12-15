@@ -164,12 +164,22 @@ class User extends Authenticatable
     }
 
     public function getNivelActualAttribute() {
-        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Complete']])->max('package_id') ;
+        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Complete'], ['package_id', '<=', '5']])->max('package_id') ;
+        if (!$package_mayor) {
+            return 0;
+        }
+
+        return $package_mayor;
+    }
+
+    public function getNivelActualVIPAttribute() {
+        $package_mayor = Compra::where([['user_id', $this->id], ['status', 'Complete'], ['package_id', '>=', '6']])->max('package_id') ;
         if (!$package_mayor) {
             return 0;
         }
         return $package_mayor;
     }
+
 
     public function getReferidosAttribute() {
         $cantidadReferidos = User::where('nickname_promoter', Auth::user()->nickname)->count('nickname_promoter') ;

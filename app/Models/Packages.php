@@ -20,10 +20,13 @@ class Packages extends Model
 
     public function getPrecioAcumuladoAttribute () {
 
-        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id');
+        $package_mayor = Compra::where('user_id', Auth::user()->id)
+                    ->where('package_id', '<=', '5')
+                    ->max('package_id');
         if (!$package_mayor) {
             $package_mayor = 0;
         }
+
         $precioAcumulado = Packages::where('nivel', '>', $package_mayor)
                             ->where('tipo', 'normal')
                             ->where('nivel', '<=', $this->nivel)->sum('price');

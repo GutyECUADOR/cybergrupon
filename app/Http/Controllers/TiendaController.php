@@ -17,7 +17,9 @@ class TiendaController extends Controller
     public function index()
     {
         //Obtener el listado de planes mayores al que ya tiene.
-        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id') ;
+        $package_mayor = Compra::where('user_id', Auth::user()->id)
+                        ->where('package_id', '<=', '5')
+                        ->max('package_id') ;
         if (!$package_mayor) {
             $package_mayor = 0;
         }

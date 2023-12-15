@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -68,7 +68,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3 lh-1">
+                                    <div>
+                                        <span class="fs-6 text-uppercase fw-semibold">Nivel ActualVIP</span>
+                                    </div>
+                                    <div>
+                                        <span class="fe fe-user-check fs-3 text-primary"></span>
+                                    </div>
+                                </div>
+                                <h2 class="fw-bold mb-1">
+                                    {{ Auth::user()->NivelActualVIP }}
+                                </h2>
+                                <span class="ms-1 fw-medium">paquete VIP actual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
