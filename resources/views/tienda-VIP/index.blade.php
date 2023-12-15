@@ -67,16 +67,16 @@
                                 <div class="card-footer">
                                     <div class="row align-items-center g-0">
                                         <div class="col">
-                                            <h5 class="mb-0">${{$package->PrecioAcumulado}} USD</h5>
+                                            <h5 class="mb-0">${{$package->PrecioAcumuladoVIP}} USD</h5>
                                         </div>
 
                                         <div class="col-auto">
-                                            <form method="POST" action="{{ route('compra.store')}}">
+                                            <form method="POST" action="{{ route('compra-VIP.store')}}">
                                                 @method('POST')
                                                 @csrf
                                                 <input type="hidden" name="package_id" value="{{ $package->id }}">
                                                 <input type="hidden" name="package_name" value="{{ $package->name }}">
-                                                <input type="hidden" name="valor" value="{{ $package->PrecioAcumulado }}">
+                                                <input type="hidden" name="valor" value="{{ $package->PrecioAcumuladoVIP }}">
                                                 <a href="#" class="text-inherit btn btn-success"
                                                         onclick="event.preventDefault();
                                                                 if (window.confirm('Confirma la compra del {{$package->name}}?')) {
@@ -95,7 +95,7 @@
 
 
                 </div>
-                
+
         </section>
     </main>
 

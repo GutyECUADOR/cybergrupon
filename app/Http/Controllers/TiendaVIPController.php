@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Compra;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PackagesVIP;
+use App\Models\Packages;
 
 class TiendaVIPController extends Controller
 {
@@ -21,7 +21,9 @@ class TiendaVIPController extends Controller
         if (!$package_mayor) {
             $package_mayor = 0;
         }
-        $packages = PackagesVIP::where('nivel', '>', $package_mayor)->get();
+        $packages = Packages::where('nivel', '>', $package_mayor)
+                            ->where('tipo', 'VIP')
+                            ->get();
         $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
         return view('tienda-VIP.index', compact('packages','linksPublicidad'));
     }

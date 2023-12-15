@@ -8,6 +8,7 @@ use App\Http\Controllers\TiendaVIPController;
 use App\Http\Controllers\RecargaSaldoController;
 use App\Http\Controllers\RedController;
 use App\Http\Controllers\CompraController;
+use App\Http\Controllers\CompraVIPController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
 use App\Http\Controllers\PagoController;
@@ -78,6 +79,7 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/tienda-VIP', TiendaVIPController::class);
     Route::resource('/compra', CompraController::class);
+    Route::resource('/compra-VIP', CompraVIPController::class);
     Route::resource('/ayuda', AyudaController::class);
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });

@@ -24,7 +24,23 @@ class Packages extends Model
         if (!$package_mayor) {
             $package_mayor = 0;
         }
-        $precioAcumulado = Packages::where('nivel', '>', $package_mayor)->where('nivel', '<=', $this->nivel)->sum('price');
+        $precioAcumulado = Packages::where('nivel', '>', $package_mayor)
+                            ->where('tipo', 'normal')
+                            ->where('nivel', '<=', $this->nivel)->sum('price');
+
+        return $precioAcumulado;
+    }
+
+    public function getPrecioAcumuladoVIPAttribute () {
+
+        $package_mayor = Compra::where('user_id', Auth::user()->id)->max('package_id');
+        if (!$package_mayor) {
+            $package_mayor = 0;
+        }
+        $precioAcumulado = Packages::where('nivel', '>', $package_mayor)
+                            ->where('tipo', 'VIP')
+                            ->where('nivel', '<=', $this->nivel)
+                            ->sum('price');
 
         return $precioAcumulado;
     }

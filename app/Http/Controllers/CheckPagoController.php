@@ -19,7 +19,7 @@ class CheckPagoController extends Controller
      */
     public function index()
     {
-        $packages = Packages::all();
+        $packages = Packages::where('tipo', 'normal')->get();
         return view('check-pago.index', compact('packages'));
     }
 

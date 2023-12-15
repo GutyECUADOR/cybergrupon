@@ -21,7 +21,9 @@ class TiendaController extends Controller
         if (!$package_mayor) {
             $package_mayor = 0;
         }
-        $packages = Packages::where('nivel', '>', $package_mayor)->get();
+        $packages = Packages::where('nivel', '>', $package_mayor)
+                            ->where('tipo', 'normal')
+                            ->get();
         $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
         return view('tienda.index', compact('packages','linksPublicidad'));
     }

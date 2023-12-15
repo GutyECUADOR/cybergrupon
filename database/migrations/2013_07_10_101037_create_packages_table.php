@@ -20,6 +20,7 @@ class CreatePackagesTable extends Migration
             $table->integer('nivel');
             $table->string('imagen');
             $table->text('descripcion');
+            $table->string('tipo');
             $table->timestamps();
         });
     }
