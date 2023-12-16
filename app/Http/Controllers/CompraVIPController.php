@@ -53,10 +53,8 @@ class CompraVIPController extends Controller
             'valor' => 'required|int'
         ]);
 
-
-
-        $paquete_anterior = Packages::findOrFail(Auth::user()->NivelActualVIP);
-        $paquete_comprado = Packages::findOrFail($request->package_id);
+        $paquete_anterior = Packages::find(Auth::user()->NivelActual);
+        $paquete_comprado = Packages::find($request->package_id);
 
         Compra::create([
             'user_id' => Auth::user()->id,
@@ -68,12 +66,46 @@ class CompraVIPController extends Controller
             'status' => 'Complete'
         ]);
 
-        $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
+
+        $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anterior);
 
         return redirect()->route('tienda-VIP.index')->with('status', 'Has adquirido el paquete VIP '.$request->package_name.' con éxito!');
     }
 
-    public function generateComisions($user, $paquete_anterior, $paquete_comprado) {
+    public function generateComisions($user, $paquete_comprado) {
+
+        $usuario_promotor = User::where('nickname', $user->nickname_promoter)->first();
+
+        if ($usuario_promotor->NivelActualVIP >= 6) {
+            $paquete_inicial = Packages::FindOrFail(6);
+            ComisionVIP::create([
+                'user_id' => $usuario_promotor->id,
+                'valor' => $paquete_inicial->price
+            ]);
+        }
+
+        $usuario_transicion = User::where('id', $user->id_usuario_location)->first();
+        $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->first();
+
+        for ($cont=2; $cont <= $paquete_comprado->nivel-5; $cont++) {
+
+            $valor = 0;
+            $paquete = Packages::Find($cont + 5);
+            //dd($usuario_pago->NivelActualVIP, $cont + 6);
+
+            if ($usuario_pago->NivelActualVIP >= $cont + 5) {
+                $valor = $paquete->price;
+                ComisionVIP::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
+            }
+
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->first();
+        }
+    }
+
+    public function generateComisionsVIP($user, $paquete_anterior, $paquete_comprado) {
 
         $cont2 = 0;
         $usuario_pago = User::where('id', $user->id_usuario_location)->firstOrFail();
