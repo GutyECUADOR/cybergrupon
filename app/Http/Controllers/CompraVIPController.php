@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
+use function PHPUnit\Framework\isNull;
 
 class CompraVIPController extends Controller
 {
@@ -53,7 +56,7 @@ class CompraVIPController extends Controller
             'valor' => 'required|int'
         ]);
 
-        $paquete_anterior = Packages::find(Auth::user()->NivelActual);
+        $paquete_anteriorVIP = Packages::find(Auth::user()->NivelActualVIP);
         $paquete_comprado = Packages::find($request->package_id);
 
         Compra::create([
@@ -66,43 +69,74 @@ class CompraVIPController extends Controller
             'status' => 'Complete'
         ]);
 
-
-        $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anterior);
+        $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anteriorVIP);
 
         return redirect()->route('tienda-VIP.index')->with('status', 'Has adquirido el paquete VIP '.$request->package_name.' con éxito!');
     }
 
-    public function generateComisions($user, $paquete_comprado) {
+    public function generateComisions($user, $paquete_comprado, $paquete_anteriorVIP) {
 
-        $usuario_promotor = User::where('nickname', $user->nickname_promoter)->first();
-
-        if ($usuario_promotor->NivelActualVIP >= 6) {
-            $paquete_inicial = Packages::FindOrFail(6);
-            ComisionVIP::create([
-                'user_id' => $usuario_promotor->id,
-                'valor' => $paquete_inicial->price
-            ]);
+        $cont2 = 0;
+        if ($paquete_anteriorVIP) {
+            $nivel = $paquete_anteriorVIP->nivel;
+        }else{
+            $nivel = 0;
         }
 
-        $usuario_transicion = User::where('id', $user->id_usuario_location)->first();
-        $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->first();
+        //Comprobar que el patrocinador tenga un paquete mayor o igual al que compra el usuario
+        // Pago al patrocinador
+        if ($nivel < 1) {
+            $usuario_promotor = User::where('nickname', $user->nickname_promoter)->first(); // Para crearle la comision al promotor
 
-        for ($cont=2; $cont <= $paquete_comprado->nivel-5; $cont++) {
-
-            $valor = 0;
-            $paquete = Packages::Find($cont + 5);
-            //dd($usuario_pago->NivelActualVIP, $cont + 6);
-
-            if ($usuario_pago->NivelActualVIP >= $cont + 5) {
-                $valor = $paquete->price;
+            if ($usuario_promotor->NivelActualVIP >= 1) {
+                $paquete_inicial = Packages::FindOrFail(6); // Siempre al patrocinador pagar de comision el valor de un paquete inicial VIP
                 ComisionVIP::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
+                    'user_id' => $usuario_promotor->id,
+                    'valor' => $paquete_inicial->price
                 ]);
             }
-
-            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->first();
         }
+
+        // Pago a los de arriba
+
+        // Subir hacia arriba segun el nivel del paquete comprado, si compra nivel 2VIP subir y pagar 2 arriba de el
+        $usuario_transicion = User::where('id', $user->id_usuario_location)->first(); // El que esta arriba del usuario de compro
+        $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->first();
+
+        // Recorrer el puntero hacia arriba segun el nivel que compro
+
+        for ($cont=2; $cont <= $nivel; $cont++) {
+            $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
+        }
+        $cont2 = $cont;
+
+       /* dd($cont2, $paquete_comprado->nivel); */
+
+       if ($paquete_comprado->nivel > 6) {
+
+           for ($cont2; $cont2 <= $paquete_comprado->nivel -5; $cont2++) {
+
+               $valor = 0;
+               $paquete = Packages::Find($cont2 + 5);
+
+               //dd($cont2, $paquete_comprado->nivel -5, $usuario_pago->NivelActualVIP);
+
+               if ($usuario_pago->NivelActualVIP >= $cont2) {
+                   $valor = $paquete->price;
+                   ComisionVIP::create([
+                       'user_id' => $usuario_pago->id,
+                       'valor' => $valor,
+                       'contador' => $cont2
+                   ]);
+               }
+
+               $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->first();
+           }
+       }
+
+
+
+
     }
 
     public function generateComisionsVIP($user, $paquete_anterior, $paquete_comprado) {

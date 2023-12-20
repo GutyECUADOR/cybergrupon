@@ -177,7 +177,7 @@ class User extends Authenticatable
         if (!$package_mayor) {
             return 0;
         }
-        return $package_mayor;
+        return $package_mayor - 5;
     }
 
 

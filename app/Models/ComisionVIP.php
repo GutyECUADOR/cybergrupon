@@ -13,6 +13,7 @@ class ComisionVIP extends Model
 
     protected $fillable = [
         'user_id',
-        'valor'
+        'valor',
+        'contador'
     ];
 }
