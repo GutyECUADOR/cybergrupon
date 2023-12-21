@@ -73,6 +73,12 @@
                     <i class="nav-icon fe fe-lock me-2"></i> Retiros
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('retiros-vip.index') }}">
+                    <i class="nav-icon fe fe-star me-2"></i> Retiros VIP
+                </a>
+            </li>
             <!-- Nav item -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('ayuda.index') }}">

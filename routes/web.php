@@ -12,6 +12,7 @@ use App\Http\Controllers\CompraVIPController;
 use App\Http\Controllers\InversionController;
 use App\Http\Controllers\CreditoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\RetiroVIPController;
 use App\Http\Controllers\TransferenciaSaldoController;
 use App\Http\Controllers\WalletController;
 use App\Http\Controllers\AnalisisController;
@@ -75,6 +76,7 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
     Route::resource('/recargasaldo', RecargaSaldoController::class);
     Route::resource('/pagos', PagoController::class);
+    Route::resource('/retiros-vip', RetiroVIPController::class);
     //Route::resource('/transferencia', TransferenciaSaldoController::class);
     Route::resource('/tienda', TiendaController::class);
     Route::resource('/tienda-VIP', TiendaVIPController::class);

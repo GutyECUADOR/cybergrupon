@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-2 col-lg-3 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -41,6 +41,28 @@
                                 </div>
                                 <h2 class="fw-bold mb-1">
                                     {{ Auth::user()->SaldoActual }}
+                                </h2>
+                                <span class="text-success fw-semibold"><i
+                                        class="fe fe-trending-up me-1"></i>$ USD </span>
+                                <span class="ms-1 fw-medium">Disponible</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-12 col-12">
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3 lh-1">
+                                    <div>
+                                        <span class="fs-6 text-uppercase fw-semibold">Saldo VIP</span>
+                                    </div>
+                                    <div>
+                                        <span class="bi bi-cash-coin fs-3 text-primary"></span>
+                                    </div>
+                                </div>
+                                <h2 class="fw-bold mb-1">
+                                    {{ Auth::user()->SaldoVIPActual }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
                                         class="fe fe-trending-up me-1"></i>$ USD </span>
@@ -110,14 +132,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between mb-3 lh-1">
                                     <div>
-                                        <span class="fs-6 text-uppercase fw-semibold">Ganancias totales</span>
+                                        <span class="fs-6 text-uppercase fw-semibold">Ganancias</span>
                                     </div>
                                     <div>
                                         <span class="bi bi-bar-chart fs-3 text-primary"></span>
@@ -127,7 +149,7 @@
                                     {{ Auth::user()->GananciasTotales }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
-                                        class="fe fe-trending-up me-1"></i>+USD</span>
+                                        class="fe fe-trending-up me-1"></i>USD</span>
                                 <span class="ms-1 fw-medium">Comisiones</span>
                             </div>
                         </div>

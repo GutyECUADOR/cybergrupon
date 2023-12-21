@@ -126,6 +126,58 @@ class User extends Authenticatable
         return $saldo_actual;
     }
 
+    public function getSaldoVIPActualAttribute () {
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_transferencias_salida = DB::table('transferencia_saldos')
+        ->where('user_envio', $this->id)
+        ->selectRaw('user_envio as user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_transferencias_recibe = DB::table('transferencia_saldos')
+        ->where('user_recibe', $this->id)
+        ->selectRaw('user_recibe as user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_compras = DB::table('compras')
+        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_pagos = DB::table('pagos')
+        ->where([['user_id', $this->id]])
+        ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_comisiones = DB::table('comisions200')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $movimientos = $saldo_recargas
+                        ->merge($saldo_compras)
+                        ->merge($saldo_transferencias_salida)
+                        ->merge($saldo_transferencias_recibe)
+                        ->merge($saldo_pagos)
+                        ->merge($saldo_comisiones);
+
+        $saldo_actual = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_actual += $movimiento->valor;
+        }
+
+        return $saldo_actual;
+    }
+
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
         ->where([['user_id', $this->id], ['status', 'Complete']])

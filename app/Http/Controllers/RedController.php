@@ -130,7 +130,9 @@ class RedController extends Controller
         }
 
         $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
-        $packages = Packages::all();
+        $packages = Packages::where('nivel', '<', 6)
+                    ->where('tipo', 'normal')
+                    ->get();
         return view('red.index', compact('linksPublicidad','packages','posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
     }
 
@@ -374,7 +376,9 @@ class RedController extends Controller
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
             }
-            $packages = Packages::all();
+            $packages = Packages::where('nivel', '<', 6)
+                    ->where('tipo', 'normal')
+                    ->get();
             $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
             return view('red.index', compact('linksPublicidad', 'packages','posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
 
