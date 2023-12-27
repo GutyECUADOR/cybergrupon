@@ -135,6 +135,10 @@ class User extends Authenticatable
             $saldo_actual += $movimiento->valor;
         }
 
+        if ($saldo_actual < 0) {
+            return 0;
+        }
+
         return $saldo_actual;
     }
 
@@ -185,6 +189,10 @@ class User extends Authenticatable
         $saldo_actual = 0;
         foreach ($movimientos as $movimiento ) {
             $saldo_actual += $movimiento->valor;
+        }
+
+        if ($saldo_actual < 0) {
+            return 0;
         }
 
         return $saldo_actual;
@@ -245,6 +253,10 @@ class User extends Authenticatable
         $saldo_actual = 0;
         foreach ($movimientos as $movimiento ) {
             $saldo_actual += $movimiento->valor;
+        }
+
+        if ($saldo_actual < 0) {
+            return 0;
         }
 
         return $saldo_actual;

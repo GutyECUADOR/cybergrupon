@@ -74,6 +74,8 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::resource('/red', RedController::class);
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
     Route::post('/subred', [RedController::class, 'subred'])->name('red.subred');
+    Route::get('/subred2', [RedController::class, 'subred2view'])->name('red.subred2view');
+    Route::post('/subred2', [RedController::class, 'subred2'])->name('red.subred2');
     Route::resource('/recargasaldo', RecargaSaldoController::class);
     Route::resource('/pagos', PagoController::class);
     Route::resource('/retiros-vip', RetiroVIPController::class);
