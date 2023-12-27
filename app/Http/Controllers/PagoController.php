@@ -40,8 +40,8 @@ class PagoController extends Controller
     public function store(Request $request, User $user)
     {
         // Validar que usuario tenga saldo
-        if (Auth::user()->SaldoActual < $request->valor) {
-            return redirect()->route('pagos.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        if (Auth::user()->SaldoTotal < $request->valor) {
+            return redirect()->route('pagos.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
         }
 
         $request->request->add(['user_id' => Auth::user()->id]);

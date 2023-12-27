@@ -183,8 +183,8 @@ class RedController extends Controller
         // Validar que usuario tenga saldo
         $paquete = Packages::findOrFail($request->paquete);
 
-        if (Auth::user()->SaldoActual < $paquete->PrecioAcumuladoWithOutID) {
-            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        if (Auth::user()->SaldoTotal < $paquete->PrecioAcumuladoWithOutID) {
+            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
         }
 
         $user = User::create([

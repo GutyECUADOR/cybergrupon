@@ -26,21 +26,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-2 col-lg-3 col-md-12 col-12">
+                    <div class="col-xl-4 col-lg-3 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
                             <div class="card-body">
                                 <div class="d-flex align-items-center justify-content-between mb-3 lh-1">
                                     <div>
-                                        <span class="fs-6 text-uppercase fw-semibold">Saldo Disponible</span>
+                                        <span class="fs-6 text-uppercase fw-semibold">Saldo Total</span>
                                     </div>
                                     <div>
                                         <span class="bi bi-cash-coin fs-3 text-primary"></span>
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    {{ Auth::user()->SaldoActual }}
+                                    {{ number_format(Auth::user()->SaldoTotal, 2, '.', ',') }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
                                         class="fe fe-trending-up me-1"></i>$ USD </span>
@@ -48,7 +48,29 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-12 col-12">
+                    <div class="col-xl-4 col-lg-3 col-md-12 col-12">
+                        <!-- Card -->
+                        <div class="card mb-4">
+                            <!-- Card body -->
+                            <div class="card-body">
+                                <div class="d-flex align-items-center justify-content-between mb-3 lh-1">
+                                    <div>
+                                        <span class="fs-6 text-uppercase fw-semibold">Saldo Normal</span>
+                                    </div>
+                                    <div>
+                                        <span class="bi bi-cash-coin fs-3 text-primary"></span>
+                                    </div>
+                                </div>
+                                <h2 class="fw-bold mb-1">
+                                    {{ number_format(Auth::user()->SaldoActual, 2, '.', ',') }}
+                                </h2>
+                                <span class="text-success fw-semibold"><i
+                                        class="fe fe-trending-up me-1"></i>$ USD </span>
+                                <span class="ms-1 fw-medium">Disponible</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -62,7 +84,7 @@
                                     </div>
                                 </div>
                                 <h2 class="fw-bold mb-1">
-                                    {{ Auth::user()->SaldoVIPActual }}
+                                    {{ number_format(Auth::user()->SaldoVIPActual, 2, '.', ',') }}
                                 </h2>
                                 <span class="text-success fw-semibold"><i
                                         class="fe fe-trending-up me-1"></i>$ USD </span>
@@ -70,7 +92,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -90,7 +112,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -110,7 +132,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -132,7 +154,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 col-md-12 col-12">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-12">
                         <!-- Card -->
                         <div class="card mb-4">
                             <!-- Card body -->
@@ -205,7 +227,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Tipo de Movimiento</th>
-                                        <th>Valor</th>
+                                        <th style="text-align: right;">Valor</th>
                                         <th>Fecha</th>
                                         <th>Estado</th>
                                     </tr>
@@ -213,7 +235,7 @@
 
                                     @foreach (Auth::user()->Movimientos as $movimiento)
                                         <td>{{$movimiento->tipoMovimiento}}</td>
-                                        <td>{{$movimiento->valor}}</td>
+                                        <td style="text-align: right;">{{ number_format($movimiento->valor, 2, '.', ','); }}</td>
                                         <td>{{$movimiento->created_at}}</td>
                                         @if (in_array($movimiento->status, ['Complete', 'Completo', 'Success']))
                                             <td><span class="badge bg-success">Completo</span></td>

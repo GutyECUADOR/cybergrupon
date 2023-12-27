@@ -63,15 +63,27 @@ class User extends Authenticatable
 
     public function getGananciasTotalesAttribute() {
         $saldo_comisiones = DB::table('comisions')
-        ->where('user_id', $this->id)
-        ->selectRaw('user_id, sum(valor) as valor')
-        ->groupBy('user_id')
-        ->first();
+            ->where('user_id', $this->id)
+            ->selectRaw('user_id, sum(valor) as valor')
+            ->groupBy('user_id')
+            ->get();
 
-        if ($saldo_comisiones) {
-            return $saldo_comisiones->valor;
+        $saldo_comisionesVIP = DB::table('comisions200')
+            ->where('user_id', $this->id)
+            ->selectRaw('user_id, sum(valor) as valor')
+            ->groupBy('user_id')
+            ->get();
+
+        $movimientos = $saldo_comisiones->merge($saldo_comisionesVIP);
+
+        $saldo_comisiones = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_comisiones += $movimiento->valor;
         }
-        return 0;
+
+        return $saldo_comisiones;
+
+
     }
 
     public function getSaldoActualAttribute () {
@@ -178,6 +190,66 @@ class User extends Authenticatable
         return $saldo_actual;
     }
 
+    public function getSaldoTotalAttribute () {
+
+        $saldo_recargas = DB::table('recarga_saldos')
+        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_transferencias_salida = DB::table('transferencia_saldos')
+        ->where('user_envio', $this->id)
+        ->selectRaw('user_envio as user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_transferencias_recibe = DB::table('transferencia_saldos')
+        ->where('user_recibe', $this->id)
+        ->selectRaw('user_recibe as user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_compras = DB::table('compras')
+        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->selectRaw('user_id, -sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_pagos = DB::table('pagos')
+        ->where([['user_id', $this->id]])
+        ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_comisiones = DB::table('comisions')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $saldo_comisionesVIP = DB::table('comisions200')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, sum(valor) as valor')
+        ->groupBy('user_id')
+        ->get();
+
+        $movimientos = $saldo_recargas
+                        ->merge($saldo_compras)
+                        ->merge($saldo_transferencias_salida)
+                        ->merge($saldo_transferencias_recibe)
+                        ->merge($saldo_pagos)
+                        ->merge($saldo_comisiones)
+                        ->merge($saldo_comisionesVIP);
+
+        $saldo_actual = 0;
+        foreach ($movimientos as $movimiento ) {
+            $saldo_actual += $movimiento->valor;
+        }
+
+        return $saldo_actual;
+    }
+
     public function getMovimientosAttribute () {
         $saldo_recargas = DB::table('recarga_saldos')
         ->where([['user_id', $this->id], ['status', 'Complete']])
@@ -195,6 +267,10 @@ class User extends Authenticatable
         ->where('user_id', $this->id)
         ->selectRaw('user_id, valor, created_at, "Completo" as status, "Comision" as tipoMovimiento ');
 
+        $saldo_comisionesVIP = DB::table('comisions200')
+        ->where('user_id', $this->id)
+        ->selectRaw('user_id, valor, created_at, "Completo" as status, "Comision" as tipoMovimiento ');
+
         $saldo_pagos = DB::table('pagos')
         ->where('user_id', $this->id)
         ->selectRaw('user_id, -((valor * 5)/95 + valor) as valor, created_at, status, "Pago" as tipoMovimiento ');
@@ -207,6 +283,7 @@ class User extends Authenticatable
         ->union($saldo_transferencias_recibe)
         ->union($saldo_pagos)
         ->union($saldo_comisiones)
+        ->union($saldo_comisionesVIP)
         ->orderByDesc('created_at')
         ->limit(100)
         ->get();

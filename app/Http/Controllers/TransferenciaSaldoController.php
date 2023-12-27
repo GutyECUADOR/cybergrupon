@@ -38,8 +38,8 @@ class TransferenciaSaldoController extends Controller
     public function store(Request $request)
     {
         // Validar que usuario tenga saldo
-        if (Auth::user()->SaldoActual < $request->valor) {
-            return redirect()->route('transferencia.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoActual]);
+        if (Auth::user()->SaldoTotal < $request->valor) {
+            return redirect()->route('transferencia.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
         }
 
         $request->validate([

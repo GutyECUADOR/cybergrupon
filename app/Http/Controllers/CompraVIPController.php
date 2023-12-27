@@ -44,8 +44,8 @@ class CompraVIPController extends Controller
     public function store(Request $request)
     {
         // Validar que usuario tenga saldo
-        if (Auth::user()->SaldoActual < $request->valor) {
-            return redirect()->route('tienda-VIP.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de: '. Auth::user()->SaldoActual]);
+        if (Auth::user()->SaldoTotal < $request->valor) {
+            return redirect()->route('tienda-VIP.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de: '. Auth::user()->SaldoTotal]);
         }
 
         $request->request->add(['user_id' => Auth::user()->id]);
