@@ -64,7 +64,7 @@
                                             onclick="event.preventDefault();
                                                             this.closest('form').submit();">
                                             <i class="align-middle me-1" data-feather="log-out"></i>
-                                            {{ __('Cerrar Sesión') }}
+                                            {{ __('Logout') }}
                                         </a>
                                     </form>
                                     </a>

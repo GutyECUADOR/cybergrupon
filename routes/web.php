@@ -31,6 +31,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Redirect;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +48,16 @@ use Illuminate\Support\Facades\Mail;
     return redirect()->to('login');
 }); */
 
+
+Route::get('/locale/{locale}', function ($locale) {
+    if (! in_array($locale, ['en', 'es'])) {
+        abort(400);
+    }
+    session()->put('locale', $locale);
+
+    return Redirect::back();
+
+})->name('locale');
 
 Route::get('/', function () {
     $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();

@@ -93,7 +93,7 @@
                             onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             <i class="fe fe-power me-2"></i>
-                            {{ __('Cerrar Sesión') }}
+                            {{ __('Logout') }}
                         </a>
                 </form>
 

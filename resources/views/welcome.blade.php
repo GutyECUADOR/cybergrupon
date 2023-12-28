@@ -48,8 +48,8 @@
 
                     </a>
 
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2 ">Ingresar</a>
-                    <a href="{{ route('register') }}" class="btn btn-primary d-none d-md-block">Registrarme</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2 ">{{ __('Login') }}</a>
+                    <a href="{{ route('register') }}" class="btn btn-primary d-none d-md-block">{{ __('Register') }}</a>
                 </div>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar top-bar mt-0"></span>
@@ -92,6 +92,26 @@
                             <a class="dropdown-item" href="#">
                               Contáctenos
                             </a>
+                          </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          Idioma
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow dropdown-menu-end" aria-labelledby="navbarPages">
+                          <li>
+                            <a class="dropdown-item" href="{{ route('locale', ['locale' => 'es']) }}">
+                              Español
+                            </a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="{{ route('locale', ['locale' => 'en']) }}">
+                              English
+                            </a>
+                          </li>
                           </li>
 
                         </ul>
