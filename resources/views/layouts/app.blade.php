@@ -66,6 +66,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('assets/js/admin/dashboard.js')}}?<?php echo date('Ymdhiiss')?>" defer></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
         function copyToClipboard() {
             // Get the text field
@@ -91,6 +93,16 @@
             // Alert the copied text
             //alert("Link de referido: " + copyText.value);
         }
+    </script>
+
+    <script>
+        function googleTranslateElementInit(){
+            new google.translate.TranslateElement(
+                {pageLanguaje: 'en'},
+                'google_translate_element'
+            )
+        }
+
     </script>
 
     <script type="text/javascript">

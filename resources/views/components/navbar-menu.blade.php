@@ -15,6 +15,7 @@
         </a>
 
         <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
+            <div id="google_translate_element"></div>
 
             <!-- List -->
             <li class="dropdown ms-2">

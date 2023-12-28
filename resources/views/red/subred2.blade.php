@@ -43,7 +43,11 @@
                                 <ul>
                                     <li>
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position1_1" style="margin-left: 60px;">
-                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                            @if ($posicion1_1->NivelActualVIP >= 1)
+                                                <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                            @else
+                                                <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                            @endif
                                             <div class="text-wrap text-break fw-bold text-dark" style="width: 6rem;">
                                                 {{ $posicion1_1->nickname }}
                                             </div>
@@ -71,7 +75,11 @@
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_1" style="margin-left: 30px;">
                                                     @if(!is_null($posicion2_1))
-                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @if ($posicion2_1->NivelActualVIP >= 1)
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @else
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                     @endif
@@ -189,7 +197,11 @@
                                             <li id="tercerenlace">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_2" style="margin-left: 30px;">
                                                      @if(!is_null($posicion2_2))
-                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @if ($posicion2_2->NivelActualVIP >= 1)
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @else
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                     @endif
@@ -305,7 +317,11 @@
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_3" style="margin-left: 30px;">
                                                     @if(!is_null($posicion2_3))
-                                                        <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @if ($posicion2_3->NivelActualVIP >= 1)
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @else
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                     @endif

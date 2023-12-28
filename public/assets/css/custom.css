@@ -9,6 +9,27 @@
 
 /*Zoom*/
 
+body {
+    top: 0px !important;
+}
+
+body > .skiptranslate {
+    display: none;
+    visibility: hidden;
+}
+
+.VIpgJd-ZVi9od-l4eHX-hSRGPd{
+    display: none;
+}
+
+.skiptranslate:after {
+    content: "Google";
+}
+
+.skiptranslate span {
+    display: none;
+}
+
 .button-nutresa{
     background-color: #a20303 !important;
     color: #FFDF42 !important;

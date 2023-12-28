@@ -47,20 +47,17 @@ class RedController extends Controller
         $posicion1_1 =  Auth::user();
 
         //NIVEL 2
-        $posicion2_1 =  DB::table('users')
-            ->where('id_usuario_location', $posicion1_1->id)
+        $posicion2_1 =  User::where('id_usuario_location', $posicion1_1->id)
             ->where('location', 1)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
-        $posicion2_2 =  DB::table('users')
-            ->where('id_usuario_location', $posicion1_1->id)
+        $posicion2_2 =  User::where('id_usuario_location', $posicion1_1->id)
             ->where('location', 2)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
-        $posicion2_3 =  DB::table('users')
-            ->where('id_usuario_location', $posicion1_1->id)
+        $posicion2_3 =  User::where('id_usuario_location', $posicion1_1->id)
             ->where('location', 3)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
@@ -69,40 +66,35 @@ class RedController extends Controller
 
         if ($posicion2_1) {
             // Tercer nivel
-            $posicion3_1 =  DB::table('users')
-            ->where('id_usuario_location',  $posicion2_1->id)
+
+            $posicion3_1 = User::where('id_usuario_location',  $posicion2_1->id)
             ->where('location', 1)
             ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
             ->first();
 
-            $posicion3_2 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_1->id)
+            $posicion3_2 = User::where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 2)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion3_3 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_1->id)
+            $posicion3_3 = User::where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
         }
 
         if ($posicion2_2) {
-            $posicion3_4 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_2->id)
+            $posicion3_4 = User::where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion3_5 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_2->id)
+            $posicion3_5 = User::where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 2)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion3_6 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_2->id)
+            $posicion3_6 = User::where('id_usuario_location',  $posicion2_2->id)
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
@@ -110,20 +102,17 @@ class RedController extends Controller
 
         if ($posicion2_3) {
 
-            $posicion3_7 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_3->id)
+            $posicion3_7 = User::where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion3_8 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_3->id)
+            $posicion3_8 = User::where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 2)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion3_9 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_3->id)
+            $posicion3_9 = User::where('id_usuario_location',  $posicion2_3->id)
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
@@ -293,23 +282,20 @@ class RedController extends Controller
             $posicion3_9 = $NoPosition;
 
             // NIVEL 1
-            $posicion1_1 =  User::findOrFail($id);
+            $posicion1_1 = User::findOrFail($id);
 
             //NIVEL 2
-            $posicion2_1 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_1 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion2_2 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_2 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 2)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion2_3 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_3 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
@@ -318,40 +304,34 @@ class RedController extends Controller
 
             if ($posicion2_1) {
                 // Tercer nivel
-                $posicion3_1 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_1 = User::where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-                $posicion3_2 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_2 = User::where('id_usuario_location',  $posicion2_1->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_3 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_3 = User::where('id_usuario_location',  $posicion2_1->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
             }
 
             if ($posicion2_2) {
-                $posicion3_4 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_4 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 1)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_5 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_5 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_6 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_6 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
@@ -359,20 +339,17 @@ class RedController extends Controller
 
             if ($posicion2_3) {
 
-                $posicion3_7 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_7 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 1)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_8 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_8 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_9 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_9 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
@@ -418,20 +395,17 @@ class RedController extends Controller
             $posicion1_1 =  User::findOrFail($id);
 
             //NIVEL 2
-            $posicion2_1 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_1 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion2_2 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_2 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 2)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-            $posicion2_3 =  DB::table('users')
-                ->where('id_usuario_location', $posicion1_1->id)
+            $posicion2_3 = User::where('id_usuario_location', $posicion1_1->id)
                 ->where('location', 3)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
@@ -440,40 +414,34 @@ class RedController extends Controller
 
             if ($posicion2_1) {
                 // Tercer nivel
-                $posicion3_1 =  DB::table('users')
-                ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_1 = User::where('id_usuario_location',  $posicion2_1->id)
                 ->where('location', 1)
                 ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                 ->first();
 
-                $posicion3_2 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_2 = User::where('id_usuario_location',  $posicion2_1->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_3 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_1->id)
+                $posicion3_3 = User::where('id_usuario_location',  $posicion2_1->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
             }
 
             if ($posicion2_2) {
-                $posicion3_4 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_4 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 1)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_5 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_5 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_6 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_2->id)
+                $posicion3_6 = User::where('id_usuario_location',  $posicion2_2->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
@@ -481,20 +449,17 @@ class RedController extends Controller
 
             if ($posicion2_3) {
 
-                $posicion3_7 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_7 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 1)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_8 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_8 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 2)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
 
-                $posicion3_9 =  DB::table('users')
-                    ->where('id_usuario_location',  $posicion2_3->id)
+                $posicion3_9 = User::where('id_usuario_location',  $posicion2_3->id)
                     ->where('location', 3)
                     ->select('id', 'location', 'id_usuario_location', 'nickname', 'avatar')
                     ->first();
