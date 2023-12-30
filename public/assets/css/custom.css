@@ -23,7 +23,7 @@ body > .skiptranslate {
 }
 
 .skiptranslate:after {
-    content: "Google";
+    content: "";
 }
 
 .skiptranslate span {

@@ -5,7 +5,7 @@
         <!-- Brand logo -->
         <a class="navbar-brand" href="/dashboard">
             <img src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" alt="">
-            <span class="text-white">Cybergrupon</span>
+            <span class="text-white" translate="no">Cybergrupon</span>
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">

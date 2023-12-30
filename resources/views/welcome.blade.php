@@ -30,7 +30,7 @@
 
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
-    <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/css/custom.css')}}?<?php echo date('Ymdhiiss')?>" rel="stylesheet" >
 
     <title>{{ config('app.name', 'App') }} :. Marketing & Publicidad</title>
 </head>
@@ -39,7 +39,7 @@
     <!-- navbar login -->
     <nav class="navbar navbar-expand-lg">
         <div class="container px-0">
-            <a class="navbar-brand" href="/"><img style="max-width: 50px;" src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" alt="Logo Empresa"> <span class="text-dark">Cybergrupon</span></a>
+            <a class="navbar-brand" href="/"><img style="max-width: 50px;" src="{{ asset('assets/images/brand/logo/logo-cybergrupon.svg')}}" alt="Logo Empresa"> <span class="text-dark" translate="no">Cybergrupon</span></a>
             <div class="d-flex align-items-center order-lg-3 ms-lg-3">
                 <div class="d-flex align-items-center">
                     <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle me-2">
@@ -47,9 +47,10 @@
                         <label class="form-check-label" for="flexSwitchCheckDefault"></label>
 
                     </a>
-
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary me-2 ">{{ __('Login') }}</a>
+                    <div id="google_translate_element"></div>
+                    <a href="{{ route('login') }}" style="margin-left: 10px;" class="btn btn-outline-primary me-2 ">{{ __('Login') }}</a>
                     <a href="{{ route('register') }}" class="btn btn-primary d-none d-md-block">{{ __('Register') }}</a>
+
                 </div>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="icon-bar top-bar mt-0"></span>
@@ -97,26 +98,6 @@
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          Idioma
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow dropdown-menu-end" aria-labelledby="navbarPages">
-                          <li>
-                            <a class="dropdown-item" href="{{ route('locale', ['locale' => 'es']) }}">
-                              Español
-                            </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="{{ route('locale', ['locale' => 'en']) }}">
-                              English
-                            </a>
-                          </li>
-                          </li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Servicios
                         </a>
@@ -159,7 +140,6 @@
                             </div>
                         </div>
                     </li>
-
                 </ul>
 
 
@@ -571,7 +551,7 @@
 
 
     <!-- modal -->
-    <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
+    {{-- <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
 
@@ -596,7 +576,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <x-modal-terminos></x-modal-terminos>
     <x-whatsapp-fab></x-whatsapp-fab>
@@ -617,9 +597,24 @@
     <script src="{{ asset('assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/tooltip.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/popup.js')}}"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script type="text/javascript">
         $(window).on('load', function() {
+
+            $(".goog-logo-link").empty();
+            $('.goog-te-gadget').html($('.goog-te-gadget').children());
+
+            let selectElement = document.querySelector('.goog-te-combo');
+            // Agrega la clase "form-select" al elemento
+            selectElement.classList.add('form-select');
+            selectElement.classList.add('text-dark');
+            //Autoseleccionar idioma
+            selectElement.value = window.navigator.language;
+            document.querySelector('.goog-te-combo').value=window.navigator.language;
+
+            console.log(window.navigator.language);
+
             $('#modalpromo').modal('show');
             $('[data-toggle="popover"]').popover()
             $("#whatspopover").popover("show");
@@ -631,6 +626,15 @@
         });
     </script>
 
+    <script>
+        function googleTranslateElementInit(){
+            new google.translate.TranslateElement(
+                {pageLanguaje: 'en'},
+                'google_translate_element'
+            )
+        }
+
+    </script>
 
 </body>
 

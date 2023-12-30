@@ -32,7 +32,7 @@
     <!-- Theme CSS -->
     <link href="{{ asset('assets/css/theme.min.css')}}" rel="stylesheet" >
     <link href="{{ asset('assets/css/arbol.css')}}" rel="stylesheet" >
-    <link href="{{ asset('assets/css/custom.css')}}" rel="stylesheet" >
+    <link href="{{ asset('assets/css/custom.css')}}?<?php echo date('Ymdhiiss')?>" rel="stylesheet" >
     <title>{{ config('app.name', 'App') }} :. Panel de Administración</title>
 </head>
 
@@ -98,7 +98,7 @@
     <script>
         function googleTranslateElementInit(){
             new google.translate.TranslateElement(
-                {pageLanguaje: 'en'},
+                {pageLanguaje: 'es'},
                 'google_translate_element'
             )
         }
@@ -107,6 +107,20 @@
 
     <script type="text/javascript">
         $(window).on('load', function() {
+
+            $(".goog-logo-link").empty();
+            $('.goog-te-gadget').html($('.goog-te-gadget').children());
+
+            let selectElement = document.querySelector('.goog-te-combo');
+            // Agrega la clase "form-select" al elemento
+            selectElement.classList.add('form-select');
+            selectElement.classList.add('text-dark');
+            //Autoseleccionar idioma
+            selectElement.value = window.navigator.language;
+            document.querySelector('.goog-te-combo').value=window.navigator.language;
+
+            console.log(window.navigator.language);
+
             $('#modalpromo').modal('show');
             $("#modalpromo").on('hidden.bs.modal', function (e) {
                 $("#modalpromo iframe").attr("src", $("#modalpromo iframe").attr("src"));
