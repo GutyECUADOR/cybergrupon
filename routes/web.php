@@ -48,6 +48,9 @@ use Illuminate\Support\Facades\Redirect;
     return redirect()->to('login');
 }); */
 
+Route::any('{query}',
+    function() { return view('mantenimiento'); })
+    ->where('query', '.*');
 
 Route::get('/locale/{locale}', function ($locale) {
     if (! in_array($locale, ['en', 'es'])) {
@@ -63,6 +66,10 @@ Route::get('/', function () {
     $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
     //dd($linksPublicidad);
     return view('welcome', compact('linksPublicidad'));
+});
+
+Route::get('/mantenimiento', function() {
+    return view('mantenimiento');
 });
 
 Route::get('/referido/{nickname}', [RegisterReferido::class, 'create'])->name('referido.create');
