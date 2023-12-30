@@ -116,8 +116,10 @@
             selectElement.classList.add('form-select');
             selectElement.classList.add('text-dark');
             //Autoseleccionar idioma
-            selectElement.value = window.navigator.language;
-            document.querySelector('.goog-te-combo').value=window.navigator.language;
+
+            if (window.navigator.language) {
+                //document.querySelector('.goog-te-combo').value=window.navigator.language;
+            }
 
             console.log(window.navigator.language);
 

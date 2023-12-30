@@ -167,30 +167,17 @@
                     <p class="pe-lg-10 mb-5">El punto de encuentro de los emprendedores más existosos del mundo.</p>
                     <!-- btn -->
                     <a href="{{ route('register') }}" class="btn btn-primary">Registrarme ahora</a>
-                    <a href="https://www.youtube.com/watch?v=Rs-PC7KtFAQ" class="popup-youtube fs-4 text-inherit ms-3">
-                      <img src="{{ asset('/assets/images/svg/play-btn.svg') }}" alt="play" class="me-2">Video introducción</a>
-
 
                   </div>
                 </div>
                 <!-- col -->
                 <div class="col-lg-6 d-flex justify-content-center">
-                  <!-- images -->
-                  <div class="position-relative">
+                    <iframe style="width: 100%;
+                    height: 400px;
+                    border: 6px solid #CCCCCC;
+                    border-radius: 25px;"
+                    src="https://youtube.com/embed/Rs-PC7KtFAQ?autoplay=1&controls=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-                    <img src="{{ asset('assets/images/background/acedamy-img/investment01.svg')}}" alt="img" style="width: 100%" class=" ">
-
-                    <img src="{{ asset('assets/images/background/acedamy-img/frame-1.svg')}}" alt="frame"
-                      class=" position-absolute top-0 ms-lg-n10 ms-n19">
-                    <img src="{{ asset('assets/images/background/acedamy-img/frame-2.svg')}}" alt="frame"
-                      class=" position-absolute bottom-0 start-0 ms-lg-n14 ms-n6 mb-n7">
-                    <img src="{{ asset('assets/images/background/acedamy-img/target.svg')}}" alt="target"
-                      class=" position-absolute bottom-0 mb-10 ms-n10 ms-lg-n1 ">
-                    <img src="{{ asset('assets/images/background/acedamy-img/sound.svg')}}" alt="sound"
-                      class=" position-absolute top-0  start-0 mt-18 ms-lg-n19 ms-n8">
-                    <img src="{{ asset('assets/images/background/acedamy-img/trophy.svg')}}" alt="trophy"
-                      class=" position-absolute top-0  start-0 ms-lg-n14 ms-n5">
-                  </div>
                 </div>
               </div>
             </div>
@@ -609,9 +596,9 @@
             // Agrega la clase "form-select" al elemento
             selectElement.classList.add('form-select');
             selectElement.classList.add('text-dark');
-            //Autoseleccionar idioma
-            selectElement.value = window.navigator.language;
-            document.querySelector('.goog-te-combo').value=window.navigator.language;
+            if (window.navigator.language) {
+                //document.querySelector('.goog-te-combo').value=window.navigator.language;
+            }
 
             console.log(window.navigator.language);
 
