@@ -162,6 +162,8 @@ class RedController extends Controller
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
             'location' => ['required', 'integer','between:1,3'],
             'id_usuario_location' => ['required', 'exists:users,id'],
+            'pago_saldo' => ['required', 'integer'],
+            'pago_saldoVIP' => ['required', 'integer'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
             'paquete' => ['exists:packages,id'],
             'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
@@ -169,11 +171,27 @@ class RedController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);
 
-        // Validar que usuario tenga saldo
+
         $paquete = Packages::findOrFail($request->paquete);
 
+        // Verifica que usuario tenga saldo total suficiente
         if (Auth::user()->SaldoTotal < $paquete->PrecioAcumuladoWithOutID) {
             return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
+        }
+
+        // Verifica que el total de paquete haya sido asignado
+        if ($request->pago_saldo + $request->pago_saldoVIP != $paquete->PrecioAcumuladoWithOutID) {
+            return redirect()->back()->withErrors(['message' => 'La suma de los pagos debe coincidir con el valor del paquete seleccionado'])->withInput();
+        }
+
+        // Verifica que usuario tenga saldo VIP suficiente para pagar el valor asignado para comprar paquete
+        if (Auth::user()->SaldoVIPActual < $request->pago_saldoVIP) {
+            return redirect()->back()->withErrors(['message' => 'No tienes saldo VIP suficiente, tu saldo VIP actual es de: '. Auth::user()->SaldoVIPActual. ' recarga saldo o realiza la compra con saldo normal'])->withInput();
+        }
+
+        // Verifica que usuario tenga saldo normal suficiente para pagar el valor asignado para comprar paquete
+        if (Auth::user()->SaldoActual < $request->pago_saldo) {
+            return redirect()->back()->withErrors(['message' => 'No tienes saldo normal suficiente, tu saldo normal actual es de: '. Auth::user()->SaldoActual. ' recarga saldo o realiza la compra con saldo VIP'])->withInput();
         }
 
         $user = User::create([
@@ -187,22 +205,45 @@ class RedController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        if ($request->pago_saldoVIP > 0) {
+            Compra::create([
+                'user_id' => $user->id,
+                'package_id' => $request->paquete,
+                'valor' => $request->pago_saldoVIP,
+                'gateway' => 'SaldosVIP',
+                'orderID_interno' => 'Saldos',
+                'orderID_gateway' => 'Saldos',
+                'status' => 'Complete'
+            ]);
 
-        Compra::create([
-            'user_id' => $user->id,
-            'package_id' => $request->paquete,
-            'valor' => $paquete->PrecioAcumuladoWithOutID,
-            'gateway' => 'Saldos',
-            'orderID_interno' => 'Saldos',
-            'orderID_gateway' => 'Saldos',
-            'status' => 'Complete'
-        ]);
+            TransferenciaSaldo::create([
+                'user_envio' => Auth::user()->id,
+                'user_recibe' => $user->id,
+                'isVIP' => 1,
+                'valor' => $request->pago_saldoVIP,
+            ]);
+        }
 
-        TransferenciaSaldo::create([
-            'user_envio' => Auth::user()->id,
-            'user_recibe' => $user->id,
-            'valor' => $paquete->PrecioAcumuladoWithOutID,
-        ]);
+        if ($request->pago_saldo > 0) {
+            Compra::create([
+                'user_id' => $user->id,
+                'package_id' => $request->paquete,
+                'valor' => $request->pago_saldo,
+                'gateway' => 'Saldos',
+                'orderID_interno' => 'Saldos',
+                'orderID_gateway' => 'Saldos',
+                'status' => 'Complete'
+            ]);
+
+            TransferenciaSaldo::create([
+                'user_envio' => Auth::user()->id,
+                'user_recibe' => $user->id,
+                'isVIP' => 0,
+                'valor' => $request->pago_saldo,
+            ]);
+        }
+
+
 
         $this->generateComisions($user, $paquete);
 

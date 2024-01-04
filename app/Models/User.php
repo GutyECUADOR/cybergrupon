@@ -94,7 +94,7 @@ class User extends Authenticatable
         ->get();
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
-        ->where('user_envio', $this->id)
+        ->where([['user_envio', $this->id], ['isVIP', 0]])
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -143,26 +143,26 @@ class User extends Authenticatable
     }
 
     public function getSaldoVIPActualAttribute () {
-        $saldo_recargas = DB::table('recarga_saldos')
+        /* $saldo_recargas = DB::table('recarga_saldos')
         ->where([['user_id', $this->id], ['status', 'Complete']])
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
-        ->get();
+        ->get(); */
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
-        ->where('user_envio', $this->id)
+        ->where([['user_envio', $this->id], ['isVIP', 1]])
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
 
-        $saldo_transferencias_recibe = DB::table('transferencia_saldos')
-        ->where('user_recibe', $this->id)
+        /* $saldo_transferencias_recibe = DB::table('transferencia_saldos')
+        ->where([['user_recibe', $this->id], ['isVIP', '1']])
         ->selectRaw('user_recibe as user_id, sum(valor) as valor')
         ->groupBy('user_id')
-        ->get();
+        ->get(); */
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->where([['user_id', $this->id], ['status', 'Complete'], ['gateway', 'SaldoVIP']])
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -179,10 +179,8 @@ class User extends Authenticatable
         ->groupBy('user_id')
         ->get();
 
-        $movimientos = $saldo_recargas
-                        ->merge($saldo_compras)
+        $movimientos = $saldo_compras
                         ->merge($saldo_transferencias_salida)
-                        ->merge($saldo_transferencias_recibe)
                         ->merge($saldo_pagos)
                         ->merge($saldo_comisiones);
 

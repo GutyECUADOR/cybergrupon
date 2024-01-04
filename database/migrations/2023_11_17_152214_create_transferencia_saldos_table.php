@@ -20,6 +20,7 @@ class CreateTransferenciaSaldosTable extends Migration
             $table->unsignedBigInteger('user_recibe');
             $table->foreign('user_recibe')->references('id')->on('users');
             $table->decimal('valor');
+            $table->boolean('isVIP')->default(false);
             $table->timestamps();
         });
     }

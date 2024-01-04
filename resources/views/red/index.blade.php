@@ -75,8 +75,12 @@
                                             <!-- Posicion 2-1 -->
                                             <li>
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_1" style="margin-left: 30px;">
-                                                    @if(!is_null($posicion2_1))
-                                                        <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                   @if(!is_null($posicion2_1))
+                                                        @if ($posicion2_1->NivelActualVIP >= 1)
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @else
+                                                            <img src="{{ asset('assets/images/avatar/UbicacionUtilizada.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
+                                                        @endif
                                                     @else
                                                         <img src="{{ asset('assets/images/avatar/UbicacionDisponible.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                     @endif
@@ -117,9 +121,27 @@
                                                                         <select class="form-select text-dark" name="paquete">
                                                                             <option selected>Seleccione el paquete</option>
                                                                             @foreach ($packages as $package)
-                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                @if (old('paquete') == $package->id)
+                                                                                    <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                @else
+                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                @endif
                                                                             @endforeach
                                                                         </select>
+                                                                    </div>
+
+                                                                    <!-- Saldo -->
+                                                                    <div class="mb-3">
+                                                                        <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                        <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                        <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                    </div>
+
+                                                                    <!-- Saldo VIP -->
+                                                                    <div class="mb-3">
+                                                                        <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                        <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                        <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                     </div>
 
                                                                     <!-- Nickname -->
@@ -240,9 +262,27 @@
                                                                                     <select class="form-select text-dark" name="paquete">
                                                                                         <option selected>Seleccione el paquete</option>
                                                                                         @foreach ($packages as $package)
-                                                                                        <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                            @if (old('paquete') == $package->id)
+                                                                                                <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                            @else
+                                                                                                <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                            @endif
                                                                                         @endforeach
                                                                                     </select>
+                                                                                </div>
+
+                                                                                <!-- Saldo -->
+                                                                                <div class="mb-3">
+                                                                                    <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                                </div>
+
+                                                                                <!-- Saldo VIP -->
+                                                                                <div class="mb-3">
+                                                                                    <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                                 </div>
 
                                                                                 <!-- Nickname -->
@@ -394,14 +434,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -554,14 +613,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -674,7 +752,7 @@
                                             <!-- Posicion 2-2 -->
                                             <li id="tercerenlace">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#modal_position2_2" style="margin-left: 30px;">
-                                                     @if(!is_null($posicion2_2))
+                                                    @if(!is_null($posicion2_2))
                                                         @if ($posicion2_2->NivelActualVIP >= 1)
                                                             <img src="{{ asset('assets/images/avatar/UbicacionVIP.png') }}" alt="Profile" class="rounded-circle avatar-xl mb-3 mb-lg-0 w-100 h-100 ">
                                                         @else
@@ -713,15 +791,34 @@
                                                                     <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                 </div>
 
-                                                                <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
-                                                                                <select class="form-select text-dark" name="paquete">
-                                                                                    <option selected>Seleccione el paquete</option>
-                                                                                    @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                            </div>
+                                                                <!-- Paquete -->
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Paquete</label>
+                                                                    <select class="form-select text-dark" name="paquete">
+                                                                        <option selected>Seleccione el paquete</option>
+                                                                        @foreach ($packages as $package)
+                                                                            @if (old('paquete') == $package->id)
+                                                                                <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @else
+                                                                                <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+
+                                                                <!-- Saldo -->
+                                                                <div class="mb-3">
+                                                                    <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                </div>
+
+                                                                <!-- Saldo VIP -->
+                                                                <div class="mb-3">
+                                                                    <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
+                                                                </div>
 
                                                                 <!-- Nickname -->
                                                                 <div class="mb-3">
@@ -836,14 +933,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -995,14 +1111,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -1154,14 +1289,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -1312,14 +1466,33 @@
                                                                     <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                 </div>
 
-                                                                <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                <label class="form-label">Paquete</label>
+                                                                <!-- Paquete -->
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Paquete</label>
                                                                     <select class="form-select text-dark" name="paquete">
                                                                         <option selected>Seleccione el paquete</option>
                                                                         @foreach ($packages as $package)
-                                                                        <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @if (old('paquete') == $package->id)
+                                                                                <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @else
+                                                                                <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                            @endif
                                                                         @endforeach
                                                                     </select>
+                                                                </div>
+
+                                                                <!-- Saldo -->
+                                                                <div class="mb-3">
+                                                                    <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                </div>
+
+                                                                <!-- Saldo VIP -->
+                                                                <div class="mb-3">
+                                                                    <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                    <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                 </div>
 
                                                                 <!-- Nickname -->
@@ -1434,14 +1607,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -1593,14 +1785,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
@@ -1752,14 +1963,33 @@
                                                                                 <input type="text" id="nickname_promoter" class="form-control" name="nickname_promoter" value="{{ auth()->user()->nickname }}" readonly required>
                                                                             </div>
 
-                                                                            <!-- Paquete -->                                                                          <div class="mb-3">
-                                                                            <label class="form-label">Paquete</label>
+                                                                            <!-- Paquete -->
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Paquete</label>
                                                                                 <select class="form-select text-dark" name="paquete">
                                                                                     <option selected>Seleccione el paquete</option>
                                                                                     @foreach ($packages as $package)
-                                                                                    <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @if (old('paquete') == $package->id)
+                                                                                            <option value="{{$package->id}}" selected>Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @else
+                                                                                            <option value="{{$package->id}}">Plan {{$package->PrecioAcumuladoWithOutID}} USD</option>
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </select>
+                                                                            </div>
+
+                                                                            <!-- Saldo -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                                                <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                                                            </div>
+
+                                                                            <!-- Saldo VIP -->
+                                                                            <div class="mb-3">
+                                                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                                                <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                             </div>
 
                                                                             <!-- Nickname -->
