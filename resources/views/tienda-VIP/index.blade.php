@@ -71,21 +71,62 @@
                                         </div>
 
                                         <div class="col-auto">
-                                            <form method="POST" action="{{ route('compra-VIP.store')}}">
-                                                @method('POST')
-                                                @csrf
-                                                <input type="hidden" name="package_id" value="{{ $package->id }}">
-                                                <input type="hidden" name="package_name" value="{{ $package->name }}">
-                                                <input type="hidden" name="valor" value="{{ $package->PrecioAcumuladoVIP }}">
-                                                <a href="#" class="text-inherit btn btn-success"
-                                                        onclick="event.preventDefault();
-                                                                if (window.confirm('Confirma la compra del {{$package->name}}?')) {
-                                                                    this.closest('form').submit();
-                                                                }">
+                                            <a href="#" class="text-inherit btn btn-success" data-bs-toggle="modal" data-bs-target="#modal_{{$package->id}}">
+                                                <i class="fe fe-shopping-cart align-middle me-2"></i>Comprar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="modal_{{$package->id}}" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title">Compra de paquete {{$package->PrecioAcumuladoVIP}}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+
+                                        <form method="POST" action="{{ route('compra-VIP.store')}}">
+                                            @method('POST')
+                                            @csrf
+
+                                            <input type="hidden" name="package_id" value="{{ $package->id }}">
+                                            <input type="hidden" name="package_name" value="{{ $package->name }}">
+                                            <input type="hidden" name="valor" value="{{ $package->PrecioAcumuladoVIP }}">
+
+                                            <!-- Saldo -->
+                                            <div class="mb-3">
+                                                <label for="saldo" class="form-label">Pago - Saldo Normal</label>
+                                                <input type="number" name="pago_saldo" value="0" class="form-control" id="pago_saldo" required autofocus>
+                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
+                                            </div>
+
+                                            <!-- Saldo VIP -->
+                                            <div class="mb-3">
+                                                <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
+                                                <input type="number" name="pago_saldoVIP" value="0" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
+                                            </div>
+
+                                            <div class="d-grid gap-2">
+
+                                                <a href="#" class="text-inherit btn btn-success btn-block" data-bs-toggle="modal" data-bs-target="#modal_position3_8"
+                                                    onclick="event.preventDefault();
+                                                    if (window.confirm('Confirma la compra del {{$package->name}}?')) {
+                                                        this.closest('form').submit();
+                                                    }"
+                                                >
                                                     <i class="fe fe-shopping-cart align-middle me-2"></i>Comprar
                                                 </a>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                                     </div>
                                 </div>
                             </div>

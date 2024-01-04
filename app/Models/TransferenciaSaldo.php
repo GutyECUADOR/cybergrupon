@@ -13,6 +13,7 @@ class TransferenciaSaldo extends Model
         'user_envio',
         'user_recibe',
         'valor',
+        'isVIP'
     ];
 
 }

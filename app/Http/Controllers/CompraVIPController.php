@@ -56,18 +56,57 @@ class CompraVIPController extends Controller
             'valor' => 'required|int'
         ]);
 
+         // Validar que usuario tenga saldo
+         if (Auth::user()->SaldoTotal < $request->valor) {
+            return redirect()->route('tienda-VIP.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de: '. Auth::user()->SaldoTotal]);
+        }
+
+        // Verifica que usuario tenga saldo total suficiente
+        if (Auth::user()->SaldoTotal < $request->valor) {
+            return redirect()->route('recargasaldo.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
+        }
+
+        // Verifica que el total de paquete haya sido asignado
+        if ($request->pago_saldo + $request->pago_saldoVIP != $request->valor) {
+            return redirect()->back()->withErrors(['message' => 'La suma de los pagos debe coincidir con el valor del paquete seleccionado'])->withInput();
+        }
+
+        // Verifica que usuario tenga saldo VIP suficiente para pagar el valor asignado para comprar paquete
+        if (Auth::user()->SaldoVIPActual < $request->pago_saldoVIP) {
+            return redirect()->back()->withErrors(['message' => 'No tienes saldo VIP suficiente, tu saldo VIP actual es de: '. Auth::user()->SaldoVIPActual. ' recarga saldo o realiza la compra con saldo normal'])->withInput();
+        }
+
+        // Verifica que usuario tenga saldo normal suficiente para pagar el valor asignado para comprar paquete
+        if (Auth::user()->SaldoActual < $request->pago_saldo) {
+            return redirect()->back()->withErrors(['message' => 'No tienes saldo normal suficiente, tu saldo normal actual es de: '. Auth::user()->SaldoActual. ' recarga saldo o realiza la compra con saldo VIP'])->withInput();
+        }
+
         $paquete_anteriorVIP = Packages::find(Auth::user()->NivelActualVIP);
         $paquete_comprado = Packages::find($request->package_id);
 
-        Compra::create([
-            'user_id' => Auth::user()->id,
-            'package_id' => $request->package_id,
-            'valor' => $request->valor,
-            'gateway' => 'Saldos',
-            'orderID_interno' => 'Saldos',
-            'orderID_gateway' => 'Saldos',
-            'status' => 'Complete'
-        ]);
+        if ($request->pago_saldoVIP > 0) {
+            Compra::create([
+                'user_id' => Auth::user()->id,
+                'package_id' => $request->package_id,
+                'valor' => $request->pago_saldoVIP,
+                'gateway' => 'SaldosVIP',
+                'orderID_interno' => 'Saldos',
+                'orderID_gateway' => 'Saldos',
+                'status' => 'Complete'
+            ]);
+        }
+
+        if ($request->pago_saldo > 0) {
+            Compra::create([
+                'user_id' => Auth::user()->id,
+                'package_id' => $request->package_id,
+                'valor' => $request->pago_saldo,
+                'gateway' => 'Saldos',
+                'orderID_interno' => 'Saldos',
+                'orderID_gateway' => 'Saldos',
+                'status' => 'Complete'
+            ]);
+        }
 
         $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anteriorVIP);
 

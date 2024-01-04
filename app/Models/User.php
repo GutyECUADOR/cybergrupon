@@ -106,7 +106,7 @@ class User extends Authenticatable
         ->get();
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->where([['user_id', $this->id], ['status', 'Complete'], ['gateway', 'Saldos']])
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
@@ -162,7 +162,7 @@ class User extends Authenticatable
         ->get(); */
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Complete'], ['gateway', 'SaldoVIP']])
+        ->where([['user_id', $this->id], ['status', 'Complete'], ['gateway', 'SaldosVIP']])
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
