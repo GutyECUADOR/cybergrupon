@@ -58,7 +58,7 @@ class RetiroVIPController extends Controller
 
         ]);
 
-        $valor_retiro = $request->valor * 0.95;
+        $valor_retiro = ($request->valor * 0.95)-2;
 
         $client = new \UniPayment\Client\UniPaymentClient();
         $client->getConfig()->setClientId(env('UNIPAYMENT_CLIENT_ID'));
@@ -83,6 +83,7 @@ class RetiroVIPController extends Controller
                     'valor' => $valor_retiro,
                     'network' => $request->network,
                     'gateway' => $request->gateway,
+                    'isVIP' => 1,
                     'orderID_gateway' => $create_withdraw_response->data->id
                 ]);
             }else{

@@ -21,6 +21,7 @@ class CreatePagosTable extends Migration
             $table->string('gateway')->nullable();
             $table->decimal('valor',6,2);
             $table->string('orderID_gateway')->nullable();
+            $table->boolean('isVIP')->default(0);
             $table->string('status')->default('pending');
             $table->timestamps();
         });

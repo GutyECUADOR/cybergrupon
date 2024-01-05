@@ -15,6 +15,7 @@ class Pago extends Model
         'gateway',
         'fecha_pago',
         'valor',
+        'isVIP',
         'orderID_gateway'
     ];
 }
