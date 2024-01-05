@@ -114,7 +114,7 @@ class User extends Authenticatable
 
         $saldo_pagos = DB::table('pagos')
         ->where([['user_id', $this->id], ['isVIP', 0]])
-        ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
+        ->selectRaw('user_id, -sum(((valor + 2) * 5)/95 + (valor + 2)) as valor')
         ->groupBy('user_id')
         ->get();
 
@@ -174,7 +174,7 @@ class User extends Authenticatable
 
         $saldo_pagos = DB::table('pagos')
         ->where([['user_id', $this->id], ['isVIP', 1]])
-        ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
+        ->selectRaw('user_id, -sum(((valor + 2) * 5)/95 + (valor + 2)) as valor')
         ->groupBy('user_id')
         ->get();
 
@@ -232,7 +232,7 @@ class User extends Authenticatable
 
         $saldo_pagos = DB::table('pagos')
         ->where([['user_id', $this->id]])
-        ->selectRaw('user_id, -sum((valor * 5)/95 + valor) as valor')
+        ->selectRaw('user_id, -sum(((valor + 2) * 5)/95 + (valor + 2)) as valor')
         ->groupBy('user_id')
         ->get();
 
@@ -291,7 +291,8 @@ class User extends Authenticatable
 
         $saldo_pagos = DB::table('pagos')
         ->where('user_id', $this->id)
-        ->selectRaw('user_id, -((valor * 5)/95 + valor) as valor, created_at, status, "Pago" as tipoMovimiento ');
+        ->selectRaw('user_id, -(((valor + 2) * 5)/95 + (valor + 2)) as valor, created_at, status, "Pago" as tipoMovimiento ');
+
 
         $saldo_compras = DB::table('compras')
         ->where([['user_id', $this->id], ['status', 'Complete']])
