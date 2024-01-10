@@ -39,8 +39,22 @@
 
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-6 text-center">
+                                <h2 class="display-5 mt-4 mb-3 fw-bold">Presentación</h2>
+                                <embed src="{{ asset('/assets/docs/CG PDF.pdf') }}" width="500" height="375" type="application/pdf">
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-6 text-center">
+                                <h2 class="display-5 mt-4 mb-3 fw-bold">Presentation</h2>
+                                <embed src="{{ asset('/assets/docs/CG English.pdf') }}" width="500" height="375" type="application/pdf">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+
         </section>
     </main>
 

@@ -64,82 +64,7 @@
             <div class="collapse navbar-collapse" id="navbar-default">
                 <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
-                    </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarPages" data-bs-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false">
-                          Nosotros
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow dropdown-menu-end" aria-labelledby="navbarPages">
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              Sobre nosotros
-                            </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              ¿Cómo funiona?
-                            </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              Preguntas Frecuentes
-                            </a>
-                          </li>
-                          <li>
-                            <a class="dropdown-item" href="#">
-                              Contáctenos
-                            </a>
-                          </li>
-
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Servicios
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-md dropdown-menu-end " aria-labelledby="navbarDropdown">
-                            <div class="list-group">
-                                <a class="list-group-item list-group-item-action border-0" href="#">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fe fe-search fs-3 text-primary"></i>
-                                        <div class="ms-3">
-                                            <h5 class="mb-0">Marketing Digital</h5>
-                                            <p class="mb-0 fs-6">
-                                                Explorar opciones de marketing para tu negocio.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0" href="#">
-                                    <div class="d-flex align-items-center">
-                                        <i class="bi bi-cash-coin fs-3 text-primary"></i>
-                                        <div class="ms-3">
-                                            <h5 class="mb-0">
-                                                Publicidad
-                                            </h5>
-                                            <p class="mb-0 fs-6">Opciones de publicidad sencilla y rentable</p>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="list-group-item list-group-item-action border-0" href="#">
-                                    <div class="d-flex align-items-center">
-                                        <i class="fe fe-users fs-3 text-primary"></i>
-                                        <div class="ms-3">
-                                            <h5 class="mb-0">
-                                                Referidos y Afiliados
-                                            </h5>
-                                            <p class="mb-0 fs-6">Conoce otras formas de emprendimiento</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </div>
-                        </div>
-                    </li>
                 </ul>
 
 
@@ -538,7 +463,7 @@
 
 
     <!-- modal -->
-    {{-- <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
+    <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
 
@@ -563,7 +488,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 
     <x-modal-terminos></x-modal-terminos>
     <x-whatsapp-fab></x-whatsapp-fab>

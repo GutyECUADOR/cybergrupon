@@ -41,7 +41,7 @@ class RetiroVIPController extends Controller
     {
         // Validar que usuario tenga saldo
         if (Auth::user()->SaldoVIPActual < $request->valor) {
-            return redirect()->route('retiros-vip.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo actual es de:'. Auth::user()->SaldoTotal]);
+            return redirect()->route('retiros-vip.index')->withErrors(['message' => 'No tienes saldo suficiente, tu saldo VIP actual es de: $'. Auth::user()->SaldoVIPActual]);
         }
 
         $request->request->add(['user_id' => Auth::user()->id]);
