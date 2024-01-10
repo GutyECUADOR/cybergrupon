@@ -92,25 +92,34 @@ class User extends Authenticatable
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
+        
+        //dd($saldo_recargas);
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
         ->where([['user_envio', $this->id], ['isVIP', 0]])
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
+        
+        //dd($saldo_transferencias_salida);
 
         $saldo_transferencias_recibe = DB::table('transferencia_saldos')
         ->where([['user_recibe', $this->id], ['isVIP', 0]])
         ->selectRaw('user_recibe as user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
+        
+        //dd($saldo_transferencias_recibe);
 
 
         $saldo_compras = DB::table('compras')
-        ->where([['user_id', $this->id], ['status', 'Complete'], ['gateway', 'Saldos']])
+        ->where([['user_id', $this->id], ['status', 'Complete']])
+        ->where('gateway', '!=' ,'SaldosVIP')
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
+        
+        //dd($saldo_compras);
 
         $saldo_pagos = DB::table('pagos')
         ->where([['user_id', $this->id], ['isVIP', 0]])
@@ -123,8 +132,7 @@ class User extends Authenticatable
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-
-
+        
 
         $movimientos = $saldo_recargas
                         ->merge($saldo_compras)
@@ -132,7 +140,6 @@ class User extends Authenticatable
                         ->merge($saldo_transferencias_recibe)
                         ->merge($saldo_pagos)
                         ->merge($saldo_comisiones);
-
 
 
         $saldo_actual = 0;
