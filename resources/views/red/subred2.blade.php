@@ -132,14 +132,14 @@
                                                                     <!-- Saldo -->
                                                                     <div class="mb-3">
                                                                         <label for="saldo" class="form-label">Pago - Saldo Normal</label>
-                                                                        <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                        <input type="number" name="pago_saldo" value="{{old('pago_saldo', 0)}}" class="form-control" id="pago_saldo" required autofocus>
                                                                         <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
                                                                     </div>
 
                                                                     <!-- Saldo VIP -->
                                                                     <div class="mb-3">
                                                                         <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
-                                                                        <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                        <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP', 0)}}" class="form-control" id="pago_saldoVIP" required autofocus>
                                                                         <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                     </div>
 
@@ -271,14 +271,14 @@
                                                                 <!-- Saldo -->
                                                                 <div class="mb-3">
                                                                     <label for="saldo" class="form-label">Pago - Saldo Normal</label>
-                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo', 0)}}" class="form-control" id="pago_saldo" required autofocus>
                                                                     <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
                                                                 </div>
 
                                                                 <!-- Saldo VIP -->
                                                                 <div class="mb-3">
                                                                     <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
-                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP', 0)}}" class="form-control" id="pago_saldoVIP" required autofocus>
                                                                     <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                 </div>
 
@@ -409,14 +409,14 @@
                                                                 <!-- Saldo -->
                                                                 <div class="mb-3">
                                                                     <label for="saldo" class="form-label">Pago - Saldo Normal</label>
-                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo')}}" class="form-control" id="pago_saldo" required autofocus>
+                                                                    <input type="number" name="pago_saldo" value="{{old('pago_saldo', 0)}}" class="form-control" id="pago_saldo" required autofocus>
                                                                     <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoActual }}</span> USDT</p>
                                                                 </div>
 
                                                                 <!-- Saldo VIP -->
                                                                 <div class="mb-3">
                                                                     <label for="saldoVIP" class="form-label">Pago - Saldo VIP</label>
-                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP')}}" class="form-control" id="pago_saldoVIP" required autofocus>
+                                                                    <input type="number" name="pago_saldoVIP" value="{{old('pago_saldoVIP', 0)}}" class="form-control" id="pago_saldoVIP" required autofocus>
                                                                     <p class="badge bg-success text-dark mt-1">Disponible $ <span>{{ Auth::user()->SaldoVIPActual }}</span> USDT</p>
                                                                 </div>
 
