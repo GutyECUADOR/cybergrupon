@@ -17,8 +17,8 @@ class RegisteredUserController extends Controller
 {
     public function index()
     {
-        /* $users = User::all();
-        return view('usuarios.index', compact('users')); */
+        $users = User::all();
+        return view('usuarios.index', compact('users')); 
     }
 
     /**
