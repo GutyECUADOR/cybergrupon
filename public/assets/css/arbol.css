@@ -130,6 +130,12 @@ right connector from last child*/
     -webkit-overflow-scrolling: touch;
 }
 
+@media (min-width: 100px) {
+    #container-arbol{
+        min-width: 800% !important;
+    }
+
+}
 
 @media (min-width: 576px) {
     #container-arbol{
@@ -145,11 +151,10 @@ right connector from last child*/
 
 }
 
-@media (min-width: 992px) {
+@media (min-width> 992px) {
     #container-arbol{
-        min-width: 150% !important;
+        min-width: 200% !important;
     }
-
 }
 
 
