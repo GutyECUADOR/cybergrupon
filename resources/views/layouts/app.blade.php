@@ -131,6 +131,22 @@
 
         });
     </script>
+
+    <script type="text/javascript">
+        function moverDerecha(){
+            let arbolContenedor = document.getElementById('wraper-arbol');
+
+            console.log(arbolContenedor);
+            arbolContenedor = arbolContenedor.scrollLeft += 50;
+        }
+
+         function moverIzquierda(){
+            let arbolContenedor = document.getElementById('wraper-arbol');
+
+            console.log(arbolContenedor);
+            arbolContenedor = arbolContenedor.scrollLeft -= 50;
+        }
+    </script>
 </body>
 
 </html>

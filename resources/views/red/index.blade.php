@@ -21,6 +21,11 @@
                             <div class="mb-3 mb-lg-0">
                                 <h1 class="mb-0 h2 fw-bold">Mi red</h1>
                             </div>
+                            <div class="mb-3 mb-lg-0">
+
+                                <a onclick="moverIzquierda()" id="mover_izquierda" class="btn btn-primary" href="#" role="button"><-</a>
+                                <a onclick="moverDerecha()" id="mover_derecha" class="btn btn-primary" href="#" role="button">-></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,7 +42,7 @@
 
                 <div class="row">
 
-                    <div class="table-responsive wrapper">
+                    <div class="table-responsive wrapper" id="wraper-arbol">
                         <div id="container-arbol">
                             <table class="table">
                                 <div class="tree">
