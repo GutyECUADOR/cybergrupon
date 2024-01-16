@@ -122,13 +122,55 @@ right connector from last child*/
 }
 
 #container-arbol{
-    min-width: 200% !important;
+    min-width: 500% !important;
 }
 
-@media (max-width: 768px) {
-    #container-arbol{
-        min-width: 50000px !important;
+.wrapper{
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
 
+
+@media (min-width: 576px) {
+    #container-arbol{
+        min-width: 500% !important;
     }
 
+}
+
+@media (min-width: 768px) {
+    #container-arbol{
+        min-width: 400% !important;
+    }
+
+}
+
+@media (min-width: 992px) {
+    #container-arbol{
+        min-width: 150% !important;
+    }
+
+}
+
+
+/* width */
+  /*   ::-webkit-scrollbar {
+    width: 10px;
+  } */
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(77, 73, 73);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #706b6b;
   }
