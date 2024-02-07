@@ -19,13 +19,15 @@ class TiendaController extends Controller
         //Obtener el listado de planes mayores al que ya tiene.
         $package_mayor = Compra::where('user_id', Auth::user()->id)
                         ->where('package_id', '<=', '5')
-                        ->max('package_id') ;
+                        ->where('status', 'Complete')
+                        ->max('package_id');
         if (!$package_mayor) {
             $package_mayor = 0;
         }
         $packages = Packages::where('nivel', '>', $package_mayor)
                             ->where('tipo', 'normal')
                             ->get();
+
         $linksPublicidad = AdvertisingHelperController::getlinksPublicidad();
         return view('tienda.index', compact('packages','linksPublicidad'));
     }

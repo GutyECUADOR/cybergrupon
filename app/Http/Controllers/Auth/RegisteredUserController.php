@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Packages;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use App\Rules\EmailNoPlusCharacter;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +18,7 @@ class RegisteredUserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('usuarios.index', compact('users'));
+        return view('usuarios.index', compact('users')); 
     }
 
     /**
@@ -60,7 +59,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'nickname' => ['required', 'string', 'max:191', 'unique:users','alpha_dash'],
             'nickname_promoter' => ['exists:users,nickname', 'string', 'max:191'],
-            'email' => ['required', 'string', 'email', 'max:191', 'unique:users', new EmailNoPlusCharacter],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'phone' => ['required', 'string', 'max:15'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);

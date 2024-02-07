@@ -48,7 +48,8 @@ use Illuminate\Support\Facades\Redirect;
     return redirect()->to('login');
 }); */
 
-/* Route::any('{query}',
+/*
+Route::any('{query}',
     function() { return view('mantenimiento'); })
     ->where('query', '.*'); */
 
