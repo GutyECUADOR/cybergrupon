@@ -25,9 +25,10 @@ class EmailNoPlusCharacter implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (str_contains($value, '+')) {
-            return false;
+        if (!str_contains($value, '+')) {
+            return true;
         }
+        return false;
     }
 
     /**
