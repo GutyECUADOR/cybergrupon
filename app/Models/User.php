@@ -39,7 +39,17 @@ class User extends Authenticatable
         'link_publicidad4',
         'link_redireccion4',
         'link_publicidad5',
-        'link_redireccion5'
+        'link_redireccion5',
+        'link_publicidadVIP',
+        'link_redireccionVIP',
+        'link_publicidadVIP2',
+        'link_redireccionVIP2',
+        'link_publicidadVIP3',
+        'link_redireccionVIP3',
+        'link_publicidadVIP4',
+        'link_redireccionVIP4',
+        'link_publicidadVIP5',
+        'link_redireccionVIP5'
     ];
 
     /**
@@ -92,7 +102,7 @@ class User extends Authenticatable
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-        
+
         //dd($saldo_recargas);
 
         $saldo_transferencias_salida = DB::table('transferencia_saldos')
@@ -100,7 +110,7 @@ class User extends Authenticatable
         ->selectRaw('user_envio as user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-        
+
         //dd($saldo_transferencias_salida);
 
         $saldo_transferencias_recibe = DB::table('transferencia_saldos')
@@ -108,7 +118,7 @@ class User extends Authenticatable
         ->selectRaw('user_recibe as user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-        
+
         //dd($saldo_transferencias_recibe);
 
 
@@ -118,7 +128,7 @@ class User extends Authenticatable
         ->selectRaw('user_id, -sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-        
+
         //dd($saldo_compras);
 
         $saldo_pagos = DB::table('pagos')
@@ -132,7 +142,7 @@ class User extends Authenticatable
         ->selectRaw('user_id, sum(valor) as valor')
         ->groupBy('user_id')
         ->get();
-        
+
 
         $movimientos = $saldo_recargas
                         ->merge($saldo_compras)
@@ -205,7 +215,7 @@ class User extends Authenticatable
         foreach ($movimientos as $movimiento ) {
             $saldo_actual += $movimiento->valor;
         }
-        
+
         /*
         if ($saldo_actual < 0) {
             return 0;

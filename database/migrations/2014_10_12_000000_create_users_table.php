@@ -36,6 +36,17 @@ class CreateUsersTable extends Migration
             $table->string('link_redireccion4')->nullable();
             $table->string('link_publicidad5')->nullable();
             $table->string('link_redireccion5')->nullable();
+
+            $table->string('link_publicidadVIP')->nullable();
+            $table->string('link_redireccionVIP')->nullable();
+            $table->string('link_publicidadVIP2')->nullable();
+            $table->string('link_redireccionVIP2')->nullable();
+            $table->string('link_publicidadVIP3')->nullable();
+            $table->string('link_redireccionVIP3')->nullable();
+            $table->string('link_publicidadVIP4')->nullable();
+            $table->string('link_redireccionVIP4')->nullable();
+            $table->string('link_publicidadVIP5')->nullable();
+            $table->string('link_redireccionVIP5')->nullable();
             $table->boolean('is_payed')->default(false);
             $table->string('imagen_recibo')->nullable();
             $table->timestamps();
