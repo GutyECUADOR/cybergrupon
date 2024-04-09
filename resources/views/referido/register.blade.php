@@ -4,7 +4,7 @@
 	<main>
 		<section class="container d-flex flex-column">
 			<div class="row align-items-center justify-content-center g-0 min-vh-100">
-				<div class="col-lg-5 col-md-8 py-8 py-xl-0">
+				<div class="col-xl-6 col-lg-6 col-md-12">
 					<!-- Card -->
 					<div class="card shadow">
 						<!-- Card body -->
@@ -84,6 +84,22 @@
 						</div>
 					</div>
 				</div>
+                <div class="offset-xxl-1 col-xxl-5 col-lg-6 col-md-12">
+                    <div class="card shadow">
+                        <div class="card-body p-6">
+                            @foreach ($linksPublicidad as $publicidad)
+                                <div class="row text-center">
+                                    <iframe width="100%"
+                                        src="{{ $publicidad->link_publicidad }}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen></iframe>
+                                    <a href="{{ $publicidad->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</section>
 	</main>

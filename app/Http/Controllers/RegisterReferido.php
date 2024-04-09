@@ -34,9 +34,10 @@ class RegisterReferido extends Controller
     {
         # Obtener el ID del partner promotor
         $ID_Partner = User::where('nickname', '=', $nickname)->first();
+        $linksPublicidad = AdvertisingHelperController::getlinksPublicidadByNickName($ID_Partner->nickname);
 
         if (!$ID_Partner) {
-            return view('referido.register', compact('nickname'))->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
+            return view('referido.register', compact('nickname','linksPublicidad'))->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
         }
 
         $ID_Partner = $ID_Partner->id; //administrador
@@ -44,10 +45,10 @@ class RegisterReferido extends Controller
         $packages = Packages::all();
 
         if($locations->location > 3) {
-            return view('referido.register', compact('nickname', 'packages'))->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
+            return view('referido.register', compact('nickname', 'packages', 'linksPublicidad'))->withErrors(['message' => 'Este patrocinador ya usó todos sus posicionamientos']);
         }
 
-        return view('referido.register', compact('nickname', 'packages'));
+        return view('referido.register', compact('nickname', 'packages', 'linksPublicidad'));
     }
 
     /**

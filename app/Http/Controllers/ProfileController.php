@@ -109,7 +109,11 @@ class ProfileController extends Controller
     public function fixLink($link = '') {
         switch ($link) {
             case null:
-                return '';
+                return null;
+
+            case '':
+                return null;
+
 
             case strpos($link, "https://www.youtube.com/watch?v=") === 0:
                 $shortUrlRegex = "/youtu.be\/([a-zA-Z0-9_-]+)\??/i";
