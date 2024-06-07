@@ -16,7 +16,7 @@ use Facade\Ignition\Support\Packagist\Package;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 
 
 class RedController extends Controller
@@ -158,7 +158,7 @@ class RedController extends Controller
             'id_usuario_location.required' => 'Esta ubicación no esta habilitada, selecciona una ubicación directa a otro usuario.'
         ];
 
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'nickname' => ['required', 'string', 'max:191', 'unique:users'],
             'location' => ['required', 'integer','between:1,3'],
             'id_usuario_location' => ['required', 'exists:users,id'],
@@ -171,6 +171,11 @@ class RedController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], $custom_messages);
 
+        if ($validator->fails()) {
+            return redirect()->route('red.index')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
 
         $paquete = Packages::findOrFail($request->paquete);
 
