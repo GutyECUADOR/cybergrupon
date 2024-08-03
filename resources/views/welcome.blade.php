@@ -378,13 +378,13 @@
             </div>
         </section>
     </main>
-    
+
     <!-- modal -->
     <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
-
-                <div class="modal-body">
+              <div class="fireworks">
+                <div class="modal-body" style="z-index: 2;">
                     <div class="row">
                         @foreach ($linksPublicidad as $publicidad)
                             <div class="col col-md-6 text-center">
@@ -400,9 +400,10 @@
 
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer" >
+                    <button type="button" style="z-index: 2;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
+              </div>
             </div>
         </div>
     </div>
@@ -427,6 +428,8 @@
     <script src="{{ asset('assets/js/vendors/tooltip.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/popup.js')}}"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="assets/libs/js/jquery.fireworks.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendors/jquery.fireworks.js')}}"></script>
 
     <script type="text/javascript">
         $(window).on('load', function() {
@@ -463,6 +466,10 @@
             )
         }
 
+    </script>
+
+    <script type="text/javascript" >
+      $('.fireworks').fireworks();
     </script>
 
 </body>
