@@ -385,7 +385,9 @@
             <div class="modal-content">
               <div class="fireworks">
                 <div class="modal-body" style="z-index: 2;">
-                    <div class="row">
+                    <div class="row" style="justify-content: center;">
+
+                    <img class="img-fluid" style="max-width:60%" src="{{ asset('assets/images/png/primermillon.png')}}" alt="Primer Millon">
                         @foreach ($linksPublicidad as $publicidad)
                             <div class="col col-md-6 text-center">
                                 <iframe width="100%" height="200px"

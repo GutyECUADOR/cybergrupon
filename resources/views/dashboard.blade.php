@@ -1,5 +1,10 @@
 <x-app-layout>
 
+    {{
+
+        dd(Auth::user()->ReferidosUltimos5meses);
+    }}
+
     <!-- Wrapper -->
     <main id="db-wrapper">
 

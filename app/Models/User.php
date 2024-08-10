@@ -351,9 +351,31 @@ class User extends Authenticatable
         return $package_mayor - 5;
     }
 
-
     public function getReferidosAttribute() {
         $cantidadReferidos = User::where('nickname_promoter', Auth::user()->nickname)->count('nickname_promoter') ;
         return $cantidadReferidos;
+    }
+
+    public function getReferidosUltimos5mesesAttribute() {
+        //Obter fecha de la primera compra del usuario actaul + 5 meses
+        $primera_compra = Compra::Where('user_id',Auth::user()->id)->first();
+        $fechaAddMonths = $primera_compra->created_at;
+        $fecha_primera_compra = $fechaAddMonths->addMonths(5);
+
+       //Fecha de la primera compra de las personas que el usuario actual ha invitado
+       $afiliados = User::Where('nickname_promoter',Auth::user()->nickname)->get();
+      /*  dd($afiliados);
+       die(); */
+
+       $contador = 0;
+       foreach ($afiliados as &$afiliado) {
+            $primera_compra_afiliado = Compra::Where('user_id', $afiliado->id)
+                                        ->Where('Status', 'Complete')
+                                        ->Where('created_at', '<', $fecha_primera_compra )->get();
+
+            $contador += $primera_compra_afiliado->count();
+        }
+
+        return $contador;
     }
 }

@@ -100,7 +100,9 @@ class CompraController extends Controller
             ]);
         }
 
-        $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
+        if (Auth::user()->ReferidosUltimos5meses > 3) {
+            $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
+        }
 
         return redirect()->route('tienda.index')->with('status', 'Has adquirido el paquete '.$request->package_name.' con éxito!');
     }
@@ -121,6 +123,7 @@ class CompraController extends Controller
             if ($usuario_pago->NivelActual >= $cont2) {
 
                 $valor += $paquete->price;
+
                 Comision::create([
                     'user_id' => $usuario_pago->id,
                     'valor' => $valor

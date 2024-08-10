@@ -5,6 +5,7 @@
 
             <div class="modal-body">
                 <div class="row">
+
                     @foreach ($linksPublicidad as $publicidad)
                         <div class="col col-md-6 text-center">
                             <iframe width="100%" height="200px"
