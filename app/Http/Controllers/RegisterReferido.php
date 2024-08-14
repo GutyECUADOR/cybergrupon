@@ -35,7 +35,7 @@ class RegisterReferido extends Controller
         # Obtener el ID del partner promotor
         $ID_Partner = User::where('nickname', '=', $nickname)->first();
 
-        if ($ID_Partner->ReferidosUltimos5meses >= 3) {
+        if (!$ID_Partner->ReferidosUltimos5meses >= 3) {
             return view('referido.register', compact('nickname','linksPublicidad'))->withErrors(['message' => 'El usuario '.$nickname.' no tiene habilitado sus funciones como promotor, contacta con soporte']);
         }
 

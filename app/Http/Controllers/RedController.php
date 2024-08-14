@@ -122,6 +122,11 @@ class RedController extends Controller
         $packages = Packages::where('nivel', '<', 6)
                     ->where('tipo', 'normal')
                     ->get();
+
+        if (Auth::user()->ReferidosUltimos5meses < 3) {
+            return redirect()->route('dashboard')->withErrors(['message' => 'No cumples con los requisitos para invitar referidos']);
+        }   
+                
         return view('red.index', compact('linksPublicidad','packages','posicion1_1','posicion2_1', 'posicion2_2', 'posicion2_3', 'posicion3_1', 'posicion3_2', 'posicion3_3', 'posicion3_4', 'posicion3_5', 'posicion3_6', 'posicion3_7', 'posicion3_8', 'posicion3_9'));
     }
 
@@ -148,7 +153,7 @@ class RedController extends Controller
                                                 ['id_usuario_location', '=', $request->id_usuario_location],
                                             ])->first();
 
-        if (Auth::user()->ReferidosUltimos5meses >= 3) {
+        if (Auth::user()->ReferidosUltimos5meses < 3) {
             return redirect()->route('red.index')->withErrors(['message' => 'No cumples con los requisitos para invitar referidos']);
         }
 
@@ -262,7 +267,7 @@ class RedController extends Controller
         $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
         $paquete_inicial = Packages::FindOrFail(1);
 
-        if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+        if ($usuario_promotor->ReferidosUltimos5meses < 3) {
             Comision::create([
                 'user_id' => $usuario_promotor->id,
                 'valor' => $paquete_inicial->price
@@ -310,6 +315,11 @@ class RedController extends Controller
      */
     public function subred(Request $request)
     {
+
+        if (Auth::user()->ReferidosUltimos5meses < 3) {
+            return redirect()->route('dashboard')->withErrors(['message' => 'No cumples con los requisitos para invitar referidos']);
+        }  
+
         $id = $request->get('id');
 
         // Validar ids a nietos permitidos

@@ -3,6 +3,8 @@
     <!-- Wrapper -->
     <main id="db-wrapper">
 
+   
+
         <input id="hiddenuserID" type="hidden" name="hiddenuserID" value="{{Auth::user()->id}}">
 
         <!-- Sidebar -->
@@ -13,16 +15,23 @@
             <div class="header">
                 <!-- navbar -->
                 <x-navbar-menu></x-sidebar-menu>
+                
 
             </div>
             <!-- Container fluid -->
             <div class="container-fluid p-4" id="app">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
+                        <!-- Flash messages -->
+                        <x-auth-session-status class="mb-4" :status="session('status')" />
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <div class="border-bottom pb-3 mb-3 d-lg-flex justify-content-between align-items-center">
                             <div class="mb-3 mb-lg-0">
-                                <h1 class="mb-0 h2 fw-bold">Dashboard</h1>
+                                <h1 class="mb-0 h2 fw-bold">Dashboard  {{ Auth::user()->ReferidosUltimos5meses }}</h1>
+                                
                             </div>
+
                     </div>
                 </div>
                 <div class="row">

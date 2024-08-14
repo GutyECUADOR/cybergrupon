@@ -66,7 +66,7 @@ class RegisteredUserController extends Controller
         ], $custom_messages);
 
         $ID_Partner = User::where('nickname', '=', $request->nickname_promoter)->first();
-        if ($ID_Partner->ReferidosUltimos5meses >= 3) {
+        if (!$ID_Partner->ReferidosUltimos5meses >= 3) {
             return view('register', compact('nickname','linksPublicidad'))->withErrors(['message' => 'El usuario '.$request->nickname_promoter.' no tiene habilitado sus funciones como promotor, contacta con soporte']);
         }
 

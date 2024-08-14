@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -362,18 +363,33 @@ class User extends Authenticatable
         $fechaAddMonths = $primera_compra->created_at;
         $fecha_primera_compra = $fechaAddMonths->addMonths(5);
 
-       //Fecha de la primera compra de las personas que el usuario actual ha invitado
-       $afiliados = User::Where('nickname_promoter',Auth::user()->nickname)->get();
-      /*  dd($afiliados);
-       die(); */
+        $fecha_actual = Carbon::now();
+        
+        // Tu primera compra fue hace más de 5 meses
+        if ($fecha_primera_compra > $fecha_actual) {
+            $contador = 3;
+        }else{
+           
+            $afiliados = User::Where('nickname_promoter',Auth::user()->nickname)
+                        ->Where('location', '!=', null)
+                        ->get();
 
-       $contador = 0;
-       foreach ($afiliados as &$afiliado) {
-            $primera_compra_afiliado = Compra::Where('user_id', $afiliado->id)
-                                        ->Where('Status', 'Complete')
-                                        ->Where('created_at', '<', $fecha_primera_compra )->get();
+            return $afiliados->count();
 
-            $contador += $primera_compra_afiliado->count();
+            /*  foreach ($afiliados as $afiliado) {
+                $primera_compra_afiliado = Compra::Where('user_id', $afiliado->id)
+                                            ->Where('Status', 'Complete')
+                                            ->Where('created_at', '<', $fecha_primera_compra )
+                                            ->orderBy('created_at', 'asc')
+                                            ->first();
+                
+                dd($primera_compra_afiliado);
+
+                if ($primera_compra_afiliado) {
+                    $contador += 1;
+                }
+
+            } */
         }
 
         return $contador;
