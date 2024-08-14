@@ -108,7 +108,9 @@ class CompraVIPController extends Controller
             ]);
         }
 
-        $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anteriorVIP);
+        if (Auth::user()->ReferidosUltimos5meses >= 3) {
+            $this->generateComisions(Auth::user(), $paquete_comprado, $paquete_anteriorVIP);
+        }
 
         return redirect()->route('tienda-VIP.index')->with('status', 'Has adquirido el paquete VIP '.$request->package_name.' con éxito!');
     }
@@ -129,10 +131,13 @@ class CompraVIPController extends Controller
 
             if ($usuario_promotor->NivelActualVIP >= 1) {
                 $paquete_inicial = Packages::FindOrFail(6); // Siempre al patrocinador pagar de comision el valor de un paquete inicial VIP
-                ComisionVIP::create([
-                    'user_id' => $usuario_promotor->id,
-                    'valor' => $paquete_inicial->price
-                ]);
+
+                if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+                    ComisionVIP::create([
+                        'user_id' => $usuario_promotor->id,
+                        'valor' => $paquete_inicial->price
+                    ]);
+                }
             }
         }
 
@@ -162,11 +167,13 @@ class CompraVIPController extends Controller
 
                if ($usuario_pago->NivelActualVIP >= $cont2) {
                    $valor = $paquete->price;
-                   ComisionVIP::create([
-                       'user_id' => $usuario_pago->id,
-                       'valor' => $valor,
-                       'contador' => $cont2
-                   ]);
+                   if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+                        ComisionVIP::create([
+                            'user_id' => $usuario_pago->id,
+                            'valor' => $valor,
+                            'contador' => $cont2
+                        ]);
+                    }
                }
 
                $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->first();
@@ -194,10 +201,13 @@ class CompraVIPController extends Controller
             if ($usuario_pago->NivelActual >= $cont2) {
 
                 $valor += $paquete->price;
-                ComisionVIP::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
+
+                if ($usuario_pago->ReferidosUltimos5meses >= 3) {
+                    ComisionVIP::create([
+                        'user_id' => $usuario_pago->id,
+                        'valor' => $valor
+                    ]);
+                }
             }
 
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();

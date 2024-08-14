@@ -179,12 +179,15 @@ class IPNPagoUnipayment extends Controller
 
         $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
         $paquete_inicial = Packages::FindOrFail(1);
-        $comision = Comision::create([
-            'user_id' => $usuario_promotor->id,
-            'valor' => $paquete_inicial->price
-        ]);
 
-        array_push($comisiones_pagadas, $comision);
+        if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+            $comision = Comision::create([
+                'user_id' => $usuario_promotor->id,
+                'valor' => $paquete_inicial->price
+            ]);
+            array_push($comisiones_pagadas, $comision);
+        }
+
 
         $usuario_transicion = User::where('id', $user->id_usuario_location)->firstOrFail();
         $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->firstOrFail();
@@ -196,10 +199,13 @@ class IPNPagoUnipayment extends Controller
             if ($usuario_pago->NivelActual >= $cont) {
 
                 $valor = $paquete->price;
-                $comision = Comision::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
+
+                if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+                    $comision = Comision::create([
+                        'user_id' => $usuario_pago->id,
+                        'valor' => $valor
+                    ]);
+                }
 
                 array_push($comisiones_pagadas, $comision);
             }

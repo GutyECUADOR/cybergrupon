@@ -20,7 +20,9 @@ class TestController extends Controller
         $user = User::findOrFail(386);
         $package = Packages::findOrFail(3);
 
-        $this->generateComisions($user, $package);
+        if (Auth::user()->ReferidosUltimos5meses >= 3) {
+            $this->generateComisions($user, $package);
+        }
         return [$user, $package];
     }
 
@@ -35,10 +37,12 @@ class TestController extends Controller
             if ($usuario_pago->NivelActual >= $cont) {
 
                 $valor += $paquete->price;
-                Comision::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
+                if ($usuario_pago->ReferidosUltimos5meses >= 3) {
+                    Comision::create([
+                        'user_id' => $usuario_pago->id,
+                        'valor' => $valor
+                    ]);
+                }
             }
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
         }

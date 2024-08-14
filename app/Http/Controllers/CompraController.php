@@ -100,9 +100,7 @@ class CompraController extends Controller
             ]);
         }
 
-        if (Auth::user()->ReferidosUltimos5meses > 3) {
-            $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
-        }
+        $this->generateComisions(Auth::user(), $paquete_anterior, $paquete_comprado);
 
         return redirect()->route('tienda.index')->with('status', 'Has adquirido el paquete '.$request->package_name.' con éxito!');
     }
@@ -124,10 +122,13 @@ class CompraController extends Controller
 
                 $valor += $paquete->price;
 
-                Comision::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
+                if ($usuario_pago->ReferidosUltimos5meses >= 3) {
+                    Comision::create([
+                        'user_id' => $usuario_pago->id,
+                        'valor' => $valor
+                    ]);
+                }
+
             }
 
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();

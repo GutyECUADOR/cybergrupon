@@ -148,6 +148,10 @@ class RedController extends Controller
                                                 ['id_usuario_location', '=', $request->id_usuario_location],
                                             ])->first();
 
+        if (Auth::user()->ReferidosUltimos5meses >= 3) {
+            return redirect()->route('red.index')->withErrors(['message' => 'No cumples con los requisitos para invitar referidos']);
+        }
+
         if ($existeUsuarioEnUbicacion) {
             return redirect()->route('red.index')->withErrors(['message' => 'Ya existe un usuario en esta ubicación. Si el problema persiste contacte a soporte']);
         }
@@ -248,10 +252,7 @@ class RedController extends Controller
             ]);
         }
 
-
-
-        $this->generateComisions($user, $paquete);
-
+         $this->generateComisions($user, $paquete);
         return redirect()->route('red.index')->with('status', 'Se ha registrado con éxito');
     }
 
@@ -260,10 +261,13 @@ class RedController extends Controller
 
         $usuario_promotor = User::where('nickname', $user->nickname_promoter)->firstOrFail();
         $paquete_inicial = Packages::FindOrFail(1);
-        Comision::create([
-            'user_id' => $usuario_promotor->id,
-            'valor' => $paquete_inicial->price
-        ]);
+
+        if ($usuario_promotor->ReferidosUltimos5meses >= 3) {
+            Comision::create([
+                'user_id' => $usuario_promotor->id,
+                'valor' => $paquete_inicial->price
+            ]);
+        }
 
         $usuario_transicion = User::where('id', $user->id_usuario_location)->firstOrFail();
         $usuario_pago = User::where('id', $usuario_transicion->id_usuario_location)->firstOrFail();
@@ -275,10 +279,13 @@ class RedController extends Controller
             if ($usuario_pago->NivelActual >= $cont) {
 
                 $valor = $paquete->price;
-                Comision::create([
-                    'user_id' => $usuario_pago->id,
-                    'valor' => $valor
-                ]);
+
+                if ($usuario_pago->ReferidosUltimos5meses >= 3) {
+                    Comision::create([
+                        'user_id' => $usuario_pago->id,
+                        'valor' => $valor
+                    ]);
+                }
             }
 
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
