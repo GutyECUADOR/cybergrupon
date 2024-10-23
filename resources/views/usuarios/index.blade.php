@@ -57,6 +57,7 @@
                                         <th scope="col">#ID</th>
                                         <th scope="col">Nickname</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Referidos Meses</th>
                                         <th scope="col">Saldo Normal</th>
                                         <th scope="col">Saldo VIP</th>
                                         <th scope="col">Saldo Total</th>
@@ -68,6 +69,7 @@
                                                 <td>{{ $user->id }}</td>
                                                 <td>{{ $user->nickname }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>{{ $user->ReferidosUltimos5meses }}</td>
                                                 <td>{{ $user->SaldoActual }}</td>
                                                 <td>{{ $user->SaldoVIPActual }}</td>
                                                 <td>{{ $user->SaldoTotal }}</td>
