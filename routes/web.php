@@ -86,6 +86,7 @@ Route::middleware(['auth','checkPagoOk'])->group(function () {
 
 Route::middleware(['auth','role'])->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-list');
+    Route::resource('/verificalinks', VerificaLinksController::class);
 });
 
 Route::middleware(['auth','checkPago','checkReferidos'])->group(function () {
@@ -107,7 +108,7 @@ Route::middleware(['auth','checkPago','checkReferidos'])->group(function () {
     Route::resource('/compra', CompraController::class);
     Route::resource('/compra-VIP', CompraVIPController::class);
     Route::resource('/ayuda', AyudaController::class);
-    Route::resource('/verificalinks', VerificaLinksController::class);
+    
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });
 
