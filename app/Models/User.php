@@ -360,7 +360,8 @@ class User extends Authenticatable
 
     public function getReferidosUltimos5mesesAttribute() {
         //Obter fecha de la primera compra del usuario actaul + 5 meses
-        $primera_compra = Compra::Where('user_id',Auth::user()->id)->first();
+        $primera_compra = Compra::Where('user_id',$this->id)
+                        ->Where('status','Complete')->first();
 
         if ($primera_compra) {
             $fechaAddMonths = $primera_compra->created_at;
@@ -376,7 +377,7 @@ class User extends Authenticatable
             $contador = 3;
         }else{
            
-            $afiliados = User::Where('nickname_promoter',Auth::user()->nickname)
+            $afiliados = User::Where('nickname_promoter', $this->nickname)
                         ->Where('location', '!=', null)
                         ->get();
 
