@@ -26,6 +26,7 @@ use App\Http\Controllers\RegisterReferido;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\AdvertisingHelperController;
 use App\Http\Controllers\AyudaController;
+use App\Http\Controllers\VerificaLinksController;
 use App\Mail\SoporteUsuarioMaileable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -106,6 +107,7 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::resource('/compra', CompraController::class);
     Route::resource('/compra-VIP', CompraVIPController::class);
     Route::resource('/ayuda', AyudaController::class);
+    Route::resource('/verificalinks', VerificaLinksController::class);
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
 });
 
