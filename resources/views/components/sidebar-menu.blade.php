@@ -85,15 +85,6 @@
                     <i class="nav-icon fe fe-help-circle me-2"></i> Ayuda y Herramientas
                 </a>
             </li>
-
-            @if (Auth::user()->role == 'ADMIN_ROLE')
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('verificalinks.index') }}">
-                    <i class="nav-icon fe fe-check me-2"></i> Verificar links
-                </a>
-            </li>
-            @endif
-
             <!-- Nav item -->
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">

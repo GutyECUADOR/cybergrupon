@@ -55,6 +55,8 @@
     <script src="{{ asset('assets/libs/flatpickr/dist/flatpickr.min.js')}}"></script>
     <script src="{{ asset('assets/js/vendors/flatpickr.js')}}"></script>
     <script src="{{ asset('assets/libs/apexcharts/dist/apexcharts.min.js')}}"></script>
+    <script type="text/javascript" src="assets/libs/js/jquery.fireworks.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/vendors/jquery.fireworks.js')}}"></script>
     {{-- <script src="{{ asset('assets/js/vendors/chart.js')}}"></script> --}}
 
 
@@ -146,6 +148,10 @@
             console.log(arbolContenedor);
             arbolContenedor = arbolContenedor.scrollLeft -= 50;
         }
+    </script>
+    
+    <script type="text/javascript" >
+      $('.fireworks').fireworks();
     </script>
 </body>
 

@@ -3,8 +3,6 @@
     <!-- Wrapper -->
     <main id="db-wrapper">
 
-   
-
         <input id="hiddenuserID" type="hidden" name="hiddenuserID" value="{{Auth::user()->id}}">
 
         <!-- Sidebar -->
@@ -15,23 +13,16 @@
             <div class="header">
                 <!-- navbar -->
                 <x-navbar-menu></x-sidebar-menu>
-                
 
             </div>
             <!-- Container fluid -->
             <div class="container-fluid p-4" id="app">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
-                        <!-- Flash messages -->
-                        <x-auth-session-status class="mb-4" :status="session('status')" />
-                        <!-- Validation Errors -->
-                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
                         <div class="border-bottom pb-3 mb-3 d-lg-flex justify-content-between align-items-center">
                             <div class="mb-3 mb-lg-0">
-                                <h1 class="mb-0 h2 fw-bold">Dashboard  {{ Auth::user()->ReferidosUltimos5meses }}</h1>
-                                
+                                <h1 class="mb-0 h2 fw-bold">Dashboard</h1>
                             </div>
-
                     </div>
                 </div>
                 <div class="row">
@@ -274,28 +265,39 @@
     <div class="modal fade" id="modalpromo" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
+              <div class="fireworks">
+                <div class="modal-body" style="z-index: 2;">
 
-                <div class="modal-body">
-                    <div class="row">
-                        @foreach ($linksPublicidad as $publicidad)
-                            <div class="col col-md-6 text-center">
-                                <iframe width="100%" height="200px"
-                                    src="{{ $publicidad->link_publicidad }}"
-                                    title="YouTube video player" frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                    allowfullscreen></iframe>
-                                <a href="{{ $publicidad->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                    <div class="container text-center">
+                        <div class="row" style="justify-content: center;">
+                            <div class="col col-md-8 col-sm-12">
+                                <img class="img-fluid" src="{{ asset('assets/images/png/primermillon.png')}}" alt="Primer Millon">
                             </div>
-                        @endforeach
+                        </div>
+                        <div class="row" style="justify-content: center;">
+
+
+                            @foreach ($linksPublicidad as $publicidad)
+                                <div class="col col-md-6 col-sm-12">
+                                    <iframe width="100%" height="200px"
+                                        src="{{ $publicidad->link_publicidad }}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        allowfullscreen></iframe>
+                                    <a href="{{ $publicidad->link_redireccion }}" target="_blank" class="btn btn-success btn-sm mt-3 mb-3">Más información</a>
+                                </div>
+                            @endforeach
+                        </div>
+
                     </div>
 
 
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <div class="modal-footer" >
+                    <button type="button" style="z-index: 2;" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
+              </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>

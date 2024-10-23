@@ -121,14 +121,10 @@ class CompraController extends Controller
             if ($usuario_pago->NivelActual >= $cont2) {
 
                 $valor += $paquete->price;
-
-                if ($usuario_pago->ReferidosUltimos5meses >= 3) {
-                    Comision::create([
-                        'user_id' => $usuario_pago->id,
-                        'valor' => $valor
-                    ]);
-                }
-
+                Comision::create([
+                    'user_id' => $usuario_pago->id,
+                    'valor' => $valor
+                ]);
             }
 
             $usuario_pago = User::where('id', $usuario_pago->id_usuario_location)->firstOrFail();
