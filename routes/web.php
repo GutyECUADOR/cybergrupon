@@ -88,10 +88,10 @@ Route::middleware(['auth','role'])->group(function () {
     Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-list');
 });
 
-Route::middleware(['auth','checkPago'])->group(function () {
+Route::middleware(['auth','checkPago','checkReferidos'])->group(function () {
 
     Route::get('/dashboard', [CreditoController::class, 'index'])->name('dashboard');
-    Route::resource('/profile', ProfileController::class);
+   
     Route::resource('/mis-referidos', ReferidosController::class);
     Route::resource('/red', RedController::class);
     Route::get('/red/asignar', [RedController::class, 'create'])->name('red.asignar');
@@ -109,6 +109,10 @@ Route::middleware(['auth','checkPago'])->group(function () {
     Route::resource('/ayuda', AyudaController::class);
     Route::resource('/verificalinks', VerificaLinksController::class);
     Route::post('/uploadfile',[FileController::class, 'store'])->name('uploadFile');
+});
+
+Route::middleware(['auth','checkPago'])->group(function () {
+    Route::resource('/profile', ProfileController::class);
 });
 
 require __DIR__.'/auth.php';

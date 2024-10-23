@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'role' => \App\Http\Middleware\Role::class,
         'checkPago' => \App\Http\Middleware\CheckPago::class,
         'checkPagoOk' => \App\Http\Middleware\CheckPagoOk::class,
+        'checkReferidos' => \App\Http\Middleware\CheckReferidos::class,
     ];
 }

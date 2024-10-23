@@ -19,6 +19,9 @@
                     <i class="nav-icon fe fe-user me-2"></i> Mi Perfil
                 </a>
             </li>
+
+            @if (Auth::user()->ReferidosUltimos5meses >= 3)
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#navCourses"
                     aria-expanded="false" aria-controls="navCourses">
@@ -79,12 +82,23 @@
                     <i class="nav-icon fe fe-star me-2"></i> Retiros VIP
                 </a>
             </li>
+
+                @if (Auth::user()->role == 'ADMIN_ROLE')
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('verificalinks.index') }}">
+                        <i class="nav-icon fe fe-check me-2"></i> Verificar links
+                    </a>
+                </li>
+                @endif
+
             <!-- Nav item -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('ayuda.index') }}">
                     <i class="nav-icon fe fe-help-circle me-2"></i> Ayuda y Herramientas
                 </a>
             </li>
+
+            @endif
             <!-- Nav item -->
             <li class="nav-item">
                 <form method="POST" action="{{ route('logout') }}">

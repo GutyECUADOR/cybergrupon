@@ -18,6 +18,15 @@
                 <!-- User info -->
                 <div class="row align-items-center">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+
+                        <!-- ERROR -->
+                        @if ($errors->has('type')=='Cuenta Desactivada')
+                            <div class="alert alert-danger }}">
+                                {{ $errors->first('message') }}
+                            </div>
+                        @endif
+
+
                         <!-- Bg -->
                         <div class="pt-16 rounded-top"
                             style="
@@ -31,7 +40,7 @@
                                     <div
                                         class="me-2 position-relative d-flex justify-content-end align-items-end mt-n5">
                                         <img src="{{ asset('assets/images/avatar/'.$usuario->avatar)}}"
-                                            class="avatar-xl rounded-circle border border-4 border-white"
+                                            class="avatar rounded-circle border border-4 border-white"
                                             alt="avatar">
                                     </div>
                                     <div class="lh-1">
@@ -82,11 +91,20 @@
                     <div class="col-lg-9 col-md-8 col-12">
                         <!-- Card -->
                         <div class="card">
+
+                            <!-- Flash messages -->
+                            <x-auth-session-status class="mb-4" :status="session('status')" />
+                            <!-- Validation Errors -->
+                            <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                           
                             <!-- Card header -->
                             <div class="card-header">
                                 <h3 class="mb-0">Detalles del perfil</h3>
                                 <p class="mb-0">
                                     Tiene control total para administrar la configuración de su propia cuenta.
+                                </p>
+                                <p class="mb-0">
+                                    Referidos en los ultimos 5 meses: {{Auth::user()->ReferidosUltimos5meses}}
                                 </p>
                             </div>
                             <!-- Card body -->
@@ -101,11 +119,6 @@
                                     <form method="POST" action="{{ route('profile.update', $usuario) }}" class="row gx-3">
                                         @csrf
                                         @method('PUT')
-
-                                        <!-- Flash messages -->
-                                        <x-auth-session-status class="mb-4" :status="session('status')" />
-                                        <!-- Validation Errors -->
-                                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
                                         <!-- Last name -->
                                         <div class="mb-3 col-12 col-md-6">
