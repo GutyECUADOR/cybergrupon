@@ -40,6 +40,13 @@ class RegisterReferido extends Controller
             return view('referido.register', compact('nickname','linksPublicidad'))->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
         }
 
+         //Verificación referidos en los ultimos meses
+        if ($ID_Partner->ReferidosUltimos5meses < 3 ) {
+            return redirect()->route('login')->withErrors(['message' => 'La cuenta de patrocinador no está activa para registrar invitados, por favor contacte a soporte o al patrocinador.']);
+        }
+
+        /* dd($ID_Partner->ReferidosUltimos5meses); */
+       
         $ID_Partner = $ID_Partner->id; //administrador
         $locations = $this->getLocation($ID_Partner);
         $packages = Packages::all();

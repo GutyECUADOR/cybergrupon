@@ -103,9 +103,9 @@
                                 <p class="mb-0">
                                     Tiene control total para administrar la configuración de su propia cuenta.
                                 </p>
-                                <p class="mb-0">
+                                <!-- <p class="mb-0">
                                     Referidos en los ultimos 5 meses: {{Auth::user()->ReferidosUltimos5meses}}
-                                </p>
+                                </p> -->
                             </div>
                             <!-- Card body -->
                             <div class="card-body">
@@ -129,7 +129,7 @@
                                         <!-- Phone -->
                                         <div class="mb-3 col-12 col-md-6">
                                             <label class="form-label" for="phone">Teléfono</label>
-                                            <input type="text" id="phone" name="phone" class="form-control text-dark" value="{{ $usuario->phone }}" required>
+                                            <input type="text" id="phone" name="phone" class="form-control text-dark" value="{{ $usuario->phone }}" disabled required>
                                         </div>
 
                                         <!-- Address -->

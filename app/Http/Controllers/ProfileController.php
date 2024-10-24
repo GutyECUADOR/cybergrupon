@@ -74,9 +74,9 @@ class ProfileController extends Controller
     {
         $usuario = User::find($id_usuario);
 
-        $request->validate([
+        /* $request->validate([
             'phone' => 'required|string|max:25'
-        ]);
+        ]); */
 
         $usuario->phone = $request->phone;
         $usuario->link_publicidad = $this->fixLink($request->link_publicidad);
