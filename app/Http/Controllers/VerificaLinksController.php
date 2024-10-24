@@ -14,7 +14,7 @@ class VerificaLinksController extends Controller
     public function index()
     {
         $linksPublicidad = AdvertisingHelperController::getVerificalinksPublicidad();
-        dd($linksPublicidad);
+        //dd($linksPublicidad);
         return view('verificalinks.index', compact('linksPublicidad'));
     }
 
