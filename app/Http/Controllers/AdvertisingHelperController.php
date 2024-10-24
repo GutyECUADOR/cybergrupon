@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AdvertisingHelperController extends Controller {
 
@@ -104,5 +105,54 @@ class AdvertisingHelperController extends Controller {
 
         return $linksPublicidad;
     }
+
+    public static function getVerificalinksPublicidad() {
+        $linksPublicidad1 = User::select('users.id','users.link_publicidad', 'users.link_redireccion')
+        ->where('users.id', 364)
+        ->whereNotNull('users.link_publicidad');
+
+        $linksPublicidad2 = User::select('users.id','users.link_publicidad2 as link_publicidad', 'users.link_redireccion2 as link_redireccion')
+        ->where('users.id', 364)
+        ->whereNotNull('users.link_publicidad2');
+
+        $linksPublicidad3 = User::select('users.id','users.link_publicidad3 as link_publicidad', 'users.link_redireccion3 as link_redireccion')
+        ->where('users.id', 364)
+        ->whereNotNull('users.link_publicidad3');
+
+        $linksPublicidad4 = User::select('users.id','users.link_publicidad4 as link_publicidad', 'users.link_redireccion4 as link_redireccion')
+        ->where('users.id', 364)
+        ->whereNotNull('users.link_publicidad4');
+
+        $linksPublicidad = User::select('users.id','users.link_publicidad5 as link_publicidad', 'users.link_redireccion5 as link_redireccion')
+        ->where('users.id', 364)
+        ->whereNotNull('users.link_publicidad5')
+        ->unionAll($linksPublicidad1)
+        ->unionAll($linksPublicidad2)
+        ->unionAll($linksPublicidad3)
+        ->unionAll($linksPublicidad4)
+        
+        ->get();
+
+        $verificacionLinks = $linksPublicidad->map(function ($linkRow) {
+
+            try {
+                $response = Http::get($linkRow->link_publicidad);
+    
+                if ($response->successful()) {
+                    // La URL es correcta y responde
+                    return array('user_id'=> $linkRow->id, 'URL' => $linkRow->link_publicidad, 'status' => 'URL Válida');
+                } else {
+                    // Algo falló con la respuesta pero no es una excepción
+                    return array('user_id'=> $linkRow->id, 'URL' => $linkRow->link_publicidad, 'status' => 'URL Incorrecta o no disponible');
+                }
+            } catch (\Throwable $th) {
+                $errorData = "Ocurrió un error al intentar acceder a la URL: " . $th->getMessage();
+                return array('user_id'=> $linkRow->id, 'URL' => $linkRow->link_publicidad, 'status' => $errorData);
+            }
+        });
+
+        return $verificacionLinks;
+    }
+
 
 }
