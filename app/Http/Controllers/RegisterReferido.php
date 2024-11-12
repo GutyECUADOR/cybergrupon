@@ -34,11 +34,15 @@ class RegisterReferido extends Controller
     {
         # Obtener el ID del partner promotor
         $ID_Partner = User::where('nickname', '=', $nickname)->first();
-        $linksPublicidad = AdvertisingHelperController::getlinksPublicidadByNickName($ID_Partner->nickname);
+        
+        
 
         if (!$ID_Partner) {
-            return view('referido.register', compact('nickname','linksPublicidad'))->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
+            $linksPublicidad = [];
+            return redirect()->route('register')->withErrors(['message' => 'Este código de patrocinador no existe, solicite un link válido o contacte a nuestro soporte']);
         }
+
+        $linksPublicidad = AdvertisingHelperController::getlinksPublicidadByNickName($ID_Partner->nickname);
 
          //Verificación referidos en los ultimos meses
         if ($ID_Partner->ReferidosUltimos5meses < 3 ) {
