@@ -22,6 +22,7 @@ class Packages extends Model
 
         $package_mayor = Compra::where('user_id', Auth::user()->id)
                     ->where('package_id', '<=', '5')
+                    ->where('status', 'Complete')
                     ->max('package_id');
         if (!$package_mayor) {
             $package_mayor = 0;
